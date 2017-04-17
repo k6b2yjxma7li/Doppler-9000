@@ -1,5 +1,6 @@
 /**
  * @author Robert
+ * @version 16.04.2017
  */
 
 package doppeler9k;
@@ -18,6 +19,7 @@ public class FunctionGenerator {
 		switch(fType){
 			case 0:
 			{
+				//FUNKCJA SINUS
 				byte[] buf;
 				AudioFormat af;
 				buf = new byte[1];
@@ -37,6 +39,7 @@ public class FunctionGenerator {
 			}
 			case 1:
 			{
+				//TU BEDZIE FUNKCJA KWADRATOWA
 				/*byte[] buf;
 				AudioFormat af;
 				buf = new byte[1];
