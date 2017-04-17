@@ -1,6 +1,8 @@
 /**
  * @author Robert
  * @version 16.04.2017
+ * Glowna czesc 'oienek'
+ * Tu bedzie wprowadzany kazdy element i wyswietlana symulacja
  */
 
 package doppeler9k;
@@ -21,7 +23,7 @@ import javax.swing.JTextField;
 
 public class Doppler9000 extends JFrame {
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
-		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byæ zarówno zrodlo jak i obserwator
+		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menu");
 		JMenuItem exitBut = new JMenuItem("Exit");
@@ -36,7 +38,7 @@ public class Doppler9000 extends JFrame {
 		//
 		freq.addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { //POWSTANIE NOWEGO OKIENKA - ROZWIAZANIE TYMCZASOWE
 				JFrame ramka = new JFrame();
 				JSlider freqSlider = new JSlider();
 				JButton freqG = new JButton("Generate");
