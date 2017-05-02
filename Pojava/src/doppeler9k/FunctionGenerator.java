@@ -36,11 +36,12 @@ public class FunctionGenerator {
 				sdl.drain();
 				sdl.stop();
 				sdl.close();
+				break;
 			}
 			case 1:
 			{
-				//TU BEDZIE FUNKCJA KWADRATOWA
-				/*byte[] buf;
+				//FUNKCJA KWADRATOWA
+				byte[] buf;
 				AudioFormat af;
 				buf = new byte[1];
 				af = new AudioFormat(44100,8,1,true,false);
@@ -50,12 +51,19 @@ public class FunctionGenerator {
 				sdl.start();
 				for(int i=0; i<2*44100; i++){
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
-					buf[0]=(byte)(Math.sin(angle)*100);
+					if(Math.sin(angle) > 0) {
+						buf[0]=(byte)(1*100);
+					}else if(Math.sin(angle) == 0){
+						buf[0]=(byte)0;
+					}else{
+						buf[0]=(byte)((-1)*100);
+					}
 					sdl.write(buf,0,1);
 				}
 				sdl.drain();
 				sdl.stop();
-				sdl.close();*/
+				sdl.close();
+				break;
 			}
 		}
 	}
