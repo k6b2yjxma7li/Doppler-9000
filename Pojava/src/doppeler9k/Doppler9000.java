@@ -11,7 +11,6 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +21,39 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class Doppler9000 extends JFrame {
+	int functChoice = 0;
+	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
 		JMenuBar menuBar = new JMenuBar();
+		//
 		JMenu menu = new JMenu("Menu");
 		JMenuItem exitBut = new JMenuItem("Exit");
 		JMenuItem freq = new JMenuItem("Frequency");
 		//
+		JMenu functionMenu = new JMenu("Function");
+		JMenuItem sineButton = new JMenuItem("Sine");
+		JMenuItem squareButton = new JMenuItem("Square");
+		JMenuItem oddButton = new JMenuItem("Exponens of sine");
+		//
+		sineButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functChoice = 0;
+			}
+		});
+		squareButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functChoice = 1;
+			}
+		});
+		squareButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functChoice = 2;
+			}
+		});
 		exitBut.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -52,7 +77,7 @@ public class Doppler9000 extends JFrame {
 					public void actionPerformed(ActionEvent ae) {
 						try {
 							obserwator.setV(Float.parseFloat(v_obs.getText()));
-							FunctionGenerator generator = new FunctionGenerator((int)(Math.round(freqSlider.getValue()*10)*((340+obserwator.v)/340)), 0);//dodany doppler zaokr¹gli³em oraz zcastowa³em do inta
+							FunctionGenerator generator = new FunctionGenerator((int)(Math.round(freqSlider.getValue()*10)*((340+obserwator.v)/340)), functChoice);//dodany doppler zaokr¹gli³em oraz zcastowa³em do inta
 						} catch (LineUnavailableException e) {
 							e.printStackTrace();
 						}
@@ -63,7 +88,7 @@ public class Doppler9000 extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent ae){
 						try {
-							FunctionGenerator gener200 = new FunctionGenerator(200, 0);
+							FunctionGenerator gener200 = new FunctionGenerator(200, functChoice);
 						} catch (LineUnavailableException e) {
 							e.printStackTrace();
 						}
@@ -87,9 +112,14 @@ public class Doppler9000 extends JFrame {
 			}
 		});
 		//
+		functionMenu.add(sineButton);
+		functionMenu.add(squareButton);
+		functionMenu.add(oddButton);
+		//
 		menu.add(exitBut);
 		menu.add(freq);
 		menuBar.add(menu);
+		menuBar.add(functionMenu);
 		setJMenuBar(menuBar);
 		//
 		setSize(640,320);
