@@ -13,12 +13,46 @@ public class Window extends JFrame {
 
 	public Window() throws HeadlessException {
 		JPanel mainPanel = new JPanel();
+		//Menu bar
 		JMenuBar mainBar = new JMenuBar();
 		JMenu mainMenu = new JMenu("Menu");
-		JMenu function = new JMenu("Function");
-		
+		JMenu functionMenu = new JMenu("Function");
+		JMenu simulationMenu = new JMenu("Simulation");
+		//Main
 		JMenuItem exitButton = new JMenuItem("Exit");
-		
+		JMenuItem frequencyButton = new JMenuItem("Frequency");
+		//Function
+		JMenuItem sineButton = new JMenuItem("Sine wave");
+		JMenuItem squareButton = new JMenuItem("Square wave");
+		JMenuItem expButton = new JMenuItem("Cosine-exponens-sine wave");
+		//Simulation
+		JMenuItem startSimButton = new JMenuItem("Start simulation");
+		JMenuItem stopSimButton = new JMenuItem("Stop simulation");
+		JMenuItem saveSimButton = new JMenuItem("Save simulation");
+		JMenuItem openSimButton = new JMenuItem("Open existing save");
+		//
+		mainBar.add(mainMenu);
+		mainBar.add(functionMenu);
+		mainBar.add(simulationMenu);
+		//Main
+		mainMenu.add(exitButton);
+		mainMenu.add(frequencyButton);
+		//Function
+		functionMenu.add(sineButton);
+		functionMenu.add(squareButton);
+		functionMenu.add(expButton);
+		//Simulation
+		simulationMenu.add(startSimButton);
+		simulationMenu.add(stopSimButton);
+		simulationMenu.add(saveSimButton);
+		simulationMenu.add(openSimButton);
+		//
+		setJMenuBar(mainBar);
+		//
+		setSize(640,320);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 	public Window(String arg0, GraphicsConfiguration arg1) {

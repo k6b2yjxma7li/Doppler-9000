@@ -20,14 +20,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
-public class Doppler9000 extends JFrame {
+public class Doppler9000 extends Window {
 	int functChoice = 0;
 	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
-		JMenuBar menuBar = new JMenuBar();
+		//JMenuBar menuBar = new JMenuBar();
 		//
-		JMenu menu = new JMenu("Menu");
+		/*JMenu menu = new JMenu("Menu");
 		JMenuItem exitBut = new JMenuItem("Exit");
 		JMenuItem freq = new JMenuItem("Frequency");
 		//
@@ -48,7 +48,7 @@ public class Doppler9000 extends JFrame {
 				functChoice = 1;
 			}
 		});
-		squareButton.addActionListener(new ActionListener(){
+		oddButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functChoice = 2;
@@ -125,7 +125,7 @@ public class Doppler9000 extends JFrame {
 		setSize(640,320);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setVisible(true);
+		setVisible(true);*/
 	}
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 Win = new Doppler9000();
