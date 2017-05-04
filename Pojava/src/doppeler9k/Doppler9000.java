@@ -1,8 +1,6 @@
 /**
  * @author Robert
- * @version 16.04.2017
- * Glowna czesc 'oienek'
- * Tu bedzie wprowadzany kazdy element i wyswietlana symulacja
+ * @version 03.05.2017
  */
 
 package doppeler9k;
@@ -20,21 +18,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
-public class Doppler9000 extends JFrame {
+public class Doppler9000 extends WindowGUI {
 	int functChoice = 0;
 	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
-		JMenuBar menuBar = new JMenuBar();
-		//
-		JMenu menu = new JMenu("Menu");
-		JMenuItem exitBut = new JMenuItem("Exit");
-		JMenuItem freq = new JMenuItem("Frequency");
-		//
-		JMenu functionMenu = new JMenu("Function");
-		JMenuItem sineButton = new JMenuItem("Sine");
-		JMenuItem squareButton = new JMenuItem("Square");
-		JMenuItem oddButton = new JMenuItem("Exponens of sine");
 		//
 		sineButton.addActionListener(new ActionListener(){
 			@Override
@@ -48,20 +36,20 @@ public class Doppler9000 extends JFrame {
 				functChoice = 1;
 			}
 		});
-		oddButton.addActionListener(new ActionListener(){
+		expButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functChoice = 2;
 			}
 		});
-		exitBut.addActionListener(new ActionListener(){
+		exitButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
 				System.exit(0);
 			}
 		});
 		//
-		freq.addActionListener(new ActionListener(){
+		frequencyButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) { //POWSTANIE NOWEGO OKIENKA - ROZWIAZANIE TYMCZASOWE
 				JFrame ramka = new JFrame();
@@ -111,21 +99,6 @@ public class Doppler9000 extends JFrame {
 				ramka.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			}
 		});
-		//
-		functionMenu.add(sineButton);
-		functionMenu.add(squareButton);
-		functionMenu.add(oddButton);
-		//
-		menu.add(exitBut);
-		menu.add(freq);
-		menuBar.add(menu);
-		menuBar.add(functionMenu);
-		setJMenuBar(menuBar);
-		//
-		setSize(640,320);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setVisible(true);
 	}
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 Win = new Doppler9000();
