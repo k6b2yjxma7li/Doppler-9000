@@ -19,7 +19,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class Doppler9000 extends WindowGUI {
-	int functChoice = 0;
+	int functionChoice = 0;
 	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
@@ -27,19 +27,19 @@ public class Doppler9000 extends WindowGUI {
 		sineButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				functChoice = 0;
+				functionChoice = 0;
 			}
 		});
 		squareButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				functChoice = 1;
+				functionChoice = 1;
 			}
 		});
 		expButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				functChoice = 2;
+				functionChoice = 2;
 			}
 		});
 		exitButton.addActionListener(new ActionListener(){
@@ -65,7 +65,7 @@ public class Doppler9000 extends WindowGUI {
 					public void actionPerformed(ActionEvent ae) {
 						try {
 							obserwator.setV(Float.parseFloat(v_obs.getText()));
-							FunctionGenerator generator = new FunctionGenerator((int)(Math.round(freqSlider.getValue()*10)*((340+obserwator.v)/340)), functChoice);//dodany doppler zaokr¹gli³em oraz zcastowa³em do inta
+							FunctionGenerator generator = new FunctionGenerator((int)(Math.round(freqSlider.getValue()*10)*((340+obserwator.v)/340)), functionChoice);//dodany doppler zaokr¹gli³em oraz zcastowa³em do inta
 						} catch (LineUnavailableException e) {
 							e.printStackTrace();
 						}
@@ -76,14 +76,14 @@ public class Doppler9000 extends WindowGUI {
 					@Override
 					public void actionPerformed(ActionEvent ae){
 						try {
-							FunctionGenerator gener200 = new FunctionGenerator(200, functChoice);
+							FunctionGenerator gener200 = new FunctionGenerator(200, functionChoice);
 						} catch (LineUnavailableException e) {
 							e.printStackTrace();
 						}
 					}
 				});
 				//
-				v_obs.addActionListener(new ActionListener() { //uzylem na razie pola tekstowego do wpisywania predkosci obserwatora
+				v_obs.addActionListener(new ActionListener() { //
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						obserwator.setV(Float.parseFloat(v_obs.getText()));
