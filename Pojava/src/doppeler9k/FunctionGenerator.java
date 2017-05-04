@@ -15,7 +15,7 @@ public class FunctionGenerator {
 	public FunctionGenerator() {
 	}
 	
-	public FunctionGenerator(int hz, int fType) throws LineUnavailableException{
+	public FunctionGenerator(float hz, int fType) throws LineUnavailableException{
 		switch(fType){
 			case 0:
 			{

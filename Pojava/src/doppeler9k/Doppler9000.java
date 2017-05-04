@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
+	float soundVelocity = (float)343.8;
 	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
@@ -42,61 +43,39 @@ public class Doppler9000 extends WindowGUI {
 				functionChoice = 2;
 			}
 		});
-		exitButton.addActionListener(new ActionListener(){
+		freqGenerateButton.addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e){
-				System.exit(0);
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					obserwator.setV(Float.parseFloat(velocityField.getText()));
+					FunctionGenerator generator = new FunctionGenerator((Float.parseFloat(freqField.getText())*((soundVelocity+obserwator.v)/soundVelocity)), functionChoice);
+				} catch (LineUnavailableException e) {
+					e.printStackTrace();
+				}
 			}
 		});
-		//
-		frequencyButton.addActionListener(new ActionListener(){
+		velocityField.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) { //POWSTANIE NOWEGO OKIENKA - ROZWIAZANIE TYMCZASOWE
-				JFrame ramka = new JFrame();
-				JSlider freqSlider = new JSlider();
-				JButton freqG = new JButton("Generate");
-				JButton freq2 = new JButton("200Hz");
-				JTextField v_obs = new JTextField("0",10); // domyslnie wpisane jest zero zeby nie bylo problemu jak ktos od razu kliknie generate
-				//
-				ramka.setLayout(new GridLayout(3, 0));
-				//
-				freqG.addActionListener(new ActionListener(){
-					@Override
-					public void actionPerformed(ActionEvent ae) {
-						try {
-							obserwator.setV(Float.parseFloat(v_obs.getText()));
-							FunctionGenerator generator = new FunctionGenerator((int)(Math.round(freqSlider.getValue()*10)*((340+obserwator.v)/340)), functionChoice);//dodany doppler zaokr¹gli³em oraz zcastowa³em do inta
-						} catch (LineUnavailableException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				//
-				freq2.addActionListener(new ActionListener(){
-					@Override
-					public void actionPerformed(ActionEvent ae){
-						try {
-							FunctionGenerator gener200 = new FunctionGenerator(200, functionChoice);
-						} catch (LineUnavailableException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				//
-				v_obs.addActionListener(new ActionListener() { //
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						obserwator.setV(Float.parseFloat(v_obs.getText()));
-					}
-				});
-				//
-				ramka.add(freqSlider);
-				ramka.add(freqG);
-				ramka.add(freq2);
-				ramka.add(v_obs);
-				ramka.setVisible(true);
-				ramka.setSize(200,100);
-				ramka.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			public void actionPerformed(ActionEvent e) {
+				obserwator.setV(Float.parseFloat(velocityField.getText()));
+			}
+		});
+		airButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				soundVelocity = (float)343.8;
+			}
+		});
+		waterButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				soundVelocity = (float)1500;
+			}
+		});
+		heliumButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				soundVelocity = (float)965;
 			}
 		});
 	}
