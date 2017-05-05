@@ -1,18 +1,18 @@
 /**
  * @author Karol
  * @author Robert
- * @version 03.05.2017
+ * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 package doppeler9k;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GraphicsConfiguration;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class WindowGUI extends JFrame {
@@ -52,13 +53,14 @@ public class WindowGUI extends JFrame {
 	public JTextField freqField = new JTextField("440");
 	public JButton freqGenerateButton = new JButton("Generate");
 	public JTextField velocityField = new JTextField("0");
+	public JSlider volumeSlider = new JSlider();
 	//
 	public JLabel freqLabel = new JLabel("Frequency [Hz]: ");
 	public JLabel velocityLabel = new JLabel("Velocity [m/s]: ");
 	//
 	public WindowGUI() throws HeadlessException {
 		//
-		this.setLayout(new GridLayout(3, 3));
+		this.setLayout(new GridLayout(3,3));
 		this.add(simMainPanel);
 		this.add(simPropertiesPanel);
 		this.add(objPropertiesPanel);
@@ -90,16 +92,58 @@ public class WindowGUI extends JFrame {
 		simulationMenu.add(saveSimButton);
 		simulationMenu.add(openSimButton);
 		//
-		//simPropertiesPanel.setLayout(new GridLayout(2,3));
-		simPropertiesPanel.add(freqLabel);
-		simPropertiesPanel.add(freqField);
-		simPropertiesPanel.add(freqGenerateButton);
-		simPropertiesPanel.add(velocityLabel);
-		simPropertiesPanel.add(velocityField);
+		GroupLayout simPropPanelLayout = new GroupLayout(simPropertiesPanel);
+		simPropertiesPanel.setLayout(simPropPanelLayout);
+		simPropPanelLayout.setAutoCreateGaps(true);
+		simPropPanelLayout.setAutoCreateContainerGaps(true);
+		//
+		GroupLayout.Group line1 = simPropPanelLayout.createParallelGroup(Alignment.TRAILING);
+		GroupLayout.Group line2 = simPropPanelLayout.createParallelGroup();
+		GroupLayout.Group column1 = simPropPanelLayout.createParallelGroup();
+		GroupLayout.Group column2 = simPropPanelLayout.createParallelGroup();
+		GroupLayout.Group column3 = simPropPanelLayout.createParallelGroup();
+		//
+		GroupLayout.SequentialGroup lines = simPropPanelLayout.createSequentialGroup();
+		GroupLayout.SequentialGroup columns = simPropPanelLayout.createSequentialGroup();
+		lines.addGroup(line1);
+		lines.addGroup(line2);
+		columns.addGroup(column1);
+		columns.addGroup(column2);
+		columns.addGroup(column3);
+		simPropPanelLayout.setHorizontalGroup(columns);
+		simPropPanelLayout.setVerticalGroup(lines);
+		//a1
+		line1.addComponent(freqLabel);
+		column1.addComponent(freqLabel);
+		//b1
+		line1.addComponent(freqField);
+		column2.addComponent(freqField);
+		//c1
+		line1.addComponent(freqGenerateButton);
+		column3.addComponent(freqGenerateButton);
+		//a2
+		line2.addComponent(velocityLabel);
+		column1.addComponent(velocityLabel);
+		//b2
+		line2.addComponent(velocityField);
+		column2.addComponent(velocityField);
+		//c2
+		line2.addComponent(volumeSlider);
+		column3.addComponent(volumeSlider);
+		//
+		velocityField.setMinimumSize(new Dimension(40, 5));
+		freqField.setMinimumSize(new Dimension(40, 5));
+		velocityField.setPreferredSize(new Dimension(40, 5));
+		freqField.setPreferredSize(new Dimension(40, 5));
+		freqGenerateButton.setMinimumSize(new Dimension(40, 5));
+		freqGenerateButton.setPreferredSize(new Dimension(40, 5));
+		volumeSlider.setMinimum(0);
+		volumeSlider.setMaximum(100);
 		//
 		setJMenuBar(mainBar);
 		//
 		setSize(640,320);
+		setMinimumSize(new Dimension(640, 320));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);

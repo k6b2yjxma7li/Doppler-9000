@@ -1,6 +1,6 @@
 /**
  * @author Robert
- * @version 16.04.2017
+ * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 
 package doppeler9k;
@@ -15,11 +15,11 @@ public class FunctionGenerator {
 	public FunctionGenerator() {
 	}
 	
-	public FunctionGenerator(float hz, int fType) throws LineUnavailableException{
+	public FunctionGenerator(float hz, float volume, int fType) throws LineUnavailableException{
 		switch(fType){
 			case 0:
 			{
-				//SINE WIVE
+				//SINE WAVE
 				byte[] buf;
 				AudioFormat af;
 				buf = new byte[1];
@@ -30,7 +30,7 @@ public class FunctionGenerator {
 				sdl.start();
 				for(int i=0; i<2*44100; i++){
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
-					buf[0]=(byte)(Math.sin(angle)*100);
+					buf[0]=(byte)(Math.sin(angle)*volume);
 					sdl.write(buf,0,1);
 				}
 				sdl.drain();
@@ -52,11 +52,11 @@ public class FunctionGenerator {
 				for(int i=0; i<2*44100; i++){
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
 					if(Math.sin(angle) > 0) {
-						buf[0]=(byte)(1*100);
+						buf[0]=(byte)(1*volume);
 					}else if(Math.sin(angle) == 0){
 						buf[0]=(byte)0;
 					}else{
-						buf[0]=(byte)((-1)*100);
+						buf[0]=(byte)((-1)*volume);
 					}
 					sdl.write(buf,0,1);
 				}
@@ -78,7 +78,7 @@ public class FunctionGenerator {
 				sdl.start();
 				for(int i=0; i<2*44100; i++){
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
-					buf[0]=(byte)(Math.cos(angle)*Math.exp(Math.sin(angle))*100);
+					buf[0]=(byte)(Math.cos(angle)*Math.exp(Math.sin(angle))*volume);
 					sdl.write(buf,0,1);
 				}
 				sdl.drain();

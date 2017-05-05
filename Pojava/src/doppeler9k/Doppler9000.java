@@ -1,22 +1,14 @@
 /**
  * @author Robert
- * @version 03.05.2017
+ * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 
 package doppeler9k;
 
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.sound.sampled.LineUnavailableException;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
@@ -48,7 +40,10 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					obserwator.setV(Float.parseFloat(velocityField.getText()));
-					FunctionGenerator generator = new FunctionGenerator((Float.parseFloat(freqField.getText())*((soundVelocity+obserwator.v)/soundVelocity)), functionChoice);
+					FunctionGenerator generator = new FunctionGenerator(
+							(Float.parseFloat(freqField.getText())*((soundVelocity+obserwator.v)/soundVelocity)),
+							volumeSlider.getValue(),
+							functionChoice);
 				} catch (LineUnavailableException e) {
 					e.printStackTrace();
 				}
