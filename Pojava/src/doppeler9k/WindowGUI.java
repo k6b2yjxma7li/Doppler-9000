@@ -179,13 +179,4 @@ public class WindowGUI extends JFrame {
 			}
 		});
 	}
-///// PO CO TU MAIN?
-	public static void main(String arg0) {
-		
-		
-		
-		
-		WindowGUI mainWin = new WindowGUI();
-	}
-
 }

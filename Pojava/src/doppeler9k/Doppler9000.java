@@ -13,30 +13,32 @@ import javax.sound.sampled.LineUnavailableException;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
 	float soundVelocity = (float)343.8;
-	
-	double getFactor(SimulationObject source, SimulationObject observer)// czêstotliwoœæ wynikowa to f_zrodla*getFactor
+	//KOMENTAZE WZGLEDEM ELEMOENTOW PO ANGIELSKU I WIELKIMI LITERAMI (lepiej wyglada przy oddawaniu)
+	//komentarze wzgledem przyszlych poprawek moga byc normalne/R
+	double getFactor(SimulationObject source, SimulationObject observer)// czestotliwosc wynikowa to f_zrodla*getFactor
 	{
 		double rx = observer.x-source.x;
+		System.out.print("Rx: ");
 		System.out.println(rx);
 		double ry = observer.y-source.y;
+		System.out.print("Ry: ");
 		System.out.println(ry);
 		double cosObs = 1;
 		double cosSou = 1;
-		if (source.v != 0 && observer.v != 0)
-		{
-		cosObs = (rx*observer.vx()) + (ry*observer.vy()) / (Math.sqrt(rx*rx+ry*ry) * observer.v);
-		System.out.println(cosObs);
-		cosSou = (rx*source.vx()) + (ry*source.vy()) / (Math.sqrt(rx*rx+ry*ry) * source.v);
-		System.out.println(cosSou);
+		if (source.v != 0 && observer.v != 0){//do poprawienia - przy wpisaniu v_observer i v_source = 10 wyrzuca cosinusy =600 /R
+			cosObs = (rx*observer.vx()) + (ry*observer.vy()) / (Math.sqrt(rx*rx+ry*ry) * observer.v);
+			System.out.print("Observer cos: ");
+			System.out.println(cosObs);
+			cosSou = (rx*source.vx()) + (ry*source.vy()) / (Math.sqrt(rx*rx+ry*ry) * source.v);
+			System.out.print("Source cos: ");
+			System.out.println(cosSou);
 		}
 		double factor = (soundVelocity + (observer.v * cosObs)) / (soundVelocity - (source.v * cosSou));
+		System.out.print("Frequency factor: ");
 		System.out.println(factor);
-		
-			return factor;
+		return factor;
 	}
-	
-	
-	
+	//
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject source = new SimulationObject(30,40);
 		SimulationObject obserwator = new SimulationObject(90,30); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
@@ -69,8 +71,6 @@ public class Doppler9000 extends WindowGUI {
 							(Float.parseFloat(freqField.getText())*(float)getFactor(source, obserwator)),
 							volumeSlider.getValue(),
 							functionChoice);
-					
-					
 				} catch (LineUnavailableException e) {
 					e.printStackTrace();
 				}
@@ -112,3 +112,4 @@ public class Doppler9000 extends WindowGUI {
 	}
 }
 ///// program wywala sie przy podaniu zbyt niepoprawnej czêstotliwoœci -- do naprawy
+//co znaczy 'zbyt niepoprawna czestotliwosc'? /R

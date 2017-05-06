@@ -27,14 +27,14 @@ public class SimulationObject {
 		x = coords;
 	}
 	
-	public SimulationObject() {	//domyslny
+	public SimulationObject() {
 		x = 0;
 		y = 0;
 		v = 0;
 		angle = 0;
 	}
 	
-	public SimulationObject(float coordX,float coordY) {	//do drag&drop
+	public SimulationObject(float coordX,float coordY) {
 		x = coordX;
 		y = coordY;
 		v = 0;
