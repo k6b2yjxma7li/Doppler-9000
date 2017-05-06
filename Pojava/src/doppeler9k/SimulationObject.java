@@ -5,25 +5,25 @@
 package doppeler9k;
 
 public class SimulationObject {
-	float x,y;
-	int angle;
-	float v;
+	double x,y;
+	double angle;
+	double v;
 	
-	public double vx(int angle, float v) {
+	public double vx() {
 		return v*Math.cos((Math.toRadians(angle)));
 	}
 	
-	public double vy(int angle, float v) {
+	public double vy() {
 		return v*Math.sin((Math.toRadians(angle)));
 	}
 	
-	public void setV (float velocity) {
+	public void setV (double velocity) {
 		v = velocity;
 	}
-	public void setAngle (int angl) {
+	public void setAngle (double angl) {
 		angle = angl;
 	}
-	public void setX (float coords) {
+	public void setX (double coords) {
 		x = coords;
 	}
 	

@@ -23,7 +23,15 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
+
+
+
+
 public class WindowGUI extends JFrame {
+	
+	
+	
+	
 	//Menu bar
 	public JMenuBar mainBar = new JMenuBar();
 	public JMenu mainMenu = new JMenu("Menu");
@@ -53,10 +61,12 @@ public class WindowGUI extends JFrame {
 	public JTextField freqField = new JTextField("440");
 	public JButton freqGenerateButton = new JButton("Generate");
 	public JTextField velocityField = new JTextField("0");
+	public JTextField souVelocityField = new JTextField("0");
 	public JSlider volumeSlider = new JSlider();
 	//
 	public JLabel freqLabel = new JLabel("Frequency [Hz]: ");
-	public JLabel velocityLabel = new JLabel("Velocity [m/s]: ");
+	public JLabel velocityLabel = new JLabel("Observer Velocity [m/s]: ");
+	public JLabel souVelocityLabel = new JLabel("Source Velocity [m/s]: ");
 	//
 	public WindowGUI() throws HeadlessException {
 		//
@@ -99,17 +109,21 @@ public class WindowGUI extends JFrame {
 		//
 		GroupLayout.Group line1 = simPropPanelLayout.createParallelGroup(Alignment.TRAILING);
 		GroupLayout.Group line2 = simPropPanelLayout.createParallelGroup();
+		GroupLayout.Group line3 = simPropPanelLayout.createParallelGroup();
 		GroupLayout.Group column1 = simPropPanelLayout.createParallelGroup();
 		GroupLayout.Group column2 = simPropPanelLayout.createParallelGroup();
 		GroupLayout.Group column3 = simPropPanelLayout.createParallelGroup();
+		
 		//
 		GroupLayout.SequentialGroup lines = simPropPanelLayout.createSequentialGroup();
 		GroupLayout.SequentialGroup columns = simPropPanelLayout.createSequentialGroup();
 		lines.addGroup(line1);
 		lines.addGroup(line2);
+		lines.addGroup(line3);
 		columns.addGroup(column1);
 		columns.addGroup(column2);
 		columns.addGroup(column3);
+		
 		simPropPanelLayout.setHorizontalGroup(columns);
 		simPropPanelLayout.setVerticalGroup(lines);
 		//a1
@@ -131,19 +145,29 @@ public class WindowGUI extends JFrame {
 		line2.addComponent(volumeSlider);
 		column3.addComponent(volumeSlider);
 		//
-		velocityField.setMinimumSize(new Dimension(40, 5));
-		freqField.setMinimumSize(new Dimension(40, 5));
-		velocityField.setPreferredSize(new Dimension(40, 5));
-		freqField.setPreferredSize(new Dimension(40, 5));
-		freqGenerateButton.setMinimumSize(new Dimension(40, 5));
-		freqGenerateButton.setPreferredSize(new Dimension(40, 5));
+		line3.addComponent(souVelocityLabel);
+		column1.addComponent(souVelocityLabel);
+		//
+		line3.addComponent(souVelocityField);
+		column2.addComponent(souVelocityField);
+		
+		velocityField.setMinimumSize(new Dimension(40, 30));
+		velocityField.setMaximumSize(new Dimension(40, 30));
+		souVelocityField.setMinimumSize(new Dimension(40, 30));
+		souVelocityField.setMaximumSize(new Dimension(40, 30));
+		freqField.setMinimumSize(new Dimension(40, 30));
+		freqField.setMaximumSize(new Dimension(40, 30));
+		velocityField.setPreferredSize(new Dimension(40, 30));
+		freqField.setPreferredSize(new Dimension(40, 30));
+		freqGenerateButton.setMinimumSize(new Dimension(40, 30));
+		freqGenerateButton.setPreferredSize(new Dimension(40, 30));
 		volumeSlider.setMinimum(0);
 		volumeSlider.setMaximum(100);
 		//
 		setJMenuBar(mainBar);
 		//
 		setSize(640,320);
-		setMinimumSize(new Dimension(640, 320));
+		setMinimumSize(new Dimension(800, 400));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -155,8 +179,12 @@ public class WindowGUI extends JFrame {
 			}
 		});
 	}
-
+///// PO CO TU MAIN?
 	public static void main(String arg0) {
+		
+		
+		
+		
 		WindowGUI mainWin = new WindowGUI();
 	}
 

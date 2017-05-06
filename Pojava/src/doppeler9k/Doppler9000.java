@@ -14,8 +14,32 @@ public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
 	float soundVelocity = (float)343.8;
 	
+	double getFactor(SimulationObject source, SimulationObject observer)// czêstotliwoœæ wynikowa to f_zrodla*getFactor
+	{
+		double rx = observer.x-source.x;
+		System.out.println(rx);
+		double ry = observer.y-source.y;
+		System.out.println(ry);
+		double cosObs = 1;
+		double cosSou = 1;
+		if (source.v != 0 && observer.v != 0)
+		{
+		cosObs = (rx*observer.vx()) + (ry*observer.vy()) / (Math.sqrt(rx*rx+ry*ry) * observer.v);
+		System.out.println(cosObs);
+		cosSou = (rx*source.vx()) + (ry*source.vy()) / (Math.sqrt(rx*rx+ry*ry) * source.v);
+		System.out.println(cosSou);
+		}
+		double factor = (soundVelocity + (observer.v * cosObs)) / (soundVelocity - (source.v * cosSou));
+		System.out.println(factor);
+		
+			return factor;
+	}
+	
+	
+	
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
-		SimulationObject obserwator = new SimulationObject(); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
+		SimulationObject source = new SimulationObject(30,40);
+		SimulationObject obserwator = new SimulationObject(90,30); //dodane obiekty majace x,y,v,kat - moze to byc zarowno zrodlo jak i obserwator
 		//
 		sineButton.addActionListener(new ActionListener(){
 			@Override
@@ -40,10 +64,13 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					obserwator.setV(Float.parseFloat(velocityField.getText()));
+					source.setV(Float.parseFloat(souVelocityField.getText()));
 					FunctionGenerator generator = new FunctionGenerator(
-							(Float.parseFloat(freqField.getText())*((soundVelocity+obserwator.v)/soundVelocity)),
+							(Float.parseFloat(freqField.getText())*(float)getFactor(source, obserwator)),
 							volumeSlider.getValue(),
 							functionChoice);
+					
+					
 				} catch (LineUnavailableException e) {
 					e.printStackTrace();
 				}
@@ -53,6 +80,12 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				obserwator.setV(Float.parseFloat(velocityField.getText()));
+			}
+		});
+		souVelocityField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			source.setV(Float.parseFloat(souVelocityField.getText()));
 			}
 		});
 		airButton.addActionListener(new ActionListener(){
@@ -78,3 +111,4 @@ public class Doppler9000 extends WindowGUI {
 		Doppler9000 Win = new Doppler9000();
 	}
 }
+///// program wywala sie przy podaniu zbyt niepoprawnej czêstotliwoœci -- do naprawy

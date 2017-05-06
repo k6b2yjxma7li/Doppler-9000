@@ -88,7 +88,7 @@ public class FunctionGenerator {
 			}
 		}
 	}
-
+//PO CO MAIN?
 	public static void main(String[] args) {
 		FunctionGenerator generator = new FunctionGenerator();
 
