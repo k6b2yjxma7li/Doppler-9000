@@ -13,29 +13,17 @@ import javax.sound.sampled.LineUnavailableException;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
 	float soundVelocity = (float)343.8;
-	//KOMENTAZE WZGLEDEM ELEMOENTOW PO ANGIELSKU I WIELKIMI LITERAMI (lepiej wyglada przy oddawaniu)
-	//komentarze wzgledem przyszlych poprawek moga byc normalne/R
-	double getFactor(SimulationObject source, SimulationObject observer)// czestotliwosc wynikowa to f_zrodla*getFactor
+	double getFactor(SimulationObject source, SimulationObject observer)// OBSERVED FREQUENCY = FACTOR*EMITER_FREQ
 	{
 		double rx = observer.x-source.x;
-		System.out.print("Rx: ");
-		System.out.println(rx);
 		double ry = observer.y-source.y;
-		System.out.print("Ry: ");
-		System.out.println(ry);
 		double cosObs = 1;
 		double cosSou = 1;
-		if (source.v != 0 && observer.v != 0){//do poprawienia - przy wpisaniu v_observer i v_source = 10 wyrzuca cosinusy =600 /R
-			cosObs = (rx*observer.vx()) + (ry*observer.vy()) / (Math.sqrt(rx*rx+ry*ry) * observer.v);
-			System.out.print("Observer cos: ");
-			System.out.println(cosObs);
-			cosSou = (rx*source.vx()) + (ry*source.vy()) / (Math.sqrt(rx*rx+ry*ry) * source.v);
-			System.out.print("Source cos: ");
-			System.out.println(cosSou);
+		if (source.v != 0 && observer.v != 0){
+			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.v));
+			cosSou = ((rx*source.vx()) + (ry*source.vy())) / ((Math.sqrt(rx*rx+ry*ry) * source.v));
 		}
 		double factor = (soundVelocity + (observer.v * cosObs)) / (soundVelocity - (source.v * cosSou));
-		System.out.print("Frequency factor: ");
-		System.out.println(factor);
 		return factor;
 	}
 	//
@@ -111,5 +99,4 @@ public class Doppler9000 extends WindowGUI {
 		Doppler9000 Win = new Doppler9000();
 	}
 }
-///// program wywala sie przy podaniu zbyt niepoprawnej czêstotliwoœci -- do naprawy
-//co znaczy 'zbyt niepoprawna czestotliwosc'? /R
+//// chodzi o to ¿e jak ktoœ poda ujemn¹ czêstotliwoœæ lub czêstotliwoœæ przekracza maksymaln¹ czêstotliwoœæ generatora(mo¿e byæ spowodowane tak¿e przez sam efekt dopplera)
