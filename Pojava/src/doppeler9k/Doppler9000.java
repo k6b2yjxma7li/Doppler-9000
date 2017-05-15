@@ -13,6 +13,7 @@ import javax.sound.sampled.LineUnavailableException;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
 	float soundVelocity = (float)343.8;
+	//
 	double getFactor(SimulationObject source, SimulationObject observer)// OBSERVED FREQUENCY = FACTOR*EMITER_FREQ
 	{
 		double rx = observer.x-source.x;

@@ -11,16 +11,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 public class FunctionGenerator {
-	
-
 	public FunctionGenerator() {
 	}
-	
+	//
 	public FunctionGenerator(float hz, float volume, int fType) throws LineUnavailableException{
-		
-		
-		
-		
 		switch(fType){
 			case 0:
 			{

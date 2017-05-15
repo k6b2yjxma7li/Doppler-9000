@@ -8,15 +8,13 @@ public class SimulationObject {
 	double x,y;
 	double angle;
 	double v;
-	
+	//
 	public double vx() {
 		return v*Math.cos((Math.toRadians(angle)));
 	}
-	
 	public double vy() {
 		return v*Math.sin((Math.toRadians(angle)));
 	}
-	
 	public void setV (double velocity) {
 		v = velocity;
 	}
@@ -26,7 +24,6 @@ public class SimulationObject {
 	public void setX (double coords) {
 		x = coords;
 	}
-	
 	public SimulationObject() {
 		x = 0;
 		y = 0;

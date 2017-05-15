@@ -23,15 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
-
-
-
-
 public class WindowGUI extends JFrame {
-	
-	
-	
-	
 	//Menu bar
 	public JMenuBar mainBar = new JMenuBar();
 	public JMenu mainMenu = new JMenu("Menu");
@@ -113,7 +105,6 @@ public class WindowGUI extends JFrame {
 		GroupLayout.Group column1 = simPropPanelLayout.createParallelGroup();
 		GroupLayout.Group column2 = simPropPanelLayout.createParallelGroup();
 		GroupLayout.Group column3 = simPropPanelLayout.createParallelGroup();
-		
 		//
 		GroupLayout.SequentialGroup lines = simPropPanelLayout.createSequentialGroup();
 		GroupLayout.SequentialGroup columns = simPropPanelLayout.createSequentialGroup();
@@ -123,7 +114,7 @@ public class WindowGUI extends JFrame {
 		columns.addGroup(column1);
 		columns.addGroup(column2);
 		columns.addGroup(column3);
-		
+		//
 		simPropPanelLayout.setHorizontalGroup(columns);
 		simPropPanelLayout.setVerticalGroup(lines);
 		//a1
@@ -150,7 +141,7 @@ public class WindowGUI extends JFrame {
 		//
 		line3.addComponent(souVelocityField);
 		column2.addComponent(souVelocityField);
-		
+		//
 		velocityField.setMinimumSize(new Dimension(40, 30));
 		velocityField.setMaximumSize(new Dimension(40, 30));
 		souVelocityField.setMinimumSize(new Dimension(40, 30));
