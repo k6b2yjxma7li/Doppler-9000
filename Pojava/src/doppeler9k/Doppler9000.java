@@ -21,10 +21,10 @@ public class Doppler9000 extends WindowGUI {
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject source = new SimulationObject(30,40);
 		SimulationObject obserwator = new SimulationObject(90,30);
-		Animata soundWave = new Animata();
-		soundWave.init();
-		soundWave.start();
-		simMainPanel.add(soundWave, BorderLayout.CENTER);
+		//Animata soundWave = new Animata();
+		//soundWave.init();
+		//soundWave.start();
+		//simMainPanel.add(soundWave, BorderLayout.CENTER);
 		simMainPanel.setVisible(true);
 		//
 		sineButton.addActionListener(new ActionListener() {
