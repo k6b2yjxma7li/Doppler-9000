@@ -4,6 +4,7 @@
  */
 package doppeler9k;
 
+//SIMULATION OBJECTS - BOTH OBSERVER AND SOURCE
 public class SimulationObject {
 	double x,y;
 	double angle;
@@ -30,7 +31,6 @@ public class SimulationObject {
 		v = 0;
 		angle = 0;
 	}
-	
 	public SimulationObject(float coordX,float coordY) {
 		x = coordX;
 		y = coordY;

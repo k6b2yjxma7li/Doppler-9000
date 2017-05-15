@@ -10,11 +10,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
+//FUNCTION GENERATING CLASS
 public class FunctionGenerator {
 	public FunctionGenerator() {
 	}
 	//
-	public FunctionGenerator(float hz, float volume, int fType) throws LineUnavailableException{
+	public FunctionGenerator(float hz, float volume, int fType) throws LineUnavailableException {
 		switch(fType){
 			case 0:
 			{
@@ -27,7 +28,7 @@ public class FunctionGenerator {
 				sdl = AudioSystem.getSourceDataLine(af);
 				sdl.open(af);
 				sdl.start();
-				for(int i=0; i<2*44100; i++){
+				for(int i=0; i<2*44100; i++) {
 					double angle = i/((float)44100/hz)*2.0*Math.PI;//TU
 					buf[0]=(byte)(Math.sin(angle)*volume);
 					sdl.write(buf,0,1);
@@ -75,7 +76,7 @@ public class FunctionGenerator {
 				sdl = AudioSystem.getSourceDataLine(af);
 				sdl.open(af);
 				sdl.start();
-				for(int i=0; i<2*44100; i++){
+				for(int i=0; i<2*44100; i++) {
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
 					buf[0]=(byte)(Math.cos(angle)*Math.exp(Math.sin(angle))*volume);
 					sdl.write(buf,0,1);

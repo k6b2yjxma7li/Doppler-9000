@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
+//WINDOW GUI CLASS
 public class WindowGUI extends JFrame {
 	//Menu bar
 	public JMenuBar mainBar = new JMenuBar();
@@ -63,7 +64,7 @@ public class WindowGUI extends JFrame {
 	public WindowGUI() throws HeadlessException {
 		//
 		this.setLayout(new GridLayout(3,3));
-		this.add(simMainPanel);
+		this.getContentPane().add(simMainPanel);
 		this.add(simPropertiesPanel);
 		this.add(objPropertiesPanel);
 		this.add(emitSignalPanel);
@@ -162,10 +163,11 @@ public class WindowGUI extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
+		pack();
 		//
-		exitButton.addActionListener(new ActionListener(){
+		exitButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
