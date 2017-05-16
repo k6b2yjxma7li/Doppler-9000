@@ -29,10 +29,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 
 public class WindowGUI extends JFrame {
-	
-	
-	
-	
 	//Menu bar
 	public JMenuBar mainBar = new JMenuBar();
 	public JMenu mainMenu = new JMenu("Menu");
@@ -96,7 +92,6 @@ public class WindowGUI extends JFrame {
 	public JLabel observer4Label = new JLabel("Observer 4");
 	public JLabel graphicalSimulationLabel = new JLabel("Graphical simulation                                                                                                                  ");
 	public JSlider volumeSlider = new JSlider();
-	
 	//
 	public WindowGUI() throws HeadlessException {
 		// BORDER
@@ -201,9 +196,7 @@ public class WindowGUI extends JFrame {
 		//
 		line6.addComponent(resetButton);
 		column3.addComponent(resetButton);
-		
-	
-		
+		//
 		//LAYOUT FOR OBSERVATOR'S PROPERTIES
 		GroupLayout objPropertiesPanelLayout = new GroupLayout(objPropertiesPanel);
 		objPropertiesPanel.setLayout(objPropertiesPanelLayout);
@@ -274,7 +267,7 @@ public class WindowGUI extends JFrame {
 		//EMITTED SIGNAL
 		emitSignalPanel.setLayout(new BoxLayout(emitSignalPanel,BoxLayout.Y_AXIS));
 		emitSignalPanel.add(emittedSignalLabel);
-		emitSignalPanel.add(workInProgress1);
+		//emitSignalPanel.add(workInProgress1);
 		//INCOMING SIGNAL
 		obsSignalPanel.setLayout(new BoxLayout(obsSignalPanel,BoxLayout.Y_AXIS));
 		obsSignalPanel.add(incomingSignalLabel);

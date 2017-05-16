@@ -5,16 +5,10 @@
 
 package doppeler9k;
 
-import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
-
 import javax.sound.sampled.LineUnavailableException;
-import javax.swing.JApplet;
-import javax.swing.SwingUtilities;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
@@ -28,18 +22,30 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 0;
+				Animatronix sineAnimation = new Animatronix();
+				emitSignalPanel.add(sineAnimation);
+				sineAnimation.setSize(215, 150);
+				sineAnimation.functionChoiceVal = 0;
 			}
 		});
 		squareButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 1;
+				Animatronix squareAnimation = new Animatronix();
+				emitSignalPanel.add(squareAnimation);
+				squareAnimation.setSize(215, 150);
+				squareAnimation.functionChoiceVal = 1;
 			}
 		});
 		expButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 2;
+				Animatronix expAnimation = new Animatronix();
+				emitSignalPanel.add(expAnimation);
+				expAnimation.setSize(215, 150);
+				expAnimation.functionChoiceVal = 2;
 			}
 		});
 		freqGenerateButton.addActionListener(new ActionListener() {
