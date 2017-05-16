@@ -163,13 +163,6 @@ public class WindowGUI extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
-		pack();
-		//
-		exitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		this.pack();
 	}
 }

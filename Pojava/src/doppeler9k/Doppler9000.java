@@ -10,6 +10,8 @@ import java.awt.HeadlessException;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JApplet;
 import javax.swing.SwingUtilities;
@@ -21,11 +23,6 @@ public class Doppler9000 extends WindowGUI {
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		SimulationObject source = new SimulationObject(30,40);
 		SimulationObject obserwator = new SimulationObject(90,30);
-		Animata soundWave = new Animata();
-		soundWave.init();
-		soundWave.start();
-		simMainPanel.add(soundWave, BorderLayout.CENTER);
-		simMainPanel.setVisible(true);
 		//
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -58,6 +55,12 @@ public class Doppler9000 extends WindowGUI {
 				} catch (LineUnavailableException e) {
 					e.printStackTrace();
 				}
+			}
+		});
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		velocityField.addActionListener(new ActionListener() {
@@ -106,17 +109,8 @@ public class Doppler9000 extends WindowGUI {
 		return factor;
 	}
 	//
+	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
-		SwingUtilities.invokeLater(new Runnable() {
-	         public void run() {
-	            try {
-					new Doppler9000();
-				} catch (HeadlessException e) {
-					e.printStackTrace();
-				} catch (LineUnavailableException e) {
-					e.printStackTrace();
-				}
-	         }
-	      });
+		Doppler9000 mainWin = new Doppler9000();
 	}
 }
