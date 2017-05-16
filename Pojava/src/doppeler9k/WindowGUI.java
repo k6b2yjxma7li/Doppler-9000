@@ -81,6 +81,7 @@ public class WindowGUI extends JFrame {
 	public JTextField obsYPosition = new JTextField("0");
 	public JTextField obsDirection = new JTextField("0");
 	//OTHER
+	Animatronix sineAnimation = new Animatronix();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
 	public JLabel workInProgress1 = new JLabel("To Be Done");
 	public JLabel workInProgress2 = new JLabel("To Be Done");
@@ -247,27 +248,30 @@ public class WindowGUI extends JFrame {
 		//
 		lineO4.addComponent(obsYPosition);
 		columnO3.addComponent(obsYPosition);
-		//
-		obsYPosition.setMinimumSize(new Dimension(40, 30));
-		obsYPosition.setMaximumSize(new Dimension(40, 30));
-		obsVelocityField.setMinimumSize(new Dimension(40, 30));
-		obsVelocityField.setMaximumSize(new Dimension(40, 30));
-		velocityField.setMinimumSize(new Dimension(40, 30));
-		velocityField.setMaximumSize(new Dimension(40, 30));
-		souVelocityField.setMinimumSize(new Dimension(40, 30));
-		souVelocityField.setMaximumSize(new Dimension(40, 30));
-		freqField.setMinimumSize(new Dimension(40, 30));
-		freqField.setMaximumSize(new Dimension(40, 30));
-		velocityField.setPreferredSize(new Dimension(40, 30));
-		freqField.setPreferredSize(new Dimension(40, 30));
-		freqGenerateButton.setMinimumSize(new Dimension(40, 30));
-		freqGenerateButton.setPreferredSize(new Dimension(40, 30));
-		volumeSlider.setMinimum(0);
-		volumeSlider.setMaximum(100);
 		//EMITTED SIGNAL
-		emitSignalPanel.setLayout(new BoxLayout(emitSignalPanel,BoxLayout.Y_AXIS));
-		emitSignalPanel.add(emittedSignalLabel);
-		//emitSignalPanel.add(workInProgress1);
+		GroupLayout emitSignalPanelLayout = new GroupLayout(emitSignalPanel);
+		emitSignalPanel.setLayout(emitSignalPanelLayout);
+		emitSignalPanelLayout.setAutoCreateGaps(true);
+		emitSignalPanelLayout.setAutoCreateContainerGaps(true);
+		//
+		GroupLayout.Group columnE1 = emitSignalPanelLayout.createParallelGroup(Alignment.LEADING);
+		GroupLayout.Group lineE1 = emitSignalPanelLayout.createParallelGroup();
+		GroupLayout.Group lineE2 = emitSignalPanelLayout.createParallelGroup();
+		//
+		GroupLayout.SequentialGroup linesE = emitSignalPanelLayout.createSequentialGroup();
+		GroupLayout.SequentialGroup columnsE = emitSignalPanelLayout.createSequentialGroup();
+		linesE.addGroup(lineE1);
+		linesE.addGroup(lineE2);
+		columnsE.addGroup(columnE1);
+		//
+		emitSignalPanelLayout.setHorizontalGroup(columnsE);
+		emitSignalPanelLayout.setVerticalGroup(linesE);
+		//
+		lineE1.addComponent(emittedSignalLabel);
+		columnE1.addComponent(emittedSignalLabel);
+		//
+		lineE2.addComponent(sineAnimation);
+		columnE1.addComponent(sineAnimation);
 		//INCOMING SIGNAL
 		obsSignalPanel.setLayout(new BoxLayout(obsSignalPanel,BoxLayout.Y_AXIS));
 		obsSignalPanel.add(incomingSignalLabel);
@@ -283,11 +287,29 @@ public class WindowGUI extends JFrame {
 		simMainPanel.setLayout(new BoxLayout(simMainPanel,BoxLayout.Y_AXIS));
 		simMainPanel.add(graphicalSimulationLabel);
 		simMainPanel.add(workInProgress3);
-		//
+		//COMPONENT SIZE
+		obsYPosition.setMinimumSize(new Dimension(40, 30));
+		obsYPosition.setMaximumSize(new Dimension(40, 30));
+		obsVelocityField.setMinimumSize(new Dimension(40, 30));
+		obsVelocityField.setMaximumSize(new Dimension(40, 30));
+		velocityField.setMinimumSize(new Dimension(40, 30));
+		velocityField.setMaximumSize(new Dimension(40, 30));
+		souVelocityField.setMinimumSize(new Dimension(40, 30));
+		souVelocityField.setMaximumSize(new Dimension(40, 30));
+		freqField.setMinimumSize(new Dimension(40, 30));
+		freqField.setMaximumSize(new Dimension(40, 30));
+		velocityField.setPreferredSize(new Dimension(40, 30));
+		freqField.setPreferredSize(new Dimension(40, 30));
+		freqGenerateButton.setMinimumSize(new Dimension(40, 30));
+		freqGenerateButton.setPreferredSize(new Dimension(40, 30));
+		sineAnimation.setMinimumSize(new Dimension(100,300));
+		volumeSlider.setMinimum(0);
+		volumeSlider.setMaximum(100);
+		//	
 		setJMenuBar(mainBar);
 		//
-		setSize(640,320);
-		setMinimumSize(new Dimension(800, 400));
+		
+		setMinimumSize(new Dimension(1000, 500));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);

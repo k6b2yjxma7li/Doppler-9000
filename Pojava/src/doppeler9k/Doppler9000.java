@@ -24,7 +24,7 @@ public class Doppler9000 extends WindowGUI {
 				functionChoice = 0;
 				Animatronix sineAnimation = new Animatronix();
 				emitSignalPanel.add(sineAnimation);
-				sineAnimation.setSize(215, 150);
+				sineAnimation.setSize(300, 300);
 				sineAnimation.functionChoiceVal = 0;
 			}
 		});
