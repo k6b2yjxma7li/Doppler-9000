@@ -10,6 +10,8 @@ import java.awt.HeadlessException;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JApplet;
 import javax.swing.SwingUtilities;
@@ -53,6 +55,12 @@ public class Doppler9000 extends WindowGUI {
 				} catch (LineUnavailableException e) {
 					e.printStackTrace();
 				}
+			}
+		});
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		velocityField.addActionListener(new ActionListener() {
@@ -101,6 +109,7 @@ public class Doppler9000 extends WindowGUI {
 		return factor;
 	}
 	//
+	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 mainWin = new Doppler9000();
 	}
