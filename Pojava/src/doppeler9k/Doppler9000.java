@@ -13,11 +13,11 @@ import javax.sound.sampled.LineUnavailableException;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
 	float soundVelocity = (float)343.8;
-	//
+	public SimulationObject source = new SimulationObject(30,40);
+	public SimulationObject obserwator = new SimulationObject(90,30);
+
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
-		SimulationObject source = new SimulationObject(30,40);
-		SimulationObject obserwator = new SimulationObject(90,30);
-		//
+				//
 		sineButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -48,14 +48,14 @@ public class Doppler9000 extends WindowGUI {
 				expAnimation.functionChoiceVal = 2;
 			}
 		});
-		freqGenerateButton.addActionListener(new ActionListener() {
+		souPanel.freqGenerateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					obserwator.setV(Float.parseFloat(velocityField.getText()));
-					source.setV(Float.parseFloat(souVelocityField.getText()));
+					obserwator.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
+					source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
 					FunctionGenerator generator = new FunctionGenerator(
-							(Float.parseFloat(freqField.getText())*(float)getFactor(source, obserwator)),
+							(Float.parseFloat(souPanel.freqField.getText())*(float)getFactor(source, obserwator)),
 							volumeSlider.getValue(),
 							functionChoice);
 				} catch (LineUnavailableException e) {
@@ -69,16 +69,22 @@ public class Doppler9000 extends WindowGUI {
 				System.exit(0);
 			}
 		});
-		velocityField.addActionListener(new ActionListener() {
+		souPanel.velocityField.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				obserwator.setV(Float.parseFloat(velocityField.getText()));
+				obserwator.setV(Float.parseFloat(souPanel.velocityField.getText()));
 			}
 		});
-		souVelocityField.addActionListener(new ActionListener() {
+		souPanel.souVelocityField.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			source.setV(Float.parseFloat(souVelocityField.getText()));
+			source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
+			}
+		});
+		obsPanel.obsVelocityField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			obserwator.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
 			}
 		});
 		airButton.addActionListener(new ActionListener() {

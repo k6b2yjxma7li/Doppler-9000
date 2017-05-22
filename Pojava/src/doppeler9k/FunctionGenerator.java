@@ -29,7 +29,7 @@ public class FunctionGenerator {
 				sdl.open(af);
 				sdl.start();
 				for(int i=0; i<2*44100; i++) {
-					double angle = i/((float)44100/hz)*2.0*Math.PI;//TU
+					double angle = i/((float)44100/hz)*2.0*Math.PI;
 					buf[0]=(byte)(Math.sin(angle)*volume);
 					sdl.write(buf,0,1);
 				}
