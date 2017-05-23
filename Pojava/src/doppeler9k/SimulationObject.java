@@ -13,18 +13,33 @@ public class SimulationObject {
 	public double vx() {
 		return v*Math.cos((Math.toRadians(angle)));
 	}
+	//
 	public double vy() {
 		return v*Math.sin((Math.toRadians(angle)));
 	}
+	//
+	public void calculateCoords(double v, double dt)
+	{
+		x = x+(vx()*dt);
+		y = y+(vy()*dt);
+	}
+	//
 	public void setV (double velocity) {
 		v = velocity;
 	}
+	//
 	public void setAngle (double angl) {
 		angle = angl;
 	}
-	public void setX (double coords) {
-		x = coords;
+	//
+	public void setX (double coordX) {
+		x = coordX;
 	}
+	//
+	public void setY (double coordY) {
+		y = coordY;
+	}
+	//
 	public SimulationObject() {
 		x = 0;
 		y = 0;
