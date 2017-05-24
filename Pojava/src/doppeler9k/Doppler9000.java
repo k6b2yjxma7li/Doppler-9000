@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.sound.sampled.LineUnavailableException;
+import javax.swing.JFrame;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice = 0;
@@ -124,5 +125,12 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 mainWin = new Doppler9000();
+		AnimationPanel panel = new AnimationPanel();
+		JFrame win = new JFrame();
+		win.setSize(1000, 1000);
+		win.setVisible(true);
+		win.add(panel);
+		win.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 	}
 }

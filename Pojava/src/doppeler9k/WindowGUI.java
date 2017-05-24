@@ -55,6 +55,7 @@ public class WindowGUI extends JFrame {
 	public JPanel objPropertiesPanel = new JPanel();
 	public JPanel emitSignalPanel = new JPanel();
 	public JPanel obsSignalPanel = new JPanel();
+	public AnimationPanel animacja = new AnimationPanel();
 	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel();
 	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel();
 	//OTHER SIMPLE PANELS
