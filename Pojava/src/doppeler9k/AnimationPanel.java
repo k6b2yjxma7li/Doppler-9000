@@ -38,11 +38,18 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		source.calculateCoords(5);
-		if((source.x>(this.getWidth()-10))||(source.getX()<0)) {
+		observer.calculateCoords(5);
+		if((source.getX()>(this.getWidth()-10))||(source.getX()<0)) {
 			source.setAngle(180-source.getAngle());
 		}
-		if((source.y>(this.getHeight()-10))||(source.getY()<0)) {
+		if((source.getY()>(this.getHeight()-10))||(source.getY()<0)) {
 			source.setAngle((360-source.getAngle()));
+		}
+		if((observer.getX()>(this.getWidth()-10))||(observer.getX()<0)) {
+			observer.setAngle(180-observer.getAngle());
+		}
+		if((observer.getY()>(this.getHeight()-10))||(observer.getY()<0)) {
+			observer.setAngle((360-observer.getAngle()));
 		}
 		repaint();
 	}
