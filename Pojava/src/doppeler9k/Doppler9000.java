@@ -81,11 +81,6 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				win.dispose();
-				Point p = new Point(0,0);
-				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-				source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
-				source.setAngle(Double.parseDouble(souPanel.souDirection.getText()));
 				AnimationPanel anima = new AnimationPanel();
 				anima.observer=observer;
 				anima.source=source;
@@ -96,17 +91,29 @@ public class Doppler9000 extends WindowGUI {
 				win.setVisible(true);
 				win.add(anima);
 				win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				win.setLocation(p);
+				win.setLocation(new Point(0,0));
 				win.setTitle("To close this window press 'Stop' in main window");
 				functionAnimation.timeDiv = Math.log(Float.parseFloat(souPanel.freqField.getText()));
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				win.dispose();
 			}
+		});
+		souPanel.resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
+				source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
+				source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
+				source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
+				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
+				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
+				observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
+				observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+			}			
 		});
 		//OBSERVER PROP
 		obsPanel.obsVelocityField.addActionListener(new ActionListener() {
@@ -135,6 +142,7 @@ public class Doppler9000 extends WindowGUI {
 				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
 			}			
 		});
+		//resetButton.
 		//MATERIAL
 		airButton.addActionListener(new ActionListener() {
 			@Override

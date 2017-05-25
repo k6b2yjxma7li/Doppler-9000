@@ -146,10 +146,8 @@ public class WindowGUI extends JFrame {
 		volumeSlider.setMaximum(100);
 		//	
 		setJMenuBar(mainBar);
-		//
-		Point winPosition = new Point(500, 0);
 		setMinimumSize(new Dimension(850, 500));
-		setLocation(winPosition);
+		setLocation(new Point(500, 0));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
