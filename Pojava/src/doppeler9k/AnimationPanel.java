@@ -39,14 +39,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		g.fillOval((int)source.getX(),(int)source.getY(), 10, 10);
 		g.fillOval((int)observer.getX(), (int)observer.getY(), 10, 10);
 		for (int i = 0; i< 30; i++)//fixed number of circles to 30 to save processing power, we shall decide our limit later//K
-		{
+		{	//it means that the source emits sound for 100*30 miliseconds
 		drawSoundWaves(g,(int)(source.getInitX()+i*source.vx()*step*0.001),(int)(source.getInitY()+i*source.vy()*step*0.001),i);
 		}
 		tm.start();
 	}
-		
-	//czy w poni¿szej funkcji nie mozna by by³o daæ tak¿e odtwarzania dzwiêku? //K
-	//nie wydaje mi sie, ale dodalem warunki brzegowe /R
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		source.calculateCoords(step);
@@ -63,7 +61,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		if((observer.getY()>(this.getHeight()-10))||(observer.getY()<0)) {
 			observer.setAngle((360-observer.getAngle()));
 		}
-		
+		//uwazam ze warunki brzegowe powinny byæ takie, ¿e symulacja koñczy siê gdy zrod³o wychodzi za krawêdz okna//K
 		repaint();
 		counter++;
 	}
