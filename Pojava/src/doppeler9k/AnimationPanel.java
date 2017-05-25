@@ -15,21 +15,33 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	float freq = 0;
 	int funct = 0;
 	float vol = 0;
+	int step = 100;
+	int counter = 0;
 	public SimulationObject source;
 	public SimulationObject observer;
 		
-	Timer tm = new Timer(5,this);
+	Timer tm = new Timer(step,this);
 	
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
 	}
+	public void drawSoundWaves(Graphics g,int x,int y,int iteration)	//function that animates wave propagation
+	{
 		
+		int r = (int)(20+soundVelocity*step*0.001*(counter-iteration));
+		g.drawOval(x-(r/2), y-(r/2) ,r,r);
+	}
+	
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
 		g.fillOval((int)source.getX(),(int)source.getY(), 10, 10);
 		g.fillOval((int)observer.getX(), (int)observer.getY(), 10, 10);
+		for (int i = 0; i< 30; i++)//fixed number of circles to 30 to save processing power, we shall decide our limit later//K
+		{
+		drawSoundWaves(g,(int)(source.getInitX()+i*source.vx()*step*0.001),(int)(source.getInitY()+i*source.vy()*step*0.001),i);
+		}
 		tm.start();
 	}
 		
@@ -37,8 +49,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	//nie wydaje mi sie, ale dodalem warunki brzegowe /R
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		source.calculateCoords(5);
-		observer.calculateCoords(5);
+		source.calculateCoords(step);
+		observer.calculateCoords(step);
 		if((source.getX()>(this.getWidth()-10))||(source.getX()<0)) {
 			source.setAngle(180-source.getAngle());
 		}
@@ -51,7 +63,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		if((observer.getY()>(this.getHeight()-10))||(observer.getY()<0)) {
 			observer.setAngle((360-observer.getAngle()));
 		}
+		
 		repaint();
+		counter++;
 	}
 	//ta funkcja zostanie przywolana gdy bedzie rozdzielenie watkow /R
 	public void simGenerator() {

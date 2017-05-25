@@ -9,6 +9,7 @@ public class SimulationObject {
 	double x,y;
 	double angle;
 	double v;
+	double initX, initY;
 	//
 	public double vx() {
 		return v*Math.cos((Math.toRadians(angle)));
@@ -37,15 +38,27 @@ public class SimulationObject {
 	//
 	public void setX(double coordX) {
 		x = coordX;
+		initX = coordX;
 	}
 	//
 	public void setY(double coordY) {
 		y = coordY;
+		initY = coordY;
 	}
 	//
 	public double getX()
 	{
 		return x;
+	}
+	//
+	public double getInitX()
+	{
+		return initX;
+	}
+	//
+	public double getInitY()
+	{
+		return initY;
 	}
 	//
 	public double getY()
