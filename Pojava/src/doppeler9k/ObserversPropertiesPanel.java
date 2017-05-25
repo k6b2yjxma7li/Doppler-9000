@@ -1,8 +1,6 @@
 package doppeler9k;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
-
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -15,7 +13,7 @@ public class ObserversPropertiesPanel extends JPanel {
 	public JCheckBox show = new JCheckBox("show");
 	public JLabel obsVelocityLabel = new JLabel("Observer Velocity [m/s]: ");
 	public JLabel obsPositionLabel = new JLabel("Observer Position [x,y]: ");
-	public JLabel directionObserverLabel = new JLabel("Source movement angle [deg]: ");
+	public JLabel directionObserverLabel = new JLabel("Observer movement angle [deg]: ");
 	public JTextField obsVelocityField = new JTextField("0");
 	public JTextField obsXPosition = new JTextField("0");
 	public JTextField obsYPosition = new JTextField("0");

@@ -1,10 +1,6 @@
 package doppeler9k;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,7 +16,7 @@ public class SourcePropertiesPanel extends JPanel {
 	public JTextField souXPosition = new JTextField("0");
 	public JTextField souYPosition = new JTextField("0");
 	public JTextField souDirection = new JTextField("0");
-	public JButton freqGenerateButton = new JButton("Start");
+	public JButton startButton = new JButton("Start");
 	public JButton stopButton = new JButton("Stop");
 	public JButton resetButton = new JButton("Reset");
 	public JLabel freqLabel = new JLabel("Frequency[Hz]: ");
@@ -93,8 +89,8 @@ public class SourcePropertiesPanel extends JPanel {
 		line5.addComponent(souDirection);
 		column2.addComponent(souDirection);
 		//
-		line6.addComponent(freqGenerateButton);
-		column1.addComponent(freqGenerateButton);
+		line6.addComponent(startButton);
+		column1.addComponent(startButton);
 		//
 		line6.addComponent(stopButton);
 		column2.addComponent(stopButton);
@@ -112,8 +108,8 @@ public class SourcePropertiesPanel extends JPanel {
 		freqField.setMaximumSize(new Dimension(40, 30));
 		velocityField.setPreferredSize(new Dimension(40, 30));
 		freqField.setPreferredSize(new Dimension(40, 30));
-		freqGenerateButton.setMinimumSize(new Dimension(40, 30));
-		freqGenerateButton.setPreferredSize(new Dimension(40, 30));
+		startButton.setMinimumSize(new Dimension(40, 30));
+		startButton.setPreferredSize(new Dimension(40, 30));
 		
 	
 	}

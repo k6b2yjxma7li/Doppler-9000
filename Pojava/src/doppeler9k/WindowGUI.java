@@ -7,16 +7,11 @@ package doppeler9k;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Point;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,9 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 
 public class WindowGUI extends JFrame {
 	//Menu bar
@@ -55,11 +48,10 @@ public class WindowGUI extends JFrame {
 	public JPanel objPropertiesPanel = new JPanel();
 	public JPanel emitSignalPanel = new JPanel();
 	public JPanel obsSignalPanel = new JPanel();
-	public AnimationPanel animacja = new AnimationPanel();
 	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel();
 	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel();
 	//OTHER SIMPLE PANELS
-	Animatronix sineAnimation = new Animatronix();
+	public FunctionAnimation functionAnimation = new FunctionAnimation();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
 	public JLabel workInProgress1 = new JLabel("To Be Done");
 	public JLabel workInProgress2 = new JLabel("To Be Done");
@@ -131,8 +123,8 @@ public class WindowGUI extends JFrame {
 		lineE1.addComponent(emittedSignalLabel);
 		columnE1.addComponent(emittedSignalLabel);
 		//
-		lineE2.addComponent(sineAnimation);
-		columnE1.addComponent(sineAnimation);
+		lineE2.addComponent(functionAnimation);
+		columnE1.addComponent(functionAnimation);
 		//INCOMING SIGNAL
 		obsSignalPanel.setLayout(new BoxLayout(obsSignalPanel,BoxLayout.Y_AXIS));
 		obsSignalPanel.add(incomingSignalLabel);
@@ -149,15 +141,15 @@ public class WindowGUI extends JFrame {
 		simMainPanel.add(graphicalSimulationLabel);
 		simMainPanel.add(workInProgress3);
 		//COMPONENT SIZE
-		sineAnimation.setMinimumSize(new Dimension(100,300));
+		functionAnimation.setMinimumSize(new Dimension(100,300));
 		volumeSlider.setMinimum(0);
 		volumeSlider.setMaximum(100);
 		//	
 		setJMenuBar(mainBar);
 		//
-		
-		setMinimumSize(new Dimension(1000, 500));
-		setLocationRelativeTo(null);
+		Point winPosition = new Point(500, 0);
+		setMinimumSize(new Dimension(850, 500));
+		setLocation(winPosition);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
