@@ -200,5 +200,6 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 mainWin = new Doppler9000();
+		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 }

@@ -5,21 +5,26 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
-	float soundVelocity;
 	public double factor = 1;
+	float soundVelocity;
+	float freq = 0;
+	int funct = 0;
+	float vol = 0;
+	int step = 100;
+	int counter = 0;
 	public SimulationObject source;
 	public SimulationObject observer;
-	
+	//
+	Timer tm = new Timer(step,this);
 	//
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
 	}
-	//
-	Timer tm = new Timer(5,this);
 	//
 	public double getFactor() {
 		double value;
@@ -33,20 +38,32 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		return value = (soundVelocity + (observer.v * cosObs)) / (soundVelocity - (source.v * cosSou));
 	}
-	//
-	public void paintComponent(Graphics g)
-	{
+	//	//function that animates wave propagation
+	public void drawSoundWaves(Graphics g, int x, int y, int iteration) {
+		int r = (int)(20+soundVelocity*step*0.001*(counter-iteration));
+		g.drawOval(x-(r/2), y-(r/2) ,r,r);
+	}
+	
+	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
 		g.fillOval((int)source.getX(),(int)source.getY(), 10, 10);
 		g.fillOval((int)observer.getX(), (int)observer.getY(), 10, 10);
+		//it means that the source emits sound for 100*30 miliseconds
+		//fixed number of circles to 30 to save processing power, we shall decide our limit later//K
+		for(int i = 0; i< 30; i++) {
+			drawSoundWaves(g,
+					(int)(source.getX()+i*source.vx()*step*0.001),
+					(int)(source.getY()+i*source.vy()*step*0.001),
+					i);
+		}
 		tm.start();
 	}
 	//
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		source.calculateCoords(5);
-		observer.calculateCoords(5);
+		source.calculateCoords(step);
+		observer.calculateCoords(step);
 		if((source.getX()>(this.getWidth()-10))||(source.getX()<0)) {
 			source.setAngle(180-source.getAngle());
 		}
@@ -60,5 +77,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			observer.setAngle((360-observer.getAngle()));
 		}
 		repaint();
+		counter++;
 	}
 }
