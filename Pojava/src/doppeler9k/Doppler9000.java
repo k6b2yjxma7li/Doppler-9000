@@ -15,9 +15,11 @@ import javax.swing.JFrame;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
 	float soundVelocity = (float)343.8;
-	public SimulationObject source = new SimulationObject();
-	public SimulationObject observer = new SimulationObject();
+	public SimulationObject source = new SimulationObject(100,100);
+	public SimulationObject observer = new SimulationObject(100,100);
 	public JFrame win = new JFrame();
+	public AnimationPanel animation = new AnimationPanel();
+	public SoundOperator generator = new SoundOperator();
 	//
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		//MENU 
@@ -81,38 +83,46 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				win.dispose();
-				AnimationPanel anima = new AnimationPanel();
-				anima.observer=observer;
-				anima.source=source;
-				anima.freq=Float.parseFloat(souPanel.freqField.getText());
-				anima.funct=functionChoice;
-				anima.vol=volumeSlider.getValue();
+				generator.dispose();
+				setValuesAnim();
+				//setValuesGen();
+				animation.tm.start();
+				generator.soundTimer.start();
+				animation.observer=observer;
+				animation.source=source;
 				win.setSize(500, 500);
 				win.setVisible(true);
-				win.add(anima);
+				win.add(animation);
 				win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				win.setLocation(new Point(0,0));
 				win.setTitle("To close this window press 'Stop' in main window");
 				functionAnimation.timeDiv = Math.log(Float.parseFloat(souPanel.freqField.getText()));
+				/*//
+				System.out.print(observer.v);
+				System.out.print('\t');
+				System.out.print(source.v);
+				System.out.println();*/
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				win.dispose();
+				animation.tm.stop();
+				generator.dispose();
+				generator.soundTimer.stop();
 			}
 		});
 		souPanel.resetButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
-				source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
-				source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
-				source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
-				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-				observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
-				observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+				setValuesAnim();
+				//setValuesGen();
+				/*//
+				System.out.print(observer.v);
+				System.out.print('\t');
+				System.out.print(source.v);
+				System.out.println();*/
 			}			
 		});
 		//OBSERVER PROP
@@ -123,12 +133,10 @@ public class Doppler9000 extends WindowGUI {
 			}
 		});
 		obsPanel.obsDirection.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
 			}
-			
 		});
 		obsPanel.obsXPosition.addActionListener(new ActionListener() {
 			@Override
@@ -163,7 +171,32 @@ public class Doppler9000 extends WindowGUI {
 			}
 		});
 	}
-	//
+	//SETS VALUES FOR ANIMATION
+	public void setValuesAnim() {
+		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
+		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
+		source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
+		source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
+		observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
+		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
+		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
+		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+		animation.soundVelocity = soundVelocity;
+		if(source.v > soundVelocity) {
+			System.out.println("Source velocity too high! Set to max");
+			source.setV(soundVelocity);
+		}
+		if(observer.v > soundVelocity) {
+			System.out.println("Observer velocity too high! Set to max");
+			observer.setV(soundVelocity);
+		}
+	}
+	//SETS VALUES FOR GENERATOR - DOES NOT WORK
+	public void setValuesGen() {
+		generator.f = (float) (Float.parseFloat(souPanel.freqField.getText())*animation.getFactor());
+		generator.fTyp = functionChoice;
+		generator.vol = 100;
+	}
 	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 mainWin = new Doppler9000();
