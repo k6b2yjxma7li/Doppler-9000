@@ -5,25 +5,29 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
 	public double factor = 1;
-	float soundVelocity;
-	float freq = 0;
-	int funct = 0;
-	float vol = 0;
-	int step = 100;
+	double soundVelocity;
+	double freq = 1;
+	int step = 1;
 	int counter = 0;
+	double waveLife = 5000;
+	double waveLength = 10000/freq;
+	int waveNumber = (int)(waveLife/waveLength) + 1;
 	public SimulationObject source;
 	public SimulationObject observer;
+	WaveObject[] wave = new WaveObject[waveNumber];
 	//
 	Timer tm = new Timer(step,this);
 	//
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
+	}
+	public void setFrequency(double f) {
+		freq = f;
 	}
 	//
 	public double getFactor() {
@@ -38,44 +42,59 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		return value = (soundVelocity + (observer.v * cosObs)) / (soundVelocity - (source.v * cosSou));
 	}
-	//	//function that animates wave propagation
-	public void drawSoundWaves(Graphics g, int x, int y, int iteration) {
-		int r = (int)(20+soundVelocity*step*0.001*(counter-iteration));
-		g.drawOval(x-(r/2), y-(r/2) ,r,r);
+	//
+	public void propCalc() {
+		source.calculateCoords(step);
+		observer.calculateCoords(step);
+		if((source.getX()>(this.getWidth())-5)||(source.getX()<0)) {
+			source.setAngle(180-source.getAngle());
+		}
+		if((source.getY()>(this.getHeight())-5)||(source.getY()<0)) {
+			source.setAngle((360-source.getAngle()));
+		}
+		if((observer.getX()>(this.getWidth())-5)||(observer.getX()<0)) {
+			observer.setAngle(180-observer.getAngle());
+		}
+		if((observer.getY()>(this.getHeight())-5)||(observer.getY()<0)) {
+			observer.setAngle((360-observer.getAngle()));
+		}
 	}
-	
+	//
+	public void drawSoundWaves(Graphics g, double x, double y) {
+		for(int n=0; n<waveNumber; n++) {
+			wave[n].setV(soundVelocity);
+			wave[n].setXY(source.calcInitX(counter+waveLength*n, waveLife), source.calcInitY(counter+waveLength*n, waveLife));
+		}
+		for(int n = 0; n<waveNumber; n++) {
+			g.drawOval((int)(wave[n].getX()-(wave[n].calculateRad(counter+waveLength*n, waveLife)/2)+5),
+				(int)(wave[n].getY()-(wave[n].calculateRad(counter+waveLength*n, waveLife)/2)+5), 
+				(int)(wave[n].calculateRad(counter+waveLength*n, waveLife)),
+				(int)(wave[n].calculateRad(counter+waveLength*n, waveLife)));
+		}
+	}
+	//
 	public void paintComponent (Graphics g) {
+		for(int n = 0; n < waveNumber; n++) {
+			wave[n] = new WaveObject(0,0,0,0);
+		}
+		//System.out.println(this.getSize());
+		//System.out.println(counter);
+		//System.out.println(freq);
+		System.out.print(waveLength);
+		System.out.print('\t');
+		System.out.print(waveNumber);
+		System.out.print('\n');
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
-		g.fillOval((int)source.getX(),(int)source.getY(), 10, 10);
-		g.fillOval((int)observer.getX(), (int)observer.getY(), 10, 10);
-		//it means that the source emits sound for 100*30 miliseconds
-		//fixed number of circles to 30 to save processing power, we shall decide our limit later//K
-		for(int i = 0; i< 30; i++) {
-			drawSoundWaves(g,
-					(int)(source.getX()+i*source.vx()*step*0.001),
-					(int)(source.getY()+i*source.vy()*step*0.001),
-					i);
-		}
+		g.fillOval((int)source.getX(),(int)source.getY(), 5, 5);
+		g.fillOval((int)observer.getX(), (int)observer.getY(), 5, 5);
+		drawSoundWaves(g, source.getX(), source.getY());
 		tm.start();
 	}
 	//
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		source.calculateCoords(step);
-		observer.calculateCoords(step);
-		if((source.getX()>(this.getWidth()-10))||(source.getX()<0)) {
-			source.setAngle(180-source.getAngle());
-		}
-		if((source.getY()>(this.getHeight()-10))||(source.getY()<0)) {
-			source.setAngle((360-source.getAngle()));
-		}
-		if((observer.getX()>(this.getWidth()-10))||(observer.getX()<0)) {
-			observer.setAngle(180-observer.getAngle());
-		}
-		if((observer.getY()>(this.getHeight()-10))||(observer.getY()<0)) {
-			observer.setAngle((360-observer.getAngle()));
-		}
+		propCalc();
 		repaint();
 		counter++;
 	}

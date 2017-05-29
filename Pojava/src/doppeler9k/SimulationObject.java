@@ -9,7 +9,8 @@ public class SimulationObject {
 	double x,y;
 	double angle;
 	double v;
-	double initX, initY;
+	double initX;
+	double initY;
 	//
 	public double vx() {
 		return v*Math.cos((Math.toRadians(angle)));
@@ -21,8 +22,21 @@ public class SimulationObject {
 	//
 	public void calculateCoords(double dt)
 	{
-		x = x+(vx()*dt*0.001);
-		y = y+(vy()*dt*0.001);
+		x += (vx()*dt*0.001);
+		y += (vy()*dt*0.001);
+	}
+	
+	public double calcInitX(double t, double length) {
+		if(t%length == 0) {
+			initX = x;
+		}
+		return initX;
+	}
+	public double calcInitY(double t, double length) {
+		if(t%length == 0) {
+			initY = y;
+		}
+		return initY;
 	}
 	//
 	public void setV(double velocity) {
@@ -38,27 +52,17 @@ public class SimulationObject {
 	//
 	public void setX(double coordX) {
 		x = coordX;
-		initX = coordX;
+		//initX = coordX;
 	}
 	//
 	public void setY(double coordY) {
 		y = coordY;
-		initY = coordY;
+		//initY = coordY;
 	}
 	//
 	public double getX()
 	{
 		return x;
-	}
-	//
-	public double getInitX()
-	{
-		return initX;
-	}
-	//
-	public double getInitY()
-	{
-		return initY;
 	}
 	//
 	public double getY()

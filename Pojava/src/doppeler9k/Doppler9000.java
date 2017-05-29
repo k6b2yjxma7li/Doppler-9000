@@ -90,6 +90,7 @@ public class Doppler9000 extends WindowGUI {
 				generator.soundTimer.start();
 				animation.observer=observer;
 				animation.source=source;
+				animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
 				win.setSize(500, 500);
 				win.setVisible(true);
 				win.add(animation);
@@ -97,11 +98,6 @@ public class Doppler9000 extends WindowGUI {
 				win.setLocation(new Point(0,0));
 				win.setTitle("To close this window press 'Stop' in main window");
 				functionAnimation.timeDiv = Math.log(Float.parseFloat(souPanel.freqField.getText()));
-				/*//
-				System.out.print(observer.v);
-				System.out.print('\t');
-				System.out.print(source.v);
-				System.out.println();*/
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
@@ -118,11 +114,6 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent e) {
 				setValuesAnim();
 				//setValuesGen();
-				/*//
-				System.out.print(observer.v);
-				System.out.print('\t');
-				System.out.print(source.v);
-				System.out.println();*/
 			}			
 		});
 		//OBSERVER PROP
@@ -141,13 +132,13 @@ public class Doppler9000 extends WindowGUI {
 		obsPanel.obsXPosition.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
+				observer.initX = (Integer.parseInt(obsPanel.obsXPosition.getText()));
 			}			
 		});
 		obsPanel.obsYPosition.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
+				observer.initY = (Integer.parseInt(obsPanel.obsYPosition.getText()));
 			}			
 		});
 		//resetButton.
@@ -182,6 +173,7 @@ public class Doppler9000 extends WindowGUI {
 		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
 		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
 		animation.soundVelocity = soundVelocity;
+		animation.counter = 0;
 		if(source.v > soundVelocity) {
 			System.out.println("Source velocity too high! Set to max");
 			source.setV(soundVelocity);
