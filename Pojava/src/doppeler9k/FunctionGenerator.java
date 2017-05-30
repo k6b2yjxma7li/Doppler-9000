@@ -12,8 +12,6 @@ import javax.sound.sampled.SourceDataLine;
 
 //FUNCTION GENERATING CLASS
 public class FunctionGenerator {
-	public FunctionGenerator() {
-	}
 	//
 	public FunctionGenerator(float hz, float volume, int fType) throws LineUnavailableException {
 		switch(fType){
@@ -28,8 +26,8 @@ public class FunctionGenerator {
 				sdl = AudioSystem.getSourceDataLine(af);
 				sdl.open(af);
 				sdl.start();
-				for(int i=0; i<2*44100; i++) {
-					double angle = i/((float)44100/hz)*2.0*Math.PI;//TU
+				for(int i=0; i<44100/hz; i++) {
+					double angle = i/((float)44100/hz)*2.0*Math.PI;
 					buf[0]=(byte)(Math.sin(angle)*volume);
 					sdl.write(buf,0,1);
 				}
@@ -49,7 +47,7 @@ public class FunctionGenerator {
 				sdl = AudioSystem.getSourceDataLine(af);
 				sdl.open(af);
 				sdl.start();
-				for(int i=0; i<2*44100; i++){
+				for(int i=0; i<44100/hz; i++){
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
 					if(Math.sin(angle) > 0) {
 						buf[0]=(byte)(1*volume);
@@ -76,9 +74,9 @@ public class FunctionGenerator {
 				sdl = AudioSystem.getSourceDataLine(af);
 				sdl.open(af);
 				sdl.start();
-				for(int i=0; i<2*44100; i++) {
+				for(int i=0; i<44100/hz; i++) {
 					double angle = i/((float)44100/hz)*2.0*Math.PI;
-					buf[0]=(byte)(Math.cos(angle)*Math.exp(Math.sin(angle))*volume);
+					buf[0]=(byte)(Math.cos(angle)*Math.exp(Math.sin(angle)-1)*volume);
 					sdl.write(buf,0,1);
 				}
 				sdl.drain();
