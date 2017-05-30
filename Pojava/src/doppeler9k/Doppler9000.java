@@ -132,13 +132,13 @@ public class Doppler9000 extends WindowGUI {
 		obsPanel.obsXPosition.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				observer.initX = (Integer.parseInt(obsPanel.obsXPosition.getText()));
+				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
 			}			
 		});
 		obsPanel.obsYPosition.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				observer.initY = (Integer.parseInt(obsPanel.obsYPosition.getText()));
+				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
 			}			
 		});
 		//resetButton.

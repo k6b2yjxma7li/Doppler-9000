@@ -10,16 +10,23 @@ import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
 	public double factor = 1;
-	double soundVelocity;
+	double soundVelocity = 100;
 	double freq = 1;
 	int step = 1;
 	int counter = 0;
-	double waveLife = 5000;
-	double waveLength = 10000/freq;
-	int waveNumber = (int)(waveLife/waveLength) + 1;
+	int ncounter = 0;
+	double waveLife = 2000;
+	double waveLength = 20;
+	int waveNumber = (int)(waveLife/waveLength);
 	public SimulationObject source;
 	public SimulationObject observer;
 	WaveObject[] wave = new WaveObject[waveNumber];
+	//
+	public AnimationPanel() {
+		for(int n =0; n < waveNumber; n++) {
+			wave[n] = new WaveObject(0,0,0,0);
+		}
+	}
 	//
 	Timer tm = new Timer(step,this);
 	//
@@ -60,35 +67,30 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 	}
 	//
-	public void drawSoundWaves(Graphics g, double x, double y) {
-		for(int n=0; n<waveNumber; n++) {
-			wave[n].setV(soundVelocity);
-			wave[n].setXY(source.calcInitX(counter+waveLength*n, waveLife), source.calcInitY(counter+waveLength*n, waveLife));
+	public void drawSoundWaves(Graphics g) {
+		double[] r = new double[waveNumber];
+		//
+		for(int n = 0; n < waveNumber; n++) {
+			if((counter+waveLength*n)%waveLife==0) {
+				wave[n].setXY(source.getX(), source.getY());
+			}
 		}
-		for(int n = 0; n<waveNumber; n++) {
-			g.drawOval((int)(wave[n].getX()-(wave[n].calculateRad(counter+waveLength*n, waveLife)/2)+5),
-				(int)(wave[n].getY()-(wave[n].calculateRad(counter+waveLength*n, waveLife)/2)+5), 
-				(int)(wave[n].calculateRad(counter+waveLength*n, waveLife)),
-				(int)(wave[n].calculateRad(counter+waveLength*n, waveLife)));
+		for(int n = 0; n < waveNumber; n++) {
+			wave[n].setV(soundVelocity);
+			r[n] = wave[n].calculateRad(counter+waveLength*n, waveLife);
+			g.drawOval((int)(wave[n].getX() - r[n]/2 + 2.5),
+					(int)(wave[n].getY() - r[n]/2 + 2.5),
+					(int)(r[n]),
+					(int)(r[n]));
 		}
 	}
 	//
-	public void paintComponent (Graphics g) {
-		for(int n = 0; n < waveNumber; n++) {
-			wave[n] = new WaveObject(0,0,0,0);
-		}
-		//System.out.println(this.getSize());
-		//System.out.println(counter);
-		//System.out.println(freq);
-		System.out.print(waveLength);
-		System.out.print('\t');
-		System.out.print(waveNumber);
-		System.out.print('\n');
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
-		g.fillOval((int)source.getX(),(int)source.getY(), 5, 5);
+		g.fillOval((int)source.getX(), (int)source.getY(), 5, 5);
 		g.fillOval((int)observer.getX(), (int)observer.getY(), 5, 5);
-		drawSoundWaves(g, source.getX(), source.getY());
+		drawSoundWaves(g);
 		tm.start();
 	}
 	//
