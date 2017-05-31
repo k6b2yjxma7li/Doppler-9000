@@ -15,11 +15,11 @@ import javax.swing.JFrame;
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
 	float soundVelocity = (float)343.8;
-	public SimulationObject source = new SimulationObject(100,100);
-	public SimulationObject observer = new SimulationObject(100,100);
+	public SimulationObject source = new SimulationObject(0,0,0,0);
+	public SimulationObject observer = new SimulationObject(0,0,0,0);
 	public JFrame win = new JFrame();
 	public AnimationPanel animation = new AnimationPanel();
-	public SoundOperator generator = new SoundOperator();
+	//public SoundOperator generator = new SoundOperator();
 	//
 	public Doppler9000() throws HeadlessException, LineUnavailableException {
 		//MENU 
@@ -83,21 +83,23 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				win.dispose();
-				generator.dispose();
-				setValuesAnim();
-				//setValuesGen();
-				animation.tm.start();
-				generator.soundTimer.start();
 				animation.observer=observer;
 				animation.source=source;
-				animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
+				//functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				//functionAnimation.repaint();
+				//generator.dispose();
+				setValuesAnim();
+				//setValuesGen();
+				//animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
+				animation.tm.start();
+				//generator.soundTimer.start();
 				win.setSize(500, 500);
 				win.setVisible(true);
 				win.add(animation);
 				win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				win.setLocation(new Point(0,0));
 				win.setTitle("To close this window press 'Stop' in main window");
-				functionAnimation.timeDiv = Math.log(Float.parseFloat(souPanel.freqField.getText()));
+				
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
@@ -105,8 +107,8 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent e) {
 				win.dispose();
 				animation.tm.stop();
-				generator.dispose();
-				generator.soundTimer.stop();
+				//generator.dispose();
+				//generator.soundTimer.stop();
 			}
 		});
 		souPanel.resetButton.addActionListener(new ActionListener() {
@@ -172,7 +174,7 @@ public class Doppler9000 extends WindowGUI {
 		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
 		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
 		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
-		animation.soundVelocity = soundVelocity;
+		animation.setSoundVel(soundVelocity);
 		animation.counter = 0;
 		if(source.v > soundVelocity) {
 			System.out.println("Source velocity too high! Set to max");
@@ -184,11 +186,11 @@ public class Doppler9000 extends WindowGUI {
 		}
 	}
 	//SETS VALUES FOR GENERATOR - DOES NOT WORK
-	public void setValuesGen() {
+	/*public void setValuesGen() {
 		generator.f = (float) (Float.parseFloat(souPanel.freqField.getText())*animation.getFactor());
 		generator.fTyp = functionChoice;
 		generator.vol = 100;
-	}
+	}*/
 	//MAIN
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
 		Doppler9000 mainWin = new Doppler9000();

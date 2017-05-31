@@ -37,12 +37,10 @@ public class SimulationObject {
 	//
 	public void setX(double coordX) {
 		x = coordX;
-		//initX = coordX;
 	}
 	//
 	public void setY(double coordY) {
 		y = coordY;
-		//initY = coordY;
 	}
 	//
 	public void setXY(double X, double Y) {
@@ -59,6 +57,9 @@ public class SimulationObject {
 	{
 		return y;
 	}
+	public double getV() {
+		return v;
+	}
 	//
 	public SimulationObject() {
 		x = 0;
@@ -66,13 +67,14 @@ public class SimulationObject {
 		v = 0;
 		angle = 0;
 	}
+	//
 	public SimulationObject(double coordX,double coordY) {
 		x = coordX;
 		y = coordY;
 		v = 0;
 		angle = 0;
 	}
-
+	//
 	public SimulationObject(double coordX,double coordY,double vel, double angl) {
 		x = coordX;
 		y = coordY;

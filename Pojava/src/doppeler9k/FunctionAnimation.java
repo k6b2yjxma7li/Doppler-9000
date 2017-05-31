@@ -13,11 +13,11 @@ public class FunctionAnimation extends JPanel implements ActionListener {
 	//
 	public int functionChoiceVal;
 	int delayTime = 20;
-	public double timeDiv = 44;
+	double timeDiv = 44;
 	double mathStep = (double)(Math.PI/timeDiv);
 	double theta = (double)0;
 	int yy[] = new int[200];
-	
+	//
 	public void setFreq(double tD) {
 		timeDiv = tD;
 	}
