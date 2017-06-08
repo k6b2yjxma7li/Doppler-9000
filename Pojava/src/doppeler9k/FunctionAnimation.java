@@ -1,3 +1,7 @@
+/**
+ * @author Robert
+ * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
+ */
 package doppeler9k;
 
 import java.awt.Color;
@@ -17,12 +21,13 @@ public class FunctionAnimation extends JPanel implements ActionListener {
 	double mathStep = (double)(Math.PI/timeDiv);
 	double theta = (double)0;
 	int yy[] = new int[200];
+	Timer timeAnimata = new Timer(delayTime, this);
 	//
 	public void setFreq(double tD) {
+		
 		timeDiv = tD;
+		mathStep = (double)(Math.PI/timeDiv);
 	}
-	//
-	Timer timeAnimata = new Timer(delayTime, this);
 	//
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

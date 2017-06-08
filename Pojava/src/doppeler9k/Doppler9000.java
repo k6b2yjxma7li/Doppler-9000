@@ -1,5 +1,6 @@
 /**
  * @author Robert
+ * @author Karol
  * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 
@@ -54,39 +55,25 @@ public class Doppler9000 extends WindowGUI {
 				System.exit(0);
 			}
 		});
-		//SOURCE PROP
-		souPanel.souVelocityField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				source.setV(Double.parseDouble(souPanel.souVelocityField.getText()));
-			}
-		});
-		souPanel.souDirection.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				source.setAngle(Double.parseDouble(souPanel.souDirection.getText()));
-			}
-		});
-		souPanel.souXPosition.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				source.setX(Integer.parseInt(souPanel.souXPosition.getText()));
-			}			
-		});
-		souPanel.souYPosition.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				source.setY(Integer.parseInt(souPanel.souYPosition.getText()));
-			}			
-		});
+		
 		souPanel.startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				win.dispose();
+				//SOURCE PROPERTIES
+				source.setV(Double.parseDouble(souPanel.souVelocityField.getText()));
+				source.setAngle(Double.parseDouble(souPanel.souDirection.getText()));
+				source.setX(Integer.parseInt(souPanel.souXPosition.getText()));
+				source.setY(Integer.parseInt(souPanel.souYPosition.getText()));
+				//OBSERVER PROPERTIES
+				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
+				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
+				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
+				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
 				animation.observer=observer;
 				animation.source=source;
-				//functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				//functionAnimation.repaint();
+				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				functionAnimation.repaint();
 				//generator.dispose();
 				setValuesAnim();
 				//setValuesGen();
@@ -118,32 +105,6 @@ public class Doppler9000 extends WindowGUI {
 				//setValuesGen();
 			}			
 		});
-		//OBSERVER PROP
-		obsPanel.obsVelocityField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-			}
-		});
-		obsPanel.obsDirection.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-			}
-		});
-		obsPanel.obsXPosition.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
-			}			
-		});
-		obsPanel.obsYPosition.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
-			}			
-		});
-		//resetButton.
 		//MATERIAL
 		airButton.addActionListener(new ActionListener() {
 			@Override
