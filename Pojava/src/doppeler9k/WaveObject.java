@@ -16,6 +16,12 @@ public class WaveObject {
 		radius = R;
 		velocity = V;
 	}
+	public WaveObject() {
+		x = 0;
+		y = 0;
+		radius = 0;
+		velocity = 0;
+	}
 	public void setV(double V) {
 		velocity = V;
 	}

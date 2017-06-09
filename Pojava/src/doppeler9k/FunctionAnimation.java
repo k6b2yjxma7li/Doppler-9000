@@ -16,23 +16,21 @@ import javax.swing.Timer;
 public class FunctionAnimation extends JPanel implements ActionListener {
 	//
 	public int functionChoiceVal;
-	int delayTime = 20;
-	double timeDiv = 44;
-	double mathStep = (double)(Math.PI/timeDiv);
+	int delayTime = 10;
+	double mathStep = 0;
 	double theta = (double)0;
-	int yy[] = new int[200];
+	int pointNr = 1000;
+	int yy[] = new int[pointNr];
 	Timer timeAnimata = new Timer(delayTime, this);
 	//
 	public void setFreq(double tD) {
-		
-		timeDiv = tD;
-		mathStep = (double)(Math.PI/timeDiv);
+		mathStep = (double)((Math.PI/100)*tD);
 	}
 	//
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
-		for(int x=0; x<199; x++) {
+		for(int x=0; x<(pointNr-1); x++) {
 			g.drawLine(x, yy[x], x+1, yy[x+1]);
 		}
 		timeAnimata.start();
@@ -41,20 +39,20 @@ public class FunctionAnimation extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		theta +=mathStep;
-		for(int x=0; x<200; x++) {
+		for(int x=0; x<pointNr; x++) {
 			yy[x] = 50;
 		}
 		switch(functionChoiceVal) {
 		case 0:
 			{
-				for(int x = 0; x<200; x++) {
+				for(int x = 0; x<pointNr; x++) {
 					yy[x] +=(int)(50*Math.sin(theta+mathStep*x));
 				}
 				break;
 			}
 		case 1:
 			{
-				for(int x = 0; x<200; x++) {
+				for(int x = 0; x<pointNr; x++) {
 					if(Math.sin(theta+mathStep*x) > 0) {
 						yy[x]+=45;
 					}else{
@@ -65,7 +63,7 @@ public class FunctionAnimation extends JPanel implements ActionListener {
 			}
 		case 2:
 			{
-				for(int x = 0; x<200; x++) {
+				for(int x = 0; x<pointNr; x++) {
 					yy[x] +=(int)(50*(Math.cos(theta+mathStep*x)*Math.exp(Math.sin(theta+mathStep*x))/1.46) );
 				}
 				break;

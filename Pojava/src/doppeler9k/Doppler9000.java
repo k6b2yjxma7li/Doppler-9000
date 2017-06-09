@@ -10,19 +10,49 @@ import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JFrame;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
 	float soundVelocity = (float)343.8;
-	public SimulationObject source = new SimulationObject(0,0,0,0);
-	public SimulationObject observer = new SimulationObject(0,0,0,0);
+	public SimulationObject source = new SimulationObject();
+	public SimulationObject observer = new SimulationObject();
 	public JFrame win = new JFrame();
-	public AnimationPanel animation = new AnimationPanel();
+	public AnimationPanel animation;
 	//public SoundOperator generator = new SoundOperator();
 	//
-	public Doppler9000() throws HeadlessException, LineUnavailableException {
+	//SETS VALUES FOR ANIMATION
+	public void setValuesAnim() {
+		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
+		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
+		source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
+		source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
+		observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
+		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
+		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
+		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+		animation.setSoundVel(soundVelocity);
+		animation.observer=observer;
+		animation.source=source;
+		animation.counter = 0;
+		if(source.v > soundVelocity) {
+			System.out.println("Source velocity too high! Set to max");
+			source.setV(soundVelocity);
+		}
+		if(observer.v > soundVelocity) {
+			System.out.println("Observer velocity too high! Set to max");
+			observer.setV(soundVelocity);
+		}
+	}
+	//MAIN C
+	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException {
 		//MENU 
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -55,30 +85,22 @@ public class Doppler9000 extends WindowGUI {
 				System.exit(0);
 			}
 		});
-		
 		souPanel.startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				win.dispose();
-				//SOURCE PROPERTIES
-				source.setV(Double.parseDouble(souPanel.souVelocityField.getText()));
-				source.setAngle(Double.parseDouble(souPanel.souDirection.getText()));
-				source.setX(Integer.parseInt(souPanel.souXPosition.getText()));
-				source.setY(Integer.parseInt(souPanel.souYPosition.getText()));
-				//OBSERVER PROPERTIES
-				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
-				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
-				animation.observer=observer;
-				animation.source=source;
+				try {
+					animation = new AnimationPanel();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				functionAnimation.repaint();
-				//generator.dispose();
 				setValuesAnim();
-				//setValuesGen();
+				functionAnimation.repaint();
 				//animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
 				animation.tm.start();
+				animation.repaint();
 				//generator.soundTimer.start();
 				win.setSize(500, 500);
 				win.setVisible(true);
@@ -94,6 +116,7 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent e) {
 				win.dispose();
 				animation.tm.stop();
+				animation.outFile.close();
 				//generator.dispose();
 				//generator.soundTimer.stop();
 			}
@@ -102,6 +125,7 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setValuesAnim();
+				animation.repaint();
 				//setValuesGen();
 			}			
 		});
@@ -125,35 +149,8 @@ public class Doppler9000 extends WindowGUI {
 			}
 		});
 	}
-	//SETS VALUES FOR ANIMATION
-	public void setValuesAnim() {
-		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
-		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
-		source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
-		source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
-		observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
-		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
-		animation.setSoundVel(soundVelocity);
-		animation.counter = 0;
-		if(source.v > soundVelocity) {
-			System.out.println("Source velocity too high! Set to max");
-			source.setV(soundVelocity);
-		}
-		if(observer.v > soundVelocity) {
-			System.out.println("Observer velocity too high! Set to max");
-			observer.setV(soundVelocity);
-		}
-	}
-	//SETS VALUES FOR GENERATOR - DOES NOT WORK
-	/*public void setValuesGen() {
-		generator.f = (float) (Float.parseFloat(souPanel.freqField.getText())*animation.getFactor());
-		generator.fTyp = functionChoice;
-		generator.vol = 100;
-	}*/
-	//MAIN
-	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
+	//MAIN F
+	public static void main(String[] args) throws HeadlessException, LineUnavailableException, FileNotFoundException {
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

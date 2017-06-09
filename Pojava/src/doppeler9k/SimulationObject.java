@@ -31,9 +31,6 @@ public class SimulationObject {
 	public void setAngle(double angl) {
 		angle = angl;
 	}
-	public double getAngle() {
-		return angle;
-	}
 	//
 	public void setX(double coordX) {
 		x = coordX;
@@ -46,6 +43,10 @@ public class SimulationObject {
 	public void setXY(double X, double Y) {
 		x = X;
 		y = Y;
+	}
+	//
+	public double getAngle() {
+		return angle;
 	}
 	//
 	public double getX()
