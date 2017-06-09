@@ -17,8 +17,8 @@ public class SourcePropertiesPanel extends JPanel {
 	public JTextField freqField = new JTextField("440");
 	public JTextField velocityField = new JTextField("0");
 	public JTextField souVelocityField = new JTextField("0");
-	public JTextField souXPosition = new JTextField("10");
-	public JTextField souYPosition = new JTextField("10");
+	public JTextField souXPosition = new JTextField("0");
+	public JTextField souYPosition = new JTextField("0");
 	public JTextField souDirection = new JTextField("0");
 	public JButton startButton = new JButton("Start");
 	public JButton stopButton = new JButton("Stop");

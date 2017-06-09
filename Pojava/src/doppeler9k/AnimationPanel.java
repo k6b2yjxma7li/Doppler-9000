@@ -61,11 +61,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 	}
 	//
-	public void propCalc() {	
-		sizeCompare(source);
-		sizeCompare(observer);
+	public void propCalc() {
 		observer.calculateCoords(step);
 		source.calculateCoords(step);
+		sizeCompare(source);
+		sizeCompare(observer);
 	}
 	//
 	public void drawSoundWaves(Graphics g) {

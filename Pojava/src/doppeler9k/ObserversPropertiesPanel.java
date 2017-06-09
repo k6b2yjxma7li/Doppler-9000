@@ -19,8 +19,8 @@ public class ObserversPropertiesPanel extends JPanel {
 	public JLabel obsPositionLabel = new JLabel("Observer Position [x,y]: ");
 	public JLabel directionObserverLabel = new JLabel("Observer movement angle [deg]: ");
 	public JTextField obsVelocityField = new JTextField("0");
-	public JTextField obsXPosition = new JTextField("10");
-	public JTextField obsYPosition = new JTextField("10");
+	public JTextField obsXPosition = new JTextField("0");
+	public JTextField obsYPosition = new JTextField("0");
 	public JTextField obsDirection = new JTextField("0");
 	
 	public ObserversPropertiesPanel() {
