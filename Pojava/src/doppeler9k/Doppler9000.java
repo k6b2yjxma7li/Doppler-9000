@@ -32,12 +32,12 @@ public class Doppler9000 extends WindowGUI {
 	public void setValuesAnim() {
 		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
 		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
-		source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
-		source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
+		source.setX(1+Float.parseFloat(souPanel.souXPosition.getText()));
+		source.setY(1+Float.parseFloat(souPanel.souYPosition.getText()));
 		observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
 		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
-		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+		observer.setX(1+Float.parseFloat(obsPanel.obsXPosition.getText()));
+		observer.setY(1+Float.parseFloat(obsPanel.obsYPosition.getText()));
 		animation.setSoundVel(soundVelocity);
 		animation.observer=observer;
 		animation.source=source;
@@ -52,7 +52,7 @@ public class Doppler9000 extends WindowGUI {
 		}
 	}
 	//MAIN C
-	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException {
+	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
 		//MENU 
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -92,16 +92,13 @@ public class Doppler9000 extends WindowGUI {
 				try {
 					animation = new AnimationPanel();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				setValuesAnim();
 				functionAnimation.repaint();
-				//animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
 				animation.tm.start();
 				animation.repaint();
-				//generator.soundTimer.start();
 				win.setSize(500, 500);
 				win.setVisible(true);
 				win.add(animation);
@@ -148,9 +145,30 @@ public class Doppler9000 extends WindowGUI {
 				soundVelocity = (float)965;
 			}
 		});
+		//SOUND GENERATING
+		startGenButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, functionChoice);
+				} catch (LineUnavailableException e1) {
+					e1.printStackTrace();
+				}catch (NumberFormatException e1) {
+					e1.printStackTrace();
+				}catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		stopGenButton.addActionListener(new ActionListener() {
+			@Override 
+			public void actionPerformed(ActionEvent e) {
+				//end of generation
+			}
+		});
 	}
 	//MAIN F
-	public static void main(String[] args) throws HeadlessException, LineUnavailableException, FileNotFoundException {
+	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

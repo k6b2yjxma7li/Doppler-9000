@@ -30,8 +30,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public SimulationObject observer;
 	WaveObject[] wave = new WaveObject[waveNumber];
 	public PrintWriter outFile;
-	public PrintWriter souPos;
-	public PrintWriter obsPos;
 	//
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
@@ -46,8 +44,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			wave[n] = new WaveObject();
 		}
 		outFile = new PrintWriter(new FileOutputStream("factorfile.txt"));
-		souPos = new PrintWriter(new FileOutputStream("sourcefile.txt"));
-		obsPos = new PrintWriter(new FileOutputStream("observerfile.txt"));
 	}
 	//
 	Timer tm = new Timer(step,this);
@@ -64,8 +60,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public void propCalc() {
 		observer.calculateCoords(step);
 		source.calculateCoords(step);
-		sizeCompare(source);
 		sizeCompare(observer);
+		sizeCompare(source);
 	}
 	//
 	public void drawSoundWaves(Graphics g) {
@@ -108,22 +104,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.getV()));
 		}
 		value = (soundVelocity + (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
-		outFile.print(counter);
-		outFile.print('\t');
-		outFile.print(value);
-		outFile.println();
-		printer(source.getX(), source.getY(),observer.getX(), observer.getY());
+		outFile.println(value);
 		return value;
-	}
-	public void printer(double sx, double sy, double ox, double oy) {
-		souPos.print(sx);
-		souPos.print('\t');
-		souPos.print(sy);
-		souPos.println();
-		obsPos.print(ox);
-		obsPos.print('\t');
-		obsPos.print(oy);
-		obsPos.println();
 	}
 	//
 	@Override

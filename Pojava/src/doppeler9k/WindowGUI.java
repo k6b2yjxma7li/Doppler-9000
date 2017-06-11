@@ -37,10 +37,8 @@ public class WindowGUI extends JFrame {
 	public JMenuItem squareButton = new JMenuItem("Square wave");
 	public JMenuItem expButton = new JMenuItem("Cosine-exponens-sine wave");
 	//Simulation
-	public JMenuItem startSimButton = new JMenuItem("Start simulation");
-	public JMenuItem stopSimButton = new JMenuItem("Stop simulation");
-	public JMenuItem saveSimButton = new JMenuItem("Save simulation");
-	public JMenuItem openSimButton = new JMenuItem("Open existing save");
+	public JMenuItem startGenButton = new JMenuItem("Start generating");
+	public JMenuItem stopGenButton = new JMenuItem("Stop generating");
 	//
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
@@ -95,10 +93,8 @@ public class WindowGUI extends JFrame {
 		functionMenu.add(squareButton);
 		functionMenu.add(expButton);
 		//Simulation
-		simulationMenu.add(startSimButton);
-		simulationMenu.add(stopSimButton);
-		simulationMenu.add(saveSimButton);
-		simulationMenu.add(openSimButton);
+		simulationMenu.add(startGenButton);
+		simulationMenu.add(stopGenButton);
 		//LAYOUT FOR OBSERVERS' PROPERTIES
 		
 		//EMITTED SIGNAL
