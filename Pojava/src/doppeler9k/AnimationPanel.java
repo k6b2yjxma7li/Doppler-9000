@@ -84,7 +84,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	//
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GREEN);
 		g.fillOval((int)source.getX(), (int)source.getY(), 5, 5);
 		g.fillOval((int)observer.getX(), (int)observer.getY(), 5, 5);
 		drawSoundWaves(g);
@@ -119,4 +119,5 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		counter++;
 	}
+	
 }

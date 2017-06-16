@@ -103,17 +103,22 @@ public class SourcePropertiesPanel extends JPanel {
 		column3.addComponent(resetButton);
 		//
 		
-		
-		velocityField.setMinimumSize(new Dimension(40, 30));
-		velocityField.setMaximumSize(new Dimension(40, 30));
-		souVelocityField.setMinimumSize(new Dimension(40, 30));
-		souVelocityField.setMaximumSize(new Dimension(40, 30));
-		freqField.setMinimumSize(new Dimension(40, 30));
-		freqField.setMaximumSize(new Dimension(40, 30));
-		velocityField.setPreferredSize(new Dimension(40, 30));
-		freqField.setPreferredSize(new Dimension(40, 30));
-		startButton.setMinimumSize(new Dimension(40, 30));
-		startButton.setPreferredSize(new Dimension(40, 30));
+		souXPosition.setMinimumSize(new Dimension(60, 30));
+		souXPosition.setMaximumSize(new Dimension(60, 30));
+		souDirection.setMinimumSize(new Dimension(60, 30));
+		souDirection.setMaximumSize(new Dimension(60, 30));
+		souYPosition.setMinimumSize(new Dimension(60, 30));
+		souYPosition.setMaximumSize(new Dimension(60, 30));
+		velocityField.setMinimumSize(new Dimension(60, 30));
+		velocityField.setMaximumSize(new Dimension(60, 30));
+		souVelocityField.setMinimumSize(new Dimension(60, 30));
+		souVelocityField.setMaximumSize(new Dimension(60, 30));
+		freqField.setMinimumSize(new Dimension(60, 30));
+		freqField.setMaximumSize(new Dimension(60, 30));
+		velocityField.setPreferredSize(new Dimension(60, 30));
+		freqField.setPreferredSize(new Dimension(50, 30));
+		startButton.setMinimumSize(new Dimension(60, 30));
+		startButton.setPreferredSize(new Dimension(60, 30));
 		
 	
 	}

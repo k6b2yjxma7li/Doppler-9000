@@ -8,16 +8,11 @@ package doppeler9k;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.awt.Insets;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -73,6 +68,9 @@ public class Doppler9000 extends WindowGUI {
 		//
 		simLayout.setHorizontalGroup(columnsZ);
 		simLayout.setVerticalGroup(linesZ);
+		
+		souPanel.stopButton.setEnabled(false);
+		souPanel.resetButton.setEnabled(false);
 		//MENU 
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -132,7 +130,8 @@ public class Doppler9000 extends WindowGUI {
 				animation.tm.start();
 				animation.repaint();
 				souPanel.startButton.setEnabled(false);
-				
+				souPanel.resetButton.setEnabled(true);
+				souPanel.stopButton.setEnabled(true);
 				
 			}
 		});
@@ -144,6 +143,7 @@ public class Doppler9000 extends WindowGUI {
 				simMainPanel.repaint();
 				animation.tm.stop();
 				animation.outFile.close();
+				souPanel.stopButton.setEnabled(false);
 				souPanel.startButton.setEnabled(true);
 				//generator.dispose();
 				//generator.soundTimer.stop();

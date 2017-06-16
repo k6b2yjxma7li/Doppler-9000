@@ -29,7 +29,7 @@ public class FunctionAnimation extends JPanel implements ActionListener {
 	//
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GREEN);
 		for(int x=0; x<(pointNr-1); x++) {
 			g.drawLine(x, yy[x], x+1, yy[x+1]);
 		}

@@ -14,7 +14,9 @@ import javax.swing.GroupLayout.Alignment;
 
 public class ObserversPropertiesPanel extends JPanel {
 	//OBSERVER PROPERTIES PANEL
-	public JCheckBox show = new JCheckBox("show");
+	public JLabel panelLabel = new JLabel("Observer properties ");
+	public JLabel noLabel = new JLabel(" ");
+	public JLabel noLabel2 = new JLabel(" ");
 	public JLabel obsVelocityLabel = new JLabel("Observer Velocity [m/s]: ");
 	public JLabel obsPositionLabel = new JLabel("Observer Position [x,y]: ");
 	public JLabel directionObserverLabel = new JLabel("Observer movement angle [deg]: ");
@@ -37,6 +39,8 @@ public class ObserversPropertiesPanel extends JPanel {
 		GroupLayout.Group lineO2 = objPropertiesPanelLayout.createParallelGroup();
 		GroupLayout.Group lineO3 = objPropertiesPanelLayout.createParallelGroup();
 		GroupLayout.Group lineO4 = objPropertiesPanelLayout.createParallelGroup();
+		GroupLayout.Group lineO5 = objPropertiesPanelLayout.createParallelGroup();
+		GroupLayout.Group lineO6 = objPropertiesPanelLayout.createParallelGroup();
 		//
 		GroupLayout.SequentialGroup linesO = objPropertiesPanelLayout.createSequentialGroup();
 		GroupLayout.SequentialGroup columnsO = objPropertiesPanelLayout.createSequentialGroup();
@@ -44,6 +48,8 @@ public class ObserversPropertiesPanel extends JPanel {
 		linesO.addGroup(lineO2);
 		linesO.addGroup(lineO3);
 		linesO.addGroup(lineO4);
+		linesO.addGroup(lineO5);
+		linesO.addGroup(lineO6);
 		columnsO.addGroup(columnO1);
 		columnsO.addGroup(columnO2);
 		columnsO.addGroup(columnO3);
@@ -51,13 +57,19 @@ public class ObserversPropertiesPanel extends JPanel {
 		objPropertiesPanelLayout.setHorizontalGroup(columnsO);
 		objPropertiesPanelLayout.setVerticalGroup(linesO);
 		//
-		lineO1.addComponent(show);
-		columnO1.addComponent(show);
+		lineO1.addComponent(panelLabel);
+		columnO1.addComponent(panelLabel);
 		//
-		lineO2.addComponent(directionObserverLabel);
+		lineO2.addComponent(noLabel);
+		columnO1.addComponent(noLabel);
+		//
+		lineO6.addComponent(noLabel2);
+		columnO1.addComponent(noLabel2);
+		//
+		lineO5.addComponent(directionObserverLabel);
 		columnO1.addComponent(directionObserverLabel);
 		//
-		lineO2.addComponent(obsDirection);
+		lineO5.addComponent(obsDirection);
 		columnO2.addComponent(obsDirection);
 		//
 		lineO3.addComponent(obsVelocityLabel);
@@ -76,10 +88,18 @@ public class ObserversPropertiesPanel extends JPanel {
 		columnO3.addComponent(obsYPosition);
 		//
 		//
-		obsYPosition.setMinimumSize(new Dimension(40, 30));
-		obsYPosition.setMaximumSize(new Dimension(40, 30));
-		obsVelocityField.setMinimumSize(new Dimension(40, 30));
-		obsVelocityField.setMaximumSize(new Dimension(40, 30));
+		noLabel.setMinimumSize(new Dimension(60, 30));
+		noLabel.setMaximumSize(new Dimension(60, 30));
+		noLabel2.setMinimumSize(new Dimension(60, 30));
+		noLabel2.setMaximumSize(new Dimension(60, 30));
+		obsXPosition.setMinimumSize(new Dimension(60, 30));
+		obsXPosition.setMaximumSize(new Dimension(60, 30));
+		obsDirection.setMinimumSize(new Dimension(60, 30));
+		obsDirection.setMaximumSize(new Dimension(60, 30));
+		obsYPosition.setMinimumSize(new Dimension(60, 30));
+		obsYPosition.setMaximumSize(new Dimension(60, 30));
+		obsVelocityField.setMinimumSize(new Dimension(60, 30));
+		obsVelocityField.setMaximumSize(new Dimension(60, 30));
 		
 	}
 
