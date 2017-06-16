@@ -8,6 +8,7 @@ package doppeler9k;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 
 import javax.sound.sampled.LineUnavailableException;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
+import javax.swing.GroupLayout.Alignment;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
@@ -53,6 +56,23 @@ public class Doppler9000 extends WindowGUI {
 	}
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
+		
+		GroupLayout simLayout = new GroupLayout(simMainPanel);
+		simMainPanel.setLayout(simLayout);
+		simLayout.setAutoCreateGaps(true);
+		simLayout.setAutoCreateContainerGaps(true);
+		//
+		GroupLayout.Group columnZ1 = simLayout.createParallelGroup(Alignment.LEADING);
+		GroupLayout.Group lineZ1 = simLayout.createParallelGroup();
+		//
+		GroupLayout.SequentialGroup linesZ = simLayout.createSequentialGroup();
+		GroupLayout.SequentialGroup columnsZ = simLayout.createSequentialGroup();
+		linesZ.addGroup(lineZ1);
+		//
+		columnsZ.addGroup(columnZ1);
+		//
+		simLayout.setHorizontalGroup(columnsZ);
+		simLayout.setVerticalGroup(linesZ);
 		//MENU 
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -85,6 +105,7 @@ public class Doppler9000 extends WindowGUI {
 				System.exit(0);
 			}
 		});
+		
 		souPanel.startButton.addActionListener(new ActionListener() {
 			@Override
 				
@@ -95,12 +116,16 @@ public class Doppler9000 extends WindowGUI {
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
+				
+
 				simMainPanel.remove(animation);
 				simMainPanel.repaint();
 				animation.tm.stop();
 				animation.setSize(500, 500);
 				simMainPanel.setSize(500, 500);
-				simMainPanel.add(animation, BorderLayout.WEST);
+				simMainPanel.add(animation);
+				columnZ1.addComponent(animation);
+				lineZ1.addComponent(animation);
 				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				setValuesAnim();
 				functionAnimation.repaint();
