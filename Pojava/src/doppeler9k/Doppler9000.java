@@ -6,6 +6,7 @@
 
 package doppeler9k;
 
+import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,6 @@ public class Doppler9000 extends WindowGUI {
 	float soundVelocity = (float)343.8;
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
-	public JFrame win = new JFrame();
 	public AnimationPanel animation;
 	//public SoundOperator generator = new SoundOperator();
 	//
@@ -87,33 +87,39 @@ public class Doppler9000 extends WindowGUI {
 		});
 		souPanel.startButton.addActionListener(new ActionListener() {
 			@Override
+				
+				
 			public void actionPerformed(ActionEvent ae) {
-				win.dispose();
 				try {
 					animation = new AnimationPanel();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
+				simMainPanel.remove(animation);
+				simMainPanel.repaint();
+				animation.tm.stop();
+				animation.setSize(500, 500);
+				simMainPanel.setSize(500, 500);
+				simMainPanel.add(animation, BorderLayout.WEST);
 				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				setValuesAnim();
 				functionAnimation.repaint();
 				animation.tm.start();
 				animation.repaint();
-				win.setSize(500, 500);
-				win.setVisible(true);
-				win.add(animation);
-				win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				win.setLocation(new Point(0,0));
-				win.setTitle("To close this window press 'Stop' in main window");
+				souPanel.startButton.setEnabled(false);
+				
 				
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				win.dispose();
+				simMainPanel.remove(animation);
+				simMainPanel.removeAll();
+				simMainPanel.repaint();
 				animation.tm.stop();
 				animation.outFile.close();
+				souPanel.startButton.setEnabled(true);
 				//generator.dispose();
 				//generator.soundTimer.stop();
 			}
@@ -121,8 +127,13 @@ public class Doppler9000 extends WindowGUI {
 		souPanel.resetButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				simMainPanel.remove(animation);
+				simMainPanel.add(animation, BorderLayout.WEST);
+				animation.tm.stop();
+				animation.outFile.close();
 				setValuesAnim();
-				animation.repaint();
+				animation.tm.start();
+				
 				//setValuesGen();
 			}			
 		});
