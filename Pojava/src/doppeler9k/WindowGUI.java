@@ -68,11 +68,12 @@ public class WindowGUI extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.add(lowerPanel,BorderLayout.SOUTH);
 		this.add(upperPanel,BorderLayout.CENTER);
-		upperPanel.add(simMainPanel, BorderLayout.CENTER);
+		upperPanel.setLayout(new BoxLayout(upperPanel,BoxLayout.X_AXIS));
+		upperPanel.add(simMainPanel, BorderLayout.WEST);
 		lowerPanel.add(souPanel,BorderLayout.WEST);
 		lowerPanel.add(obsPanel,BorderLayout.CENTER);
 		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
-		upperPanel.add(obsSignalPanel,BorderLayout.EAST);
+		
 		//TOOLTIPS
 		simMainPanel.setToolTipText("Main panel");
 		objPropertiesPanel.setToolTipText("Object properties");
@@ -133,17 +134,16 @@ public class WindowGUI extends JFrame {
 		obsSignalPanel.add(observer4Label);
 		obsSignalPanel.add(workInProgress2);
 		//GRAPHICAL SIMULATION
-		simMainPanel.setLayout(new BoxLayout(simMainPanel,BoxLayout.Y_AXIS));
-		simMainPanel.add(graphicalSimulationLabel);
-		simMainPanel.add(workInProgress3);
+		
 		//COMPONENT SIZE
 		functionAnimation.setMinimumSize(new Dimension(100,300));
 		volumeSlider.setMinimum(0);
 		volumeSlider.setMaximum(100);
 		//	
 		setJMenuBar(mainBar);
-		setMinimumSize(new Dimension(850, 500));
-		setLocation(new Point(500, 0));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setMinimumSize(new Dimension(1000,700));
+		setLocation(new Point(0, 0));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
