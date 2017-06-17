@@ -6,136 +6,37 @@
 
 package doppeler9k;
 
+import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
+import javax.swing.GroupLayout.Alignment;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
 	float soundVelocity = (float)343.8;
-	public SimulationObject source = new SimulationObject(0,0,0,0);
-	public SimulationObject observer = new SimulationObject(0,0,0,0);
-	public JFrame win = new JFrame();
-	public AnimationPanel animation = new AnimationPanel();
-	//public SoundOperator generator = new SoundOperator();
-	//
-	public Doppler9000() throws HeadlessException, LineUnavailableException {
-		//MENU 
-		sineButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 0;
-				functionAnimation.functionChoiceVal = 0;
-				emitSignalPanel.add(functionAnimation);
-			}
-		});
-		squareButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 1;
-				functionAnimation.functionChoiceVal = 1;
-				emitSignalPanel.add(functionAnimation);
-			}
-		});
-		expButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 2;
-				functionAnimation.functionChoiceVal = 2;
-				emitSignalPanel.add(functionAnimation);
-			}
-		});
-		//
-		exitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		souPanel.startButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				win.dispose();
-				//SOURCE PROPERTIES
-				source.setV(Double.parseDouble(souPanel.souVelocityField.getText()));
-				source.setAngle(Double.parseDouble(souPanel.souDirection.getText()));
-				source.setX(Integer.parseInt(souPanel.souXPosition.getText()));
-				source.setY(Integer.parseInt(souPanel.souYPosition.getText()));
-				//OBSERVER PROPERTIES
-				observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-				observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
-				observer.setX(Integer.parseInt(obsPanel.obsXPosition.getText()));
-				observer.setY(Integer.parseInt(obsPanel.obsYPosition.getText()));
-				animation.observer=observer;
-				animation.source=source;
-				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				functionAnimation.repaint();
-				//generator.dispose();
-				setValuesAnim();
-				//setValuesGen();
-				//animation.setFrequency(Double.parseDouble(souPanel.freqField.getText()));
-				animation.tm.start();
-				//generator.soundTimer.start();
-				win.setSize(500, 500);
-				win.setVisible(true);
-				win.add(animation);
-				win.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				win.setLocation(new Point(0,0));
-				win.setTitle("To close this window press 'Stop' in main window");
-				
-			}
-		});
-		souPanel.stopButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				win.dispose();
-				animation.tm.stop();
-				//generator.dispose();
-				//generator.soundTimer.stop();
-			}
-		});
-		souPanel.resetButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setValuesAnim();
-				//setValuesGen();
-			}			
-		});
-		//MATERIAL
-		airButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				soundVelocity = (float)343.8;
-			}
-		});
-		waterButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				soundVelocity = (float)1500;
-			}
-		});
-		heliumButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				soundVelocity = (float)965;
-			}
-		});
-	}
+	public SimulationObject source = new SimulationObject();
+	public SimulationObject observer = new SimulationObject();
+	public AnimationPanel animation;
 	//SETS VALUES FOR ANIMATION
 	public void setValuesAnim() {
 		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
 		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
-		source.setX(Float.parseFloat(souPanel.souXPosition.getText()));
-		source.setY(Float.parseFloat(souPanel.souYPosition.getText()));
+		source.setX(1+Float.parseFloat(souPanel.souXPosition.getText()));
+		source.setY(1+Float.parseFloat(souPanel.souYPosition.getText()));
 		observer.setAngle(Float.parseFloat(obsPanel.obsDirection.getText()));
 		observer.setV(Float.parseFloat(obsPanel.obsVelocityField.getText()));
-		observer.setX(Float.parseFloat(obsPanel.obsXPosition.getText()));
-		observer.setY(Float.parseFloat(obsPanel.obsYPosition.getText()));
+		observer.setX(1+Float.parseFloat(obsPanel.obsXPosition.getText()));
+		observer.setY(1+Float.parseFloat(obsPanel.obsYPosition.getText()));
 		animation.setSoundVel(soundVelocity);
+		animation.observer=observer;
+		animation.source=source;
 		animation.counter = 0;
 		if(source.v > soundVelocity) {
 			System.out.println("Source velocity too high! Set to max");
@@ -146,14 +47,128 @@ public class Doppler9000 extends WindowGUI {
 			observer.setV(soundVelocity);
 		}
 	}
-	//SETS VALUES FOR GENERATOR - DOES NOT WORK
-	/*public void setValuesGen() {
-		generator.f = (float) (Float.parseFloat(souPanel.freqField.getText())*animation.getFactor());
-		generator.fTyp = functionChoice;
-		generator.vol = 100;
-	}*/
-	//MAIN
-	public static void main(String[] args) throws HeadlessException, LineUnavailableException {
+	//MAIN C
+	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
+		//MENU 
+		mainBar.sineButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functionChoice = 0;
+				functionAnimation.functionChoiceVal = 0;
+				emitSignalPanel.add(functionAnimation);
+			}
+		});
+		mainBar.squareButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functionChoice = 1;
+				functionAnimation.functionChoiceVal = 1;
+				emitSignalPanel.add(functionAnimation);
+			}
+		});
+		mainBar.expButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				functionChoice = 2;
+				functionAnimation.functionChoiceVal = 2;
+				emitSignalPanel.add(functionAnimation);
+			}
+		});
+		//
+		mainBar.exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		souPanel.startButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					animation = new AnimationPanel();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				upperPanel.remove(animation);
+				upperPanel.repaint();
+				animation.tm.stop();
+				animation.setSize(upperPanel.getWidth(),upperPanel.getHeight());
+				upperPanel.add(animation);
+				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				setValuesAnim();
+				functionAnimation.repaint();
+				animation.tm.start();
+				animation.repaint();
+				souPanel.startButton.setEnabled(false);
+				souPanel.resetButton.setEnabled(true);
+				souPanel.stopButton.setEnabled(true);
+			}
+		});
+		souPanel.stopButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				upperPanel.remove(animation);
+				upperPanel.removeAll();
+				upperPanel.repaint();
+				animation.tm.stop();
+				animation.outFile.close();
+				souPanel.stopButton.setEnabled(false);
+				souPanel.stopButton.setEnabled(false);
+				souPanel.startButton.setEnabled(true);
+			}
+		});
+		souPanel.resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				upperPanel.remove(animation);
+				upperPanel.add(animation, BorderLayout.WEST);
+				animation.tm.stop();
+				animation.outFile.close();
+				setValuesAnim();
+				animation.tm.start();
+			}			
+		});
+		//MATERIAL
+		mainBar.airButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				soundVelocity = (float)343.8;
+			}
+		});
+		mainBar.waterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				soundVelocity = (float)1500;
+			}
+		});
+		mainBar.heliumButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				soundVelocity = (float)965;
+			}
+		});
+		//SOUND GENERATING
+		mainBar.startGenButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, functionChoice);
+				} catch (NumberFormatException | LineUnavailableException | IOException e1) {
+					e1.printStackTrace();
+				}
+			
+			}
+		});
+	}
+	//MAIN F
+	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
+		LangChoose win = new LangChoose();
+		while(win.getLanguage() == 69)
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

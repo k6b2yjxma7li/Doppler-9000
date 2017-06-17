@@ -27,34 +27,27 @@ public class SimulationObject {
 	public void setV(double velocity) {
 		v = velocity;
 	}
-	//
 	public void setAngle(double angl) {
 		angle = angl;
 	}
-	public double getAngle() {
-		return angle;
-	}
-	//
 	public void setX(double coordX) {
 		x = coordX;
 	}
-	//
 	public void setY(double coordY) {
 		y = coordY;
 	}
-	//
 	public void setXY(double X, double Y) {
 		x = X;
 		y = Y;
 	}
 	//
-	public double getX()
-	{
+	public double getAngle() {
+		return angle;
+	}
+	public double getX() {
 		return x;
 	}
-	//
-	public double getY()
-	{
+	public double getY() {
 		return y;
 	}
 	public double getV() {
@@ -67,14 +60,12 @@ public class SimulationObject {
 		v = 0;
 		angle = 0;
 	}
-	//
 	public SimulationObject(double coordX,double coordY) {
 		x = coordX;
 		y = coordY;
 		v = 0;
 		angle = 0;
 	}
-	//
 	public SimulationObject(double coordX,double coordY,double vel, double angl) {
 		x = coordX;
 		y = coordY;
