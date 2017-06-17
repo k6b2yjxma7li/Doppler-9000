@@ -52,31 +52,23 @@ public class WindowGUI extends JFrame {
 	//OTHER SIMPLE PANELS
 	public FunctionAnimation functionAnimation = new FunctionAnimation();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
-	public JLabel workInProgress1 = new JLabel("To Be Done");
-	public JLabel workInProgress2 = new JLabel("To Be Done");
-	public JLabel workInProgress3 = new JLabel("To Be Done");
 	public JLabel incomingSignalLabel = new JLabel("Incoming Signal");
-	public JLabel observer1Label = new JLabel("Observer 1");
-	public JLabel observer2Label = new JLabel("Observer 2");
-	public JLabel observer3Label = new JLabel("Observer 3");
-	public JLabel observer4Label = new JLabel("Observer 4");
 	public JLabel graphicalSimulationLabel = new JLabel("Graphical simulation                                                                                                                  ");
 	public JSlider volumeSlider = new JSlider();
 	
 	//
 	public WindowGUI() throws HeadlessException {
-		/*upperPanel.setBackground(Color.BLUE);
+		upperPanel.setBackground(Color.BLUE);
 		lowerPanel.setBackground(Color.CYAN);
-		simMainPanel.setBackground(Color.DARK_GRAY);
+		simMainPanel.setBackground(Color.pink);
 		objPropertiesPanel.setBackground(Color.GRAY);
 		emitSignalPanel.setBackground(Color.GREEN);
-		obsSignalPanel.setBackground(Color.LIGHT_GRAY);*/
+		obsSignalPanel.setBackground(Color.LIGHT_GRAY);
 		// BORDER
 		this.setLayout(new BorderLayout());
 		this.add(lowerPanel,BorderLayout.SOUTH);
 		this.add(upperPanel,BorderLayout.CENTER);
 		upperPanel.setLayout(new BoxLayout(upperPanel,BoxLayout.X_AXIS));
-		upperPanel.add(simMainPanel, BorderLayout.WEST);
 		lowerPanel.add(souPanel,BorderLayout.WEST);
 		lowerPanel.add(obsPanel,BorderLayout.CENTER);
 		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
@@ -129,19 +121,6 @@ public class WindowGUI extends JFrame {
 		//
 		lineE2.addComponent(functionAnimation);
 		columnE1.addComponent(functionAnimation);
-		//INCOMING SIGNAL
-		obsSignalPanel.setLayout(new BoxLayout(obsSignalPanel,BoxLayout.Y_AXIS));
-		obsSignalPanel.add(incomingSignalLabel);
-		obsSignalPanel.add(observer1Label);
-		obsSignalPanel.add(workInProgress2);
-		obsSignalPanel.add(observer2Label);
-		obsSignalPanel.add(workInProgress2);
-		obsSignalPanel.add(observer3Label);
-		obsSignalPanel.add(workInProgress2);
-		obsSignalPanel.add(observer4Label);
-		obsSignalPanel.add(workInProgress2);
-		//GRAPHICAL SIMULATION
-		
 		//COMPONENT SIZE
 		functionAnimation.setMinimumSize(new Dimension(100,300));
 		volumeSlider.setMinimum(0);
