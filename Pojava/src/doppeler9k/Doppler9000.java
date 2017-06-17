@@ -98,8 +98,8 @@ public class Doppler9000 extends WindowGUI {
 				}
 				
 
-				simMainPanel.remove(animation);
-				simMainPanel.repaint();
+				upperPanel.remove(animation);
+				upperPanel.repaint();
 				animation.tm.stop();
 				animation.setSize(500, 500);
 				upperPanel.add(animation);
@@ -117,11 +117,12 @@ public class Doppler9000 extends WindowGUI {
 		souPanel.stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				simMainPanel.remove(animation);
-				simMainPanel.removeAll();
-				simMainPanel.repaint();
+				upperPanel.remove(animation);
+				upperPanel.removeAll();
+				upperPanel.repaint();
 				animation.tm.stop();
 				animation.outFile.close();
+				souPanel.stopButton.setEnabled(false);
 				souPanel.stopButton.setEnabled(false);
 				souPanel.startButton.setEnabled(true);
 				//generator.dispose();
@@ -131,12 +132,13 @@ public class Doppler9000 extends WindowGUI {
 		souPanel.resetButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				simMainPanel.remove(animation);
-				simMainPanel.add(animation, BorderLayout.WEST);
+				upperPanel.remove(animation);
+				upperPanel.add(animation, BorderLayout.WEST);
 				animation.tm.stop();
 				animation.outFile.close();
 				setValuesAnim();
 				animation.tm.start();
+			
 				
 				//setValuesGen();
 			}			

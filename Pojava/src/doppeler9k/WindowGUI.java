@@ -43,7 +43,6 @@ public class WindowGUI extends JFrame {
 	//
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
-	public JPanel simMainPanel = new JPanel();
 	public JPanel objPropertiesPanel = new JPanel();
 	public JPanel emitSignalPanel = new JPanel();
 	public JPanel obsSignalPanel = new JPanel();
@@ -60,7 +59,6 @@ public class WindowGUI extends JFrame {
 	public WindowGUI() throws HeadlessException {
 		upperPanel.setBackground(Color.BLUE);
 		lowerPanel.setBackground(Color.CYAN);
-		simMainPanel.setBackground(Color.pink);
 		objPropertiesPanel.setBackground(Color.GRAY);
 		emitSignalPanel.setBackground(Color.GREEN);
 		obsSignalPanel.setBackground(Color.LIGHT_GRAY);
@@ -74,7 +72,7 @@ public class WindowGUI extends JFrame {
 		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
 		
 		//TOOLTIPS
-		simMainPanel.setToolTipText("Main panel");
+		upperPanel.setToolTipText("Main panel");
 		objPropertiesPanel.setToolTipText("Object properties");
 		emitSignalPanel.setToolTipText("Signal emitted");
 		obsSignalPanel.setToolTipText("Observed signals");
