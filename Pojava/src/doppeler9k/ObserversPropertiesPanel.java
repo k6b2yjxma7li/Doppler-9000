@@ -28,9 +28,8 @@ public class ObserversPropertiesPanel extends JPanel {
 	public JTextField obsXPosition = new JTextField("0");
 	public JTextField obsYPosition = new JTextField("0");
 	public JTextField obsDirection = new JTextField("0");
-	
+	//
 	public ObserversPropertiesPanel(int lang) {//0 - english// 1 - polski
-	
 		GroupLayout objPropertiesPanelLayout = new GroupLayout(this);
 		this.setLayout(objPropertiesPanelLayout);
 		objPropertiesPanelLayout.setAutoCreateGaps(true);
@@ -60,55 +59,55 @@ public class ObserversPropertiesPanel extends JPanel {
 		//
 		objPropertiesPanelLayout.setHorizontalGroup(columnsO);
 		objPropertiesPanelLayout.setVerticalGroup(linesO);
-		//
-		
-		//ENGLISH
-		if(lang == 0)
+		//LANGUAGE
+		switch(lang) {
+		case 0:
 		{
-		lineO2.addComponent(noLabel);
-		columnO1.addComponent(noLabel);
-		//
-		lineO6.addComponent(noLabel2);
-		columnO1.addComponent(noLabel2);
-		//
-		lineO1.addComponent(panelLabel);
-		columnO1.addComponent(panelLabel);
-		//
-		lineO5.addComponent(directionObserverLabel);
-		columnO1.addComponent(directionObserverLabel);
-		//
-		lineO5.addComponent(obsDirection);
-		columnO2.addComponent(obsDirection);
-		//
-		lineO3.addComponent(obsVelocityLabel);
-		columnO1.addComponent(obsVelocityLabel);
-		//
-		lineO3.addComponent(obsVelocityField);
-		columnO2.addComponent(obsVelocityField);
-		//
-		lineO4.addComponent(obsPositionLabel);
-		columnO1.addComponent(obsPositionLabel);
-		//
-		lineO4.addComponent(obsXPosition);
-		columnO2.addComponent(obsXPosition);
-		//
-		lineO4.addComponent(obsYPosition);
-		columnO3.addComponent(obsYPosition);
-		//
-		noLabel.setMinimumSize(new Dimension(60, 30));
-		noLabel.setMaximumSize(new Dimension(60, 30));
-		noLabel2.setMinimumSize(new Dimension(60, 30));
-		noLabel2.setMaximumSize(new Dimension(60, 30));
-		obsXPosition.setMinimumSize(new Dimension(60, 30));
-		obsXPosition.setMaximumSize(new Dimension(60, 30));
-		obsDirection.setMinimumSize(new Dimension(60, 30));
-		obsDirection.setMaximumSize(new Dimension(60, 30));
-		obsYPosition.setMinimumSize(new Dimension(60, 30));
-		obsYPosition.setMaximumSize(new Dimension(60, 30));
-		obsVelocityField.setMinimumSize(new Dimension(60, 30));
-		obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			lineO2.addComponent(noLabel);
+			columnO1.addComponent(noLabel);
+			//
+			lineO6.addComponent(noLabel2);
+			columnO1.addComponent(noLabel2);
+			//
+			lineO1.addComponent(panelLabel);
+			columnO1.addComponent(panelLabel);
+			//
+			lineO5.addComponent(directionObserverLabel);
+			columnO1.addComponent(directionObserverLabel);
+			//
+			lineO5.addComponent(obsDirection);
+			columnO2.addComponent(obsDirection);
+			//
+			lineO3.addComponent(obsVelocityLabel);
+			columnO1.addComponent(obsVelocityLabel);
+			//
+			lineO3.addComponent(obsVelocityField);
+			columnO2.addComponent(obsVelocityField);
+			//
+			lineO4.addComponent(obsPositionLabel);
+			columnO1.addComponent(obsPositionLabel);
+			//
+			lineO4.addComponent(obsXPosition);
+			columnO2.addComponent(obsXPosition);
+			//
+			lineO4.addComponent(obsYPosition);
+			columnO3.addComponent(obsYPosition);
+			//
+			noLabel.setMinimumSize(new Dimension(60, 30));
+			noLabel.setMaximumSize(new Dimension(60, 30));
+			noLabel2.setMinimumSize(new Dimension(60, 30));
+			noLabel2.setMaximumSize(new Dimension(60, 30));
+			obsXPosition.setMinimumSize(new Dimension(60, 30));
+			obsXPosition.setMaximumSize(new Dimension(60, 30));
+			obsDirection.setMinimumSize(new Dimension(60, 30));
+			obsDirection.setMaximumSize(new Dimension(60, 30));
+			obsYPosition.setMinimumSize(new Dimension(60, 30));
+			obsYPosition.setMaximumSize(new Dimension(60, 30));
+			obsVelocityField.setMinimumSize(new Dimension(60, 30));
+			obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			break;
 		}
-		if(lang == 1)
+		case 1:
 		{
 			lineO2.addComponent(noLabel);
 			columnO1.addComponent(noLabel);
@@ -139,22 +138,21 @@ public class ObserversPropertiesPanel extends JPanel {
 			//
 			lineO4.addComponent(obsYPosition);
 			columnO3.addComponent(obsYPosition);
-		//
-		noLabel.setMinimumSize(new Dimension(60, 30));
-		noLabel.setMaximumSize(new Dimension(60, 30));
-		noLabel2.setMinimumSize(new Dimension(60, 30));
-		noLabel2.setMaximumSize(new Dimension(60, 30));
-		obsXPosition.setMinimumSize(new Dimension(60, 30));
-		obsXPosition.setMaximumSize(new Dimension(60, 30));
-		obsDirection.setMinimumSize(new Dimension(60, 30));
-		obsDirection.setMaximumSize(new Dimension(60, 30));
-		obsYPosition.setMinimumSize(new Dimension(60, 30));
-		obsYPosition.setMaximumSize(new Dimension(60, 30));
-		obsVelocityField.setMinimumSize(new Dimension(60, 30));
-		obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			//
+			noLabel.setMinimumSize(new Dimension(60, 30));
+			noLabel.setMaximumSize(new Dimension(60, 30));
+			noLabel2.setMinimumSize(new Dimension(60, 30));
+			noLabel2.setMaximumSize(new Dimension(60, 30));
+			obsXPosition.setMinimumSize(new Dimension(60, 30));
+			obsXPosition.setMaximumSize(new Dimension(60, 30));
+			obsDirection.setMinimumSize(new Dimension(60, 30));
+			obsDirection.setMaximumSize(new Dimension(60, 30));
+			obsYPosition.setMinimumSize(new Dimension(60, 30));
+			obsYPosition.setMaximumSize(new Dimension(60, 30));
+			obsVelocityField.setMinimumSize(new Dimension(60, 30));
+			obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			break;
 		}
-		
+		}
 	}
-
-	
 }

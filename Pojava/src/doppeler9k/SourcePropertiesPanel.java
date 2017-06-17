@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 
 public class SourcePropertiesPanel extends JPanel {
-
 	public JTextField freqField = new JTextField("440");
 	public JTextField velocityField = new JTextField("0");
 	public JTextField souVelocityField = new JTextField("0");
@@ -33,11 +32,8 @@ public class SourcePropertiesPanel extends JPanel {
 	public JLabel directionSourceLabelPL = new JLabel("K¹t ruchu zród³a [stopnie]: ");
 	public JLabel thisLabelPL = new JLabel("W³aœciwoœci zród³a");
 	public JLabel souVelocityLabelPL = new JLabel("Prêdkoœæ zród³a [m/s]: ");		
-	
-	
-	
+	//
 	public SourcePropertiesPanel(int lang) {//0 english//1 - polski
-		
 		// GROUP FOR SIMPROPPANEL
 		GroupLayout simPropPanelLayout = new GroupLayout(this);
 		this.setLayout(simPropPanelLayout);
@@ -69,88 +65,87 @@ public class SourcePropertiesPanel extends JPanel {
 		simPropPanelLayout.setHorizontalGroup(columns);
 		simPropPanelLayout.setVerticalGroup(lines);
 		//
-		if(lang == 0) //english labels
-		{
-		line1.addComponent(thisLabel);
-		column1.addComponent(thisLabel);
-		//
-		line2.addComponent(freqLabel);
-		column1.addComponent(freqLabel);
-		//
-		line2.addComponent(freqField);
-		column2.addComponent(freqField);
-		//
-		line3.addComponent(souVelocityLabel);
-		column1.addComponent(souVelocityLabel);
-		//
-		line3.addComponent(souVelocityField);
-		column2.addComponent(souVelocityField);
-		//
-		line4.addComponent(positionLabel);
-		column1.addComponent(positionLabel);
-		//
-		line4.addComponent(souXPosition);
-		column2.addComponent(souXPosition);
-		//
-		line4.addComponent(souYPosition);
-		column3.addComponent(souYPosition);
-		//
-		line5.addComponent(directionSourceLabel);
-		column1.addComponent(directionSourceLabel);
-		//
-		line5.addComponent(souDirection);
-		column2.addComponent(souDirection);
-		//
-		line6.addComponent(startButton);
-		column1.addComponent(startButton);
-		//
-		line6.addComponent(stopButton);
-		column2.addComponent(stopButton);
-		//
-		line6.addComponent(resetButton);
-		column3.addComponent(resetButton);
-		}
-		//
-		if(lang == 1) //polish labels
-		{
-		line1.addComponent(thisLabelPL);
-		column1.addComponent(thisLabelPL);
-		//
-		line2.addComponent(freqLabelPL);
-		column1.addComponent(freqLabelPL);
-		//
-		line2.addComponent(freqField);
-		column2.addComponent(freqField);
-		//
-		line3.addComponent(souVelocityLabelPL);
-		column1.addComponent(souVelocityLabelPL);
-		//
-		line3.addComponent(souVelocityField);
-		column2.addComponent(souVelocityField);
-		//
-		line4.addComponent(positionLabelPL);
-		column1.addComponent(positionLabelPL);
-		//
-		line4.addComponent(souXPosition);
-		column2.addComponent(souXPosition);
-		//
-		line4.addComponent(souYPosition);
-		column3.addComponent(souYPosition);
-		//
-		line5.addComponent(directionSourceLabelPL);
-		column1.addComponent(directionSourceLabelPL);
-		//
-		line5.addComponent(souDirection);
-		column2.addComponent(souDirection);
-		//
-		line6.addComponent(startButton);
-		column1.addComponent(startButton);
-		//
-		line6.addComponent(stopButton);
-		column2.addComponent(stopButton);
-		//
-		line6.addComponent(resetButton);
-		column3.addComponent(resetButton);
+		switch(lang) {
+		case 0:
+			line1.addComponent(thisLabel);
+			column1.addComponent(thisLabel);
+			//
+			line2.addComponent(freqLabel);
+			column1.addComponent(freqLabel);
+			//
+			line2.addComponent(freqField);
+			column2.addComponent(freqField);
+			//
+			line3.addComponent(souVelocityLabel);
+			column1.addComponent(souVelocityLabel);
+			//
+			line3.addComponent(souVelocityField);
+			column2.addComponent(souVelocityField);
+			//
+			line4.addComponent(positionLabel);
+			column1.addComponent(positionLabel);
+			//
+			line4.addComponent(souXPosition);
+			column2.addComponent(souXPosition);
+			//
+			line4.addComponent(souYPosition);
+			column3.addComponent(souYPosition);
+			//
+			line5.addComponent(directionSourceLabel);
+			column1.addComponent(directionSourceLabel);
+			//
+			line5.addComponent(souDirection);
+			column2.addComponent(souDirection);
+			//
+			line6.addComponent(startButton);
+			column1.addComponent(startButton);
+			//
+			line6.addComponent(stopButton);
+			column2.addComponent(stopButton);
+			//
+			line6.addComponent(resetButton);
+			column3.addComponent(resetButton);
+			break;
+		case 1:
+			line1.addComponent(thisLabelPL);
+			column1.addComponent(thisLabelPL);
+			//
+			line2.addComponent(freqLabelPL);
+			column1.addComponent(freqLabelPL);
+			//
+			line2.addComponent(freqField);
+			column2.addComponent(freqField);
+			//
+			line3.addComponent(souVelocityLabelPL);
+			column1.addComponent(souVelocityLabelPL);
+			//
+			line3.addComponent(souVelocityField);
+			column2.addComponent(souVelocityField);
+			//
+			line4.addComponent(positionLabelPL);
+			column1.addComponent(positionLabelPL);
+			//
+			line4.addComponent(souXPosition);
+			column2.addComponent(souXPosition);
+			//
+			line4.addComponent(souYPosition);
+			column3.addComponent(souYPosition);
+			//
+			line5.addComponent(directionSourceLabelPL);
+			column1.addComponent(directionSourceLabelPL);
+			//
+			line5.addComponent(souDirection);
+			column2.addComponent(souDirection);
+			//
+			line6.addComponent(startButton);
+			column1.addComponent(startButton);
+			//
+			line6.addComponent(stopButton);
+			column2.addComponent(stopButton);
+			//
+			line6.addComponent(resetButton);
+			column3.addComponent(resetButton);
+			break;
 		}
 		stopButton.setEnabled(false);
 		resetButton.setEnabled(false);
@@ -170,7 +165,5 @@ public class SourcePropertiesPanel extends JPanel {
 		freqField.setPreferredSize(new Dimension(50, 30));
 		startButton.setMinimumSize(new Dimension(60, 30));
 		startButton.setPreferredSize(new Dimension(60, 30));
-		
-	
 	}
 }

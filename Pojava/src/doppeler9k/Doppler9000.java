@@ -24,7 +24,6 @@ public class Doppler9000 extends WindowGUI {
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
 	public AnimationPanel animation;
-	//
 	//SETS VALUES FOR ANIMATION
 	public void setValuesAnim() {
 		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
@@ -50,8 +49,6 @@ public class Doppler9000 extends WindowGUI {
 	}
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
-		//
-		
 		//MENU 
 		mainBar.sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -84,19 +81,14 @@ public class Doppler9000 extends WindowGUI {
 				System.exit(0);
 			}
 		});
-		
 		souPanel.startButton.addActionListener(new ActionListener() {
 			@Override
-				
-				
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					animation = new AnimationPanel();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-				
-
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
@@ -110,7 +102,6 @@ public class Doppler9000 extends WindowGUI {
 				souPanel.startButton.setEnabled(false);
 				souPanel.resetButton.setEnabled(true);
 				souPanel.stopButton.setEnabled(true);
-				
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
@@ -124,8 +115,6 @@ public class Doppler9000 extends WindowGUI {
 				souPanel.stopButton.setEnabled(false);
 				souPanel.stopButton.setEnabled(false);
 				souPanel.startButton.setEnabled(true);
-				//generator.dispose();
-				//generator.soundTimer.stop();
 			}
 		});
 		souPanel.resetButton.addActionListener(new ActionListener() {
@@ -137,9 +126,6 @@ public class Doppler9000 extends WindowGUI {
 				animation.outFile.close();
 				setValuesAnim();
 				animation.tm.start();
-			
-				
-				//setValuesGen();
 			}			
 		});
 		//MATERIAL
@@ -167,21 +153,12 @@ public class Doppler9000 extends WindowGUI {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, functionChoice);
-				} catch (LineUnavailableException e1) {
-					e1.printStackTrace();
-				}catch (NumberFormatException e1) {
-					e1.printStackTrace();
-				}catch (IOException e1) {
+				} catch (NumberFormatException | LineUnavailableException | IOException e1) {
 					e1.printStackTrace();
 				}
+			
 			}
 		});
-		/*stopGenButton.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e) {
-				//end of generation
-			}
-		});*/
 	}
 	//MAIN F
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
@@ -190,14 +167,9 @@ public class Doppler9000 extends WindowGUI {
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
-
 	}
 }

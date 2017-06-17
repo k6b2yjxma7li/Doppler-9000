@@ -25,7 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 public class WindowGUI extends JFrame {
 	//Menu bar
 	public MenuBar mainBar = new MenuBar(LangChoose.getLanguage());
-	
+	//
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
 	public JPanel objPropertiesPanel = new JPanel();
@@ -42,7 +42,6 @@ public class WindowGUI extends JFrame {
 	public JSlider volumeSlider = new JSlider();
 	//
 	public WindowGUI() throws HeadlessException {
-		
 		upperPanel.setBackground(Color.BLUE);
 		lowerPanel.setBackground(Color.CYAN);
 		objPropertiesPanel.setBackground(Color.GRAY);
@@ -62,11 +61,6 @@ public class WindowGUI extends JFrame {
 		emitSignalPanel.setToolTipText("Signal emitted");
 		obsSignalPanel.setToolTipText("Observed signals");
 		souPanel.setToolTipText("Properties");
-		//Menu bar
-		
-		//simulationMenu.add(stopGenButton);
-		//LAYOUT FOR OBSERVERS' PROPERTIES
-		
 		//EMITTED SIGNAL
 		GroupLayout emitSignalPanelLayout = new GroupLayout(emitSignalPanel);
 		emitSignalPanel.setLayout(emitSignalPanelLayout);
@@ -86,15 +80,15 @@ public class WindowGUI extends JFrame {
 		emitSignalPanelLayout.setHorizontalGroup(columnsE);
 		emitSignalPanelLayout.setVerticalGroup(linesE);
 		//
-		if(LangChoose.getLanguage()==0)
-		{
-		lineE1.addComponent(emittedSignalLabel);
-		columnE1.addComponent(emittedSignalLabel);
-		}
-		if(LangChoose.getLanguage()==1)
-		{
-		lineE1.addComponent(emittedSignalLabelPL);
-		columnE1.addComponent(emittedSignalLabelPL);
+		switch(LangChoose.getLanguage()) {
+		case 0:
+			lineE1.addComponent(emittedSignalLabel);
+			columnE1.addComponent(emittedSignalLabel);
+			break;
+		case 1:
+			lineE1.addComponent(emittedSignalLabelPL);
+			columnE1.addComponent(emittedSignalLabelPL);
+			break;
 		}
 		//
 		lineE2.addComponent(functionAnimation);

@@ -1,6 +1,5 @@
 /**
  * @author Robert
- * @author Karol
  * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 package doppeler9k;
@@ -119,5 +118,4 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		counter++;
 	}
-	
 }
