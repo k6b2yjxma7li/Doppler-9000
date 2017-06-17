@@ -24,7 +24,6 @@ public class Doppler9000 extends WindowGUI {
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
 	public AnimationPanel animation;
-	//public SoundOperator generator = new SoundOperator();
 	//
 	//SETS VALUES FOR ANIMATION
 	public void setValuesAnim() {
@@ -196,12 +195,12 @@ public class Doppler9000 extends WindowGUI {
 				}
 			}
 		});
-		stopGenButton.addActionListener(new ActionListener() {
+		/*stopGenButton.addActionListener(new ActionListener() {
 			@Override 
 			public void actionPerformed(ActionEvent e) {
 				//end of generation
 			}
-		});
+		});*/
 	}
 	//MAIN F
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {

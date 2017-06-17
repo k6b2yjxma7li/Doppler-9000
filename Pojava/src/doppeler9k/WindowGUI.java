@@ -6,6 +6,7 @@
 package doppeler9k;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Point;
@@ -26,7 +27,7 @@ public class WindowGUI extends JFrame {
 	public JMenuBar mainBar = new JMenuBar();
 	public JMenu mainMenu = new JMenu("Menu");
 	public JMenu functionMenu = new JMenu("Function");
-	public JMenu simulationMenu = new JMenu("Simulation");
+	public JMenu soundMenu = new JMenu("Sound");
 	//Main
 	public JMenuItem exitButton = new JMenuItem("Exit");
 	public JMenuItem airButton = new JMenuItem("Air [343.8m/s]");
@@ -37,8 +38,8 @@ public class WindowGUI extends JFrame {
 	public JMenuItem squareButton = new JMenuItem("Square wave");
 	public JMenuItem expButton = new JMenuItem("Cosine-exponens-sine wave");
 	//Simulation
-	public JMenuItem startGenButton = new JMenuItem("Start generating");
-	public JMenuItem stopGenButton = new JMenuItem("Stop generating");
+	public JMenuItem startGenButton = new JMenuItem("Generate");
+	//public JMenuItem stopGenButton = new JMenuItem("Stop generating");
 	//
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
@@ -64,6 +65,12 @@ public class WindowGUI extends JFrame {
 	
 	//
 	public WindowGUI() throws HeadlessException {
+		/*upperPanel.setBackground(Color.BLUE);
+		lowerPanel.setBackground(Color.CYAN);
+		simMainPanel.setBackground(Color.DARK_GRAY);
+		objPropertiesPanel.setBackground(Color.GRAY);
+		emitSignalPanel.setBackground(Color.GREEN);
+		obsSignalPanel.setBackground(Color.LIGHT_GRAY);*/
 		// BORDER
 		this.setLayout(new BorderLayout());
 		this.add(lowerPanel,BorderLayout.SOUTH);
@@ -83,7 +90,7 @@ public class WindowGUI extends JFrame {
 		//Menu bar
 		mainBar.add(mainMenu);
 		mainBar.add(functionMenu);
-		mainBar.add(simulationMenu);
+		mainBar.add(soundMenu);
 		//Main
 		mainMenu.add(airButton);
 		mainMenu.add(waterButton);
@@ -94,8 +101,8 @@ public class WindowGUI extends JFrame {
 		functionMenu.add(squareButton);
 		functionMenu.add(expButton);
 		//Simulation
-		simulationMenu.add(startGenButton);
-		simulationMenu.add(stopGenButton);
+		soundMenu.add(startGenButton);
+		//simulationMenu.add(stopGenButton);
 		//LAYOUT FOR OBSERVERS' PROPERTIES
 		
 		//EMITTED SIGNAL
