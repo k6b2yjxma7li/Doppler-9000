@@ -51,8 +51,7 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
 		//
-		souPanel.stopButton.setEnabled(false);
-		souPanel.resetButton.setEnabled(false);
+		
 		//MENU 
 		sineButton.addActionListener(new ActionListener() {
 			@Override
@@ -186,7 +185,21 @@ public class Doppler9000 extends WindowGUI {
 	}
 	//MAIN F
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
+		LangChoose win = new LangChoose();
+		while(win.getLanguage() == 69)
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		if(win.getLanguage() == 0)
+		{
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+		
+		
+
 	}
 }

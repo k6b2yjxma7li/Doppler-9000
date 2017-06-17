@@ -30,6 +30,8 @@ public class SourcePropertiesPanel extends JPanel {
 	public JLabel souVelocityLabel = new JLabel("Source Velocity [m/s]: ");
 			
 	
+	
+	
 	public SourcePropertiesPanel() {
 		
 		// GROUP FOR SIMPROPPANEL
@@ -102,7 +104,8 @@ public class SourcePropertiesPanel extends JPanel {
 		line6.addComponent(resetButton);
 		column3.addComponent(resetButton);
 		//
-		
+		stopButton.setEnabled(false);
+		resetButton.setEnabled(false);
 		souXPosition.setMinimumSize(new Dimension(60, 30));
 		souXPosition.setMaximumSize(new Dimension(60, 30));
 		souDirection.setMinimumSize(new Dimension(60, 30));

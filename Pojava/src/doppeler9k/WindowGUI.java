@@ -54,9 +54,9 @@ public class WindowGUI extends JFrame {
 	public JLabel incomingSignalLabel = new JLabel("Incoming Signal");
 	public JLabel graphicalSimulationLabel = new JLabel("Graphical simulation                                                                                                                  ");
 	public JSlider volumeSlider = new JSlider();
-	
 	//
 	public WindowGUI() throws HeadlessException {
+		
 		upperPanel.setBackground(Color.BLUE);
 		lowerPanel.setBackground(Color.CYAN);
 		objPropertiesPanel.setBackground(Color.GRAY);
@@ -67,10 +67,9 @@ public class WindowGUI extends JFrame {
 		this.add(lowerPanel,BorderLayout.SOUTH);
 		this.add(upperPanel,BorderLayout.CENTER);
 		upperPanel.setLayout(new BoxLayout(upperPanel,BoxLayout.X_AXIS));
+		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
 		lowerPanel.add(souPanel,BorderLayout.WEST);
 		lowerPanel.add(obsPanel,BorderLayout.CENTER);
-		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
-		
 		//TOOLTIPS
 		upperPanel.setToolTipText("Main panel");
 		objPropertiesPanel.setToolTipText("Object properties");
