@@ -24,33 +24,19 @@ import javax.swing.GroupLayout.Alignment;
 
 public class WindowGUI extends JFrame {
 	//Menu bar
-	public JMenuBar mainBar = new JMenuBar();
-	public JMenu mainMenu = new JMenu("Menu");
-	public JMenu functionMenu = new JMenu("Function");
-	public JMenu soundMenu = new JMenu("Sound");
-	//Main
-	public JMenuItem exitButton = new JMenuItem("Exit");
-	public JMenuItem airButton = new JMenuItem("Air [343.8m/s]");
-	public JMenuItem waterButton = new JMenuItem("Water [1500.0m/s]");
-	public JMenuItem heliumButton = new JMenuItem("Helium [965.0m/s]");
-	//Function
-	public JMenuItem sineButton = new JMenuItem("Sine wave");
-	public JMenuItem squareButton = new JMenuItem("Square wave");
-	public JMenuItem expButton = new JMenuItem("Cosine-exponens-sine wave");
-	//Simulation
-	public JMenuItem startGenButton = new JMenuItem("Generate");
-	//public JMenuItem stopGenButton = new JMenuItem("Stop generating");
-	//
+	public MenuBar mainBar = new MenuBar(LangChoose.getLanguage());
+	
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
 	public JPanel objPropertiesPanel = new JPanel();
 	public JPanel emitSignalPanel = new JPanel();
 	public JPanel obsSignalPanel = new JPanel();
-	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel();
-	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel();
+	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel(LangChoose.getLanguage());
+	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel(LangChoose.getLanguage());
 	//OTHER SIMPLE PANELS
 	public FunctionAnimation functionAnimation = new FunctionAnimation();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
+	public JLabel emittedSignalLabelPL = new JLabel("Sygna³ Wychodz¹cy");
 	public JLabel incomingSignalLabel = new JLabel("Incoming Signal");
 	public JLabel graphicalSimulationLabel = new JLabel("Graphical simulation                                                                                                                  ");
 	public JSlider volumeSlider = new JSlider();
@@ -77,20 +63,7 @@ public class WindowGUI extends JFrame {
 		obsSignalPanel.setToolTipText("Observed signals");
 		souPanel.setToolTipText("Properties");
 		//Menu bar
-		mainBar.add(mainMenu);
-		mainBar.add(functionMenu);
-		mainBar.add(soundMenu);
-		//Main
-		mainMenu.add(airButton);
-		mainMenu.add(waterButton);
-		mainMenu.add(heliumButton);
-		mainMenu.add(exitButton);
-		//Function
-		functionMenu.add(sineButton);
-		functionMenu.add(squareButton);
-		functionMenu.add(expButton);
-		//Simulation
-		soundMenu.add(startGenButton);
+		
 		//simulationMenu.add(stopGenButton);
 		//LAYOUT FOR OBSERVERS' PROPERTIES
 		
@@ -113,8 +86,16 @@ public class WindowGUI extends JFrame {
 		emitSignalPanelLayout.setHorizontalGroup(columnsE);
 		emitSignalPanelLayout.setVerticalGroup(linesE);
 		//
+		if(LangChoose.getLanguage()==0)
+		{
 		lineE1.addComponent(emittedSignalLabel);
 		columnE1.addComponent(emittedSignalLabel);
+		}
+		if(LangChoose.getLanguage()==1)
+		{
+		lineE1.addComponent(emittedSignalLabelPL);
+		columnE1.addComponent(emittedSignalLabelPL);
+		}
 		//
 		lineE2.addComponent(functionAnimation);
 		columnE1.addComponent(functionAnimation);

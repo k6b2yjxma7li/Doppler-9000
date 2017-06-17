@@ -53,7 +53,7 @@ public class Doppler9000 extends WindowGUI {
 		//
 		
 		//MENU 
-		sineButton.addActionListener(new ActionListener() {
+		mainBar.sineButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 0;
@@ -61,7 +61,7 @@ public class Doppler9000 extends WindowGUI {
 				emitSignalPanel.add(functionAnimation);
 			}
 		});
-		squareButton.addActionListener(new ActionListener() {
+		mainBar.squareButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 1;
@@ -69,7 +69,7 @@ public class Doppler9000 extends WindowGUI {
 				emitSignalPanel.add(functionAnimation);
 			}
 		});
-		expButton.addActionListener(new ActionListener() {
+		mainBar.expButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 2;
@@ -78,7 +78,7 @@ public class Doppler9000 extends WindowGUI {
 			}
 		});
 		//
-		exitButton.addActionListener(new ActionListener() {
+		mainBar.exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -100,7 +100,7 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
-				animation.setSize(500, 500);
+				animation.setSize(upperPanel.getWidth(),upperPanel.getHeight());
 				upperPanel.add(animation);
 				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				setValuesAnim();
@@ -143,26 +143,26 @@ public class Doppler9000 extends WindowGUI {
 			}			
 		});
 		//MATERIAL
-		airButton.addActionListener(new ActionListener() {
+		mainBar.airButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				soundVelocity = (float)343.8;
 			}
 		});
-		waterButton.addActionListener(new ActionListener() {
+		mainBar.waterButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				soundVelocity = (float)1500;
 			}
 		});
-		heliumButton.addActionListener(new ActionListener() {
+		mainBar.heliumButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				soundVelocity = (float)965;
 			}
 		});
 		//SOUND GENERATING
-		startGenButton.addActionListener(new ActionListener() {
+		mainBar.startGenButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -193,11 +193,9 @@ public class Doppler9000 extends WindowGUI {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		if(win.getLanguage() == 0)
-		{
+		
 		Doppler9000 mainWin = new Doppler9000();
 		mainWin.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		}
 		
 		
 

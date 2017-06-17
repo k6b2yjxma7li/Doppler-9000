@@ -28,11 +28,15 @@ public class SourcePropertiesPanel extends JPanel {
 	public JLabel directionSourceLabel = new JLabel("Source movement angle [deg]: ");
 	public JLabel thisLabel = new JLabel("Source Properties");
 	public JLabel souVelocityLabel = new JLabel("Source Velocity [m/s]: ");
-			
+	public JLabel freqLabelPL = new JLabel("Czêstotliwoœæ [Hz]: ");
+	public JLabel positionLabelPL = new JLabel("Po³o¿enie zród³a [x,y]: ");
+	public JLabel directionSourceLabelPL = new JLabel("K¹t ruchu zród³a [stopnie]: ");
+	public JLabel thisLabelPL = new JLabel("W³aœciwoœci zród³a");
+	public JLabel souVelocityLabelPL = new JLabel("Prêdkoœæ zród³a [m/s]: ");		
 	
 	
 	
-	public SourcePropertiesPanel() {
+	public SourcePropertiesPanel(int lang) {//0 english//1 - polski
 		
 		// GROUP FOR SIMPROPPANEL
 		GroupLayout simPropPanelLayout = new GroupLayout(this);
@@ -65,6 +69,8 @@ public class SourcePropertiesPanel extends JPanel {
 		simPropPanelLayout.setHorizontalGroup(columns);
 		simPropPanelLayout.setVerticalGroup(lines);
 		//
+		if(lang == 0) //english labels
+		{
 		line1.addComponent(thisLabel);
 		column1.addComponent(thisLabel);
 		//
@@ -103,7 +109,49 @@ public class SourcePropertiesPanel extends JPanel {
 		//
 		line6.addComponent(resetButton);
 		column3.addComponent(resetButton);
+		}
 		//
+		if(lang == 1) //polish labels
+		{
+		line1.addComponent(thisLabelPL);
+		column1.addComponent(thisLabelPL);
+		//
+		line2.addComponent(freqLabelPL);
+		column1.addComponent(freqLabelPL);
+		//
+		line2.addComponent(freqField);
+		column2.addComponent(freqField);
+		//
+		line3.addComponent(souVelocityLabelPL);
+		column1.addComponent(souVelocityLabelPL);
+		//
+		line3.addComponent(souVelocityField);
+		column2.addComponent(souVelocityField);
+		//
+		line4.addComponent(positionLabelPL);
+		column1.addComponent(positionLabelPL);
+		//
+		line4.addComponent(souXPosition);
+		column2.addComponent(souXPosition);
+		//
+		line4.addComponent(souYPosition);
+		column3.addComponent(souYPosition);
+		//
+		line5.addComponent(directionSourceLabelPL);
+		column1.addComponent(directionSourceLabelPL);
+		//
+		line5.addComponent(souDirection);
+		column2.addComponent(souDirection);
+		//
+		line6.addComponent(startButton);
+		column1.addComponent(startButton);
+		//
+		line6.addComponent(stopButton);
+		column2.addComponent(stopButton);
+		//
+		line6.addComponent(resetButton);
+		column3.addComponent(resetButton);
+		}
 		stopButton.setEnabled(false);
 		resetButton.setEnabled(false);
 		souXPosition.setMinimumSize(new Dimension(60, 30));

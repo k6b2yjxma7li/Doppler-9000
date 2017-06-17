@@ -14,18 +14,22 @@ import javax.swing.GroupLayout.Alignment;
 
 public class ObserversPropertiesPanel extends JPanel {
 	//OBSERVER PROPERTIES PANEL
-	public JLabel panelLabel = new JLabel("Observer properties ");
 	public JLabel noLabel = new JLabel(" ");
 	public JLabel noLabel2 = new JLabel(" ");
+	public JLabel panelLabel = new JLabel("Observer properties ");
 	public JLabel obsVelocityLabel = new JLabel("Observer Velocity [m/s]: ");
 	public JLabel obsPositionLabel = new JLabel("Observer Position [x,y]: ");
 	public JLabel directionObserverLabel = new JLabel("Observer movement angle [deg]: ");
+	public JLabel panelLabelPL = new JLabel("W³aœciwoœci obserwatora ");
+	public JLabel obsVelocityLabelPL = new JLabel("Prêdkoœæ obserwatora [m/s]: ");
+	public JLabel obsPositionLabelPL = new JLabel("Po³o¿enie obserwatora [x,y]: ");
+	public JLabel directionObserverLabelPL = new JLabel("K¹t ruchu obserwatora [stopnie]: ");
 	public JTextField obsVelocityField = new JTextField("0");
 	public JTextField obsXPosition = new JTextField("0");
 	public JTextField obsYPosition = new JTextField("0");
 	public JTextField obsDirection = new JTextField("0");
 	
-	public ObserversPropertiesPanel() {
+	public ObserversPropertiesPanel(int lang) {//0 - english// 1 - polski
 	
 		GroupLayout objPropertiesPanelLayout = new GroupLayout(this);
 		this.setLayout(objPropertiesPanelLayout);
@@ -57,14 +61,18 @@ public class ObserversPropertiesPanel extends JPanel {
 		objPropertiesPanelLayout.setHorizontalGroup(columnsO);
 		objPropertiesPanelLayout.setVerticalGroup(linesO);
 		//
-		lineO1.addComponent(panelLabel);
-		columnO1.addComponent(panelLabel);
-		//
+		
+		//ENGLISH
+		if(lang == 0)
+		{
 		lineO2.addComponent(noLabel);
 		columnO1.addComponent(noLabel);
 		//
 		lineO6.addComponent(noLabel2);
 		columnO1.addComponent(noLabel2);
+		//
+		lineO1.addComponent(panelLabel);
+		columnO1.addComponent(panelLabel);
 		//
 		lineO5.addComponent(directionObserverLabel);
 		columnO1.addComponent(directionObserverLabel);
@@ -87,6 +95,50 @@ public class ObserversPropertiesPanel extends JPanel {
 		lineO4.addComponent(obsYPosition);
 		columnO3.addComponent(obsYPosition);
 		//
+		noLabel.setMinimumSize(new Dimension(60, 30));
+		noLabel.setMaximumSize(new Dimension(60, 30));
+		noLabel2.setMinimumSize(new Dimension(60, 30));
+		noLabel2.setMaximumSize(new Dimension(60, 30));
+		obsXPosition.setMinimumSize(new Dimension(60, 30));
+		obsXPosition.setMaximumSize(new Dimension(60, 30));
+		obsDirection.setMinimumSize(new Dimension(60, 30));
+		obsDirection.setMaximumSize(new Dimension(60, 30));
+		obsYPosition.setMinimumSize(new Dimension(60, 30));
+		obsYPosition.setMaximumSize(new Dimension(60, 30));
+		obsVelocityField.setMinimumSize(new Dimension(60, 30));
+		obsVelocityField.setMaximumSize(new Dimension(60, 30));
+		}
+		if(lang == 1)
+		{
+			lineO2.addComponent(noLabel);
+			columnO1.addComponent(noLabel);
+			//
+			lineO6.addComponent(noLabel2);
+			columnO1.addComponent(noLabel2);
+			//
+			lineO1.addComponent(panelLabelPL);
+			columnO1.addComponent(panelLabelPL);
+			//
+			lineO5.addComponent(directionObserverLabelPL);
+			columnO1.addComponent(directionObserverLabelPL);
+			//
+			lineO5.addComponent(obsDirection);
+			columnO2.addComponent(obsDirection);
+			//
+			lineO3.addComponent(obsVelocityLabelPL);
+			columnO1.addComponent(obsVelocityLabelPL);
+			//
+			lineO3.addComponent(obsVelocityField);
+			columnO2.addComponent(obsVelocityField);
+			//
+			lineO4.addComponent(obsPositionLabelPL);
+			columnO1.addComponent(obsPositionLabelPL);
+			//
+			lineO4.addComponent(obsXPosition);
+			columnO2.addComponent(obsXPosition);
+			//
+			lineO4.addComponent(obsYPosition);
+			columnO3.addComponent(obsYPosition);
 		//
 		noLabel.setMinimumSize(new Dimension(60, 30));
 		noLabel.setMaximumSize(new Dimension(60, 30));
@@ -100,6 +152,7 @@ public class ObserversPropertiesPanel extends JPanel {
 		obsYPosition.setMaximumSize(new Dimension(60, 30));
 		obsVelocityField.setMinimumSize(new Dimension(60, 30));
 		obsVelocityField.setMaximumSize(new Dimension(60, 30));
+		}
 		
 	}
 
