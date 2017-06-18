@@ -33,6 +33,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
 	}
+	public int getCounter() {
+		return counter;
+	}
 	//
 	public void setFrequency(double f) {
 		freq = f;

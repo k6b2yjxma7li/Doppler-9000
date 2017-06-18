@@ -113,9 +113,6 @@ public class WindowGUI extends JFrame {
 		//
 		lineE4.addComponent(incomingSignalAnimation);
 		columnE1.addComponent(incomingSignalAnimation);
-		
-		
-		
 		//COMPONENT SIZE
 		emittedSignalAnimation.setMinimumSize(new Dimension(100,100));
 		incomingSignalAnimation.setMinimumSize(new Dimension(100,100));

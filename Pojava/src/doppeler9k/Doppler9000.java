@@ -20,6 +20,7 @@ import javax.swing.GroupLayout.Alignment;
 
 public class Doppler9000 extends WindowGUI {
 	int functionChoice;
+	int limitVel;
 	float soundVelocity = (float)343.8;
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
@@ -38,13 +39,15 @@ public class Doppler9000 extends WindowGUI {
 		animation.observer=observer;
 		animation.source=source;
 		animation.counter = 0;
-		if(source.v > soundVelocity) {
-			System.out.println("Source velocity too high! Set to max");
-			source.setV(soundVelocity);
-		}
-		if(observer.v > soundVelocity) {
-			System.out.println("Observer velocity too high! Set to max");
-			observer.setV(soundVelocity);
+		if(limitVel == 0) {
+			if(source.v > soundVelocity) {
+				System.out.println("Source velocity too high! Set to max");
+				source.setV(soundVelocity);
+			}
+			if(observer.v > soundVelocity) {
+				System.out.println("Observer velocity too high! Set to max");
+				observer.setV(soundVelocity);
+			}
 		}
 	}
 	//MAIN C
@@ -110,6 +113,7 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.remove(animation);
 				upperPanel.removeAll();
 				upperPanel.repaint();
+				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				animation.tm.stop();
 				animation.outFile.close();
 				souPanel.stopButton.setEnabled(false);
@@ -159,6 +163,11 @@ public class Doppler9000 extends WindowGUI {
 			
 			}
 		});
+		if(obsPanel.vLimit.isSelected()||obsPanel.vLimitPL.isSelected()) {
+			limitVel = 0;
+		}else {
+			limitVel = 1;
+		}
 	}
 	//MAIN F
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
