@@ -103,7 +103,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.getV()));
 		}
 		value = (soundVelocity + (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
-		outFile.println(value);
 		return value;
 	}
 	//
@@ -112,8 +111,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		propCalc();
 		repaint();
 		try {
-			getFactor();
+			for(int n=0; n<10; n++) {
+				outFile.println(getFactor());
+			}
 		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		counter++;

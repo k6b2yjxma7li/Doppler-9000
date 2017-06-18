@@ -113,7 +113,6 @@ public class Doppler9000 extends WindowGUI {
 				animation.tm.stop();
 				animation.outFile.close();
 				souPanel.stopButton.setEnabled(false);
-				souPanel.stopButton.setEnabled(false);
 				souPanel.startButton.setEnabled(true);
 			}
 		});
@@ -126,6 +125,8 @@ public class Doppler9000 extends WindowGUI {
 				animation.outFile.close();
 				setValuesAnim();
 				animation.tm.start();
+				souPanel.stopButton.setEnabled(true);
+				souPanel.startButton.setEnabled(false);
 			}			
 		});
 		//MATERIAL
