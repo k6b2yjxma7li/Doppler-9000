@@ -68,13 +68,13 @@ public class WindowGUI extends JFrame {
 		signalAnimationPanel.setLayout(emitSignalPanelLayout);
 		emitSignalPanelLayout.setAutoCreateGaps(true);
 		emitSignalPanelLayout.setAutoCreateContainerGaps(true);
-		//
+		
 		GroupLayout.Group columnE1 = emitSignalPanelLayout.createParallelGroup(Alignment.LEADING);
 		GroupLayout.Group lineE1 = emitSignalPanelLayout.createParallelGroup();
 		GroupLayout.Group lineE2 = emitSignalPanelLayout.createParallelGroup();
 		GroupLayout.Group lineE3 = emitSignalPanelLayout.createParallelGroup();
 		GroupLayout.Group lineE4 = emitSignalPanelLayout.createParallelGroup();
-		//
+		
 		GroupLayout.SequentialGroup linesE = emitSignalPanelLayout.createSequentialGroup();
 		GroupLayout.SequentialGroup columnsE = emitSignalPanelLayout.createSequentialGroup();
 		linesE.addGroup(lineE1);

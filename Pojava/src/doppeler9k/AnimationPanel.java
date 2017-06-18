@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
-	double soundVelocity = 100;
+	double soundVelocity = 600;
 	double freq;
-	int step = 1;
+	int step = 15;
 	int counter = 0;
 	int ncounter = 0;
-	double waveLife = 2000;
+	double waveLife = 1000;
 	double waveLength = (double)(20);
 	int waveNumber = (int)(waveLife/waveLength);
 	public SimulationObject source;
@@ -76,7 +76,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		for(int n = 0; n < waveNumber; n++) {
 			wave[n].setV(soundVelocity);
-			r[n] = wave[n].calculateRad(counter+waveLength*n, waveLife);
+			r[n] = wave[n].calculateDia(counter+waveLength*n, waveLife,step);
 			g.drawOval((int)(wave[n].getX() - r[n]/2 + 2.5),
 					(int)(wave[n].getY() - r[n]/2 + 2.5),
 					(int)(r[n]),
@@ -106,7 +106,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.getV()));
 		}
 		value = (soundVelocity + (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
-		outFile.println(value);
 		return value;
 	}
 	//
@@ -115,8 +114,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		propCalc();
 		repaint();
 		try {
-			getFactor();
+			for(int n=0; n<10; n++) {
+				outFile.println(getFactor());
+			}
 		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		counter++;
