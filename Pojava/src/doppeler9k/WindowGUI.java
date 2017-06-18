@@ -29,14 +29,16 @@ public class WindowGUI extends JFrame {
 	public JPanel upperPanel = new JPanel();
 	public JPanel lowerPanel = new JPanel();
 	public JPanel objPropertiesPanel = new JPanel();
-	public JPanel emitSignalPanel = new JPanel();
+	public JPanel signalAnimationPanel = new JPanel();
 	public JPanel obsSignalPanel = new JPanel();
 	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel(LangChoose.getLanguage());
 	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel(LangChoose.getLanguage());
 	//OTHER SIMPLE PANELS
-	public FunctionAnimation functionAnimation = new FunctionAnimation();
+	public FunctionAnimation emittedSignalAnimation = new FunctionAnimation();
+	public FunctionAnimation incomingSignalAnimation = new FunctionAnimation();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
 	public JLabel emittedSignalLabelPL = new JLabel("Sygna³ Wychodz¹cy");
+	public JLabel incomingSignalLabelPL = new JLabel("Sygna³ Odbierany");
 	public JLabel incomingSignalLabel = new JLabel("Incoming Signal");
 	public JLabel graphicalSimulationLabel = new JLabel("Graphical simulation                                                                                                                  ");
 	public JSlider volumeSlider = new JSlider();
@@ -45,36 +47,40 @@ public class WindowGUI extends JFrame {
 		upperPanel.setBackground(Color.BLUE);
 		lowerPanel.setBackground(Color.CYAN);
 		objPropertiesPanel.setBackground(Color.GRAY);
-		emitSignalPanel.setBackground(Color.GREEN);
+		signalAnimationPanel.setBackground(Color.GREEN);
 		obsSignalPanel.setBackground(Color.LIGHT_GRAY);
 		// BORDER
 		this.setLayout(new BorderLayout());
 		this.add(lowerPanel,BorderLayout.SOUTH);
 		this.add(upperPanel,BorderLayout.CENTER);
 		upperPanel.setLayout(new BoxLayout(upperPanel,BoxLayout.X_AXIS));
-		lowerPanel.add(emitSignalPanel,BorderLayout.EAST);
+		lowerPanel.add(signalAnimationPanel,BorderLayout.EAST);
 		lowerPanel.add(souPanel,BorderLayout.WEST);
 		lowerPanel.add(obsPanel,BorderLayout.CENTER);
 		//TOOLTIPS
 		upperPanel.setToolTipText("Main panel");
 		objPropertiesPanel.setToolTipText("Object properties");
-		emitSignalPanel.setToolTipText("Signal emitted");
+		signalAnimationPanel.setToolTipText("Signal emitted");
 		obsSignalPanel.setToolTipText("Observed signals");
 		souPanel.setToolTipText("Properties");
 		//EMITTED SIGNAL
-		GroupLayout emitSignalPanelLayout = new GroupLayout(emitSignalPanel);
-		emitSignalPanel.setLayout(emitSignalPanelLayout);
+		GroupLayout emitSignalPanelLayout = new GroupLayout(signalAnimationPanel);
+		signalAnimationPanel.setLayout(emitSignalPanelLayout);
 		emitSignalPanelLayout.setAutoCreateGaps(true);
 		emitSignalPanelLayout.setAutoCreateContainerGaps(true);
 		//
 		GroupLayout.Group columnE1 = emitSignalPanelLayout.createParallelGroup(Alignment.LEADING);
 		GroupLayout.Group lineE1 = emitSignalPanelLayout.createParallelGroup();
 		GroupLayout.Group lineE2 = emitSignalPanelLayout.createParallelGroup();
+		GroupLayout.Group lineE3 = emitSignalPanelLayout.createParallelGroup();
+		GroupLayout.Group lineE4 = emitSignalPanelLayout.createParallelGroup();
 		//
 		GroupLayout.SequentialGroup linesE = emitSignalPanelLayout.createSequentialGroup();
 		GroupLayout.SequentialGroup columnsE = emitSignalPanelLayout.createSequentialGroup();
 		linesE.addGroup(lineE1);
 		linesE.addGroup(lineE2);
+		linesE.addGroup(lineE3);
+		linesE.addGroup(lineE4);
 		columnsE.addGroup(columnE1);
 		//
 		emitSignalPanelLayout.setHorizontalGroup(columnsE);
@@ -91,12 +97,28 @@ public class WindowGUI extends JFrame {
 			break;
 		}
 		//
-		lineE2.addComponent(functionAnimation);
-		columnE1.addComponent(functionAnimation);
+		lineE2.addComponent(emittedSignalAnimation);
+		columnE1.addComponent(emittedSignalAnimation);
+		//
+		switch(LangChoose.getLanguage()) {
+		case 0:
+			lineE3.addComponent(incomingSignalLabel);
+			columnE1.addComponent(incomingSignalLabel);
+			break;
+		case 1:
+			lineE3.addComponent(incomingSignalLabelPL);
+			columnE1.addComponent(incomingSignalLabelPL);
+			break;
+		}
+		//
+		lineE4.addComponent(incomingSignalAnimation);
+		columnE1.addComponent(incomingSignalAnimation);
+		
+		
+		
 		//COMPONENT SIZE
-		functionAnimation.setMinimumSize(new Dimension(100,300));
-		volumeSlider.setMinimum(0);
-		volumeSlider.setMaximum(100);
+		emittedSignalAnimation.setMinimumSize(new Dimension(100,100));
+		incomingSignalAnimation.setMinimumSize(new Dimension(100,100));
 		//	
 		setJMenuBar(mainBar);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);

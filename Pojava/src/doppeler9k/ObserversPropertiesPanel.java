@@ -28,6 +28,8 @@ public class ObserversPropertiesPanel extends JPanel {
 	public JTextField obsXPosition = new JTextField("0");
 	public JTextField obsYPosition = new JTextField("0");
 	public JTextField obsDirection = new JTextField("0");
+	public JCheckBox vLimit = new JCheckBox("Velocity limit",true);
+	public JCheckBox vLimitPL = new JCheckBox("Limit prêdkoœci", true);
 	//
 	public ObserversPropertiesPanel(int lang) {//0 - english// 1 - polski
 		GroupLayout objPropertiesPanelLayout = new GroupLayout(this);
@@ -93,6 +95,9 @@ public class ObserversPropertiesPanel extends JPanel {
 			lineO4.addComponent(obsYPosition);
 			columnO3.addComponent(obsYPosition);
 			//
+			lineO6.addComponent(vLimit);
+			columnO3.addComponent(vLimit);
+			//
 			noLabel.setMinimumSize(new Dimension(60, 30));
 			noLabel.setMaximumSize(new Dimension(60, 30));
 			noLabel2.setMinimumSize(new Dimension(60, 30));
@@ -138,6 +143,9 @@ public class ObserversPropertiesPanel extends JPanel {
 			//
 			lineO4.addComponent(obsYPosition);
 			columnO3.addComponent(obsYPosition);
+			//
+			lineO6.addComponent(vLimitPL);
+			columnO3.addComponent(vLimitPL);
 			//
 			noLabel.setMinimumSize(new Dimension(60, 30));
 			noLabel.setMaximumSize(new Dimension(60, 30));

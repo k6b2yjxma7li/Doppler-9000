@@ -54,24 +54,24 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 0;
-				functionAnimation.functionChoiceVal = 0;
-				emitSignalPanel.add(functionAnimation);
+				emittedSignalAnimation.functionChoiceVal = 0;
+				signalAnimationPanel.add(emittedSignalAnimation);
 			}
 		});
 		mainBar.squareButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 1;
-				functionAnimation.functionChoiceVal = 1;
-				emitSignalPanel.add(functionAnimation);
+				emittedSignalAnimation.functionChoiceVal = 1;
+				signalAnimationPanel.add(emittedSignalAnimation);
 			}
 		});
 		mainBar.expButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				functionChoice = 2;
-				functionAnimation.functionChoiceVal = 2;
-				emitSignalPanel.add(functionAnimation);
+				emittedSignalAnimation.functionChoiceVal = 2;
+				signalAnimationPanel.add(emittedSignalAnimation);
 			}
 		});
 		//
@@ -94,9 +94,9 @@ public class Doppler9000 extends WindowGUI {
 				animation.tm.stop();
 				animation.setSize(upperPanel.getWidth(),upperPanel.getHeight());
 				upperPanel.add(animation);
-				functionAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				setValuesAnim();
-				functionAnimation.repaint();
+				emittedSignalAnimation.repaint();
 				animation.tm.start();
 				animation.repaint();
 				souPanel.startButton.setEnabled(false);
