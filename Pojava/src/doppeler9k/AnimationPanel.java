@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
-	double soundVelocity = 100;
+	double soundVelocity = 600;
 	double freq;
-	int step = 1;
+	int step = 15;
 	int counter = 0;
 	int ncounter = 0;
-	double waveLife = 2000;
+	double waveLife = 1000;
 	double waveLength = (double)(20);
 	int waveNumber = (int)(waveLife/waveLength);
 	public SimulationObject source;
@@ -73,7 +73,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		}
 		for(int n = 0; n < waveNumber; n++) {
 			wave[n].setV(soundVelocity);
-			r[n] = wave[n].calculateRad(counter+waveLength*n, waveLife);
+			r[n] = wave[n].calculateDia(counter+waveLength*n, waveLife,step);
 			g.drawOval((int)(wave[n].getX() - r[n]/2 + 2.5),
 					(int)(wave[n].getY() - r[n]/2 + 2.5),
 					(int)(r[n]),

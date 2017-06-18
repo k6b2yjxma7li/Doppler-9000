@@ -7,19 +7,19 @@ package doppeler9k;
 public class WaveObject {
 	double x;
 	double y;
-	double radius;
+	double diameter;
 	double velocity;
 	//
-	public WaveObject(double X, double Y, double R, double V) {
+	public WaveObject(double X, double Y, double D, double V) {
 		x = X;
 		y = Y;
-		radius = R;
+		diameter = D;
 		velocity = V;
 	}
 	public WaveObject() {
 		x = 0;
 		y = 0;
-		radius = 0;
+		diameter = 0;
 		velocity = 0;
 	}
 	//
@@ -44,8 +44,8 @@ public class WaveObject {
 		return y;
 	}
 	//
-	public double calculateRad(double dt, double maxRad) {
-		radius = velocity * (dt % maxRad) * 0.002;
-		return radius;
+	public double calculateDia(double dt, double maxRad, int timestep) {
+		diameter = velocity * (dt % maxRad) *timestep* 0.002;
+		return diameter;
 	}
 }
