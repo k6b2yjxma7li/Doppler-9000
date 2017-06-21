@@ -164,11 +164,26 @@ public class Doppler9000 extends WindowGUI {
 			
 			}
 		});
-		if(obsPanel.vLimit.isSelected()||obsPanel.vLimitPL.isSelected()) {
-			limitVel = 0;
-		}else {
-			limitVel = 1;
-		}
+		obsPanel.vLimit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(obsPanel.vLimit.isSelected()) {
+					limitVel = 0;
+				}else {
+					limitVel = 1;
+				}
+			}
+		});
+		obsPanel.vLimitPL.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(obsPanel.vLimitPL.isSelected()) {
+					limitVel = 0;
+				}else {
+					limitVel = 1;
+				}
+			}
+		});
 	}
 	//MAIN F
 	public static void main(String[] args) throws HeadlessException, LineUnavailableException, IOException {
