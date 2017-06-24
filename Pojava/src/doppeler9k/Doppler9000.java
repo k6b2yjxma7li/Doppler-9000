@@ -98,8 +98,14 @@ public class Doppler9000 extends WindowGUI {
 				animation.setSize(upperPanel.getWidth(),upperPanel.getHeight());
 				upperPanel.add(animation);
 				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				try {
+					incomingSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
 				setValuesAnim();
 				emittedSignalAnimation.repaint();
+				//incomingSignalAnimation.repaint();
 				animation.tm.start();
 				animation.repaint();
 				souPanel.startButton.setEnabled(false);
@@ -127,6 +133,13 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.add(animation, BorderLayout.WEST);
 				animation.tm.stop();
 				animation.outFile.close();
+				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				try {
+					incomingSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
+				} catch (NumberFormatException e1) {
+					e1.printStackTrace();
+				}
+				incomingSignalAnimation.repaint();
 				setValuesAnim();
 				animation.tm.start();
 				souPanel.stopButton.setEnabled(true);

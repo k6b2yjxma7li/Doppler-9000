@@ -29,6 +29,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public SimulationObject observer;
 	WaveObject[] wave = new WaveObject[waveNumber];
 	public PrintWriter outFile;
+	public PrintWriter operator;
 	//
 	public void setSoundVel(float sv) {
 		soundVelocity = sv;
@@ -36,9 +37,14 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public int getCounter() {
 		return counter;
 	}
-	//
 	public void setFrequency(double f) {
 		freq = f;
+	}
+	public void operator() throws FileNotFoundException {
+		operator = new PrintWriter(new FileOutputStream("operatorfile.txt"));
+		operator.println(getFactor());
+		operator.flush();
+		operator.close();
 	}
 	//
 	public AnimationPanel() throws FileNotFoundException {
@@ -114,11 +120,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		propCalc();
 		repaint();
 		try {
-			for(int n=0; n<10; n++) {
+			for(int n=0; n<step; n++) {
 				outFile.println(getFactor());
 			}
+			operator();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		counter++;

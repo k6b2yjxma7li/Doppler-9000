@@ -34,8 +34,8 @@ public class WindowGUI extends JFrame {
 	public SourcePropertiesPanel souPanel = new SourcePropertiesPanel(LangChoose.getLanguage());
 	public ObserversPropertiesPanel obsPanel = new ObserversPropertiesPanel(LangChoose.getLanguage());
 	//OTHER SIMPLE PANELS
-	public FunctionAnimation emittedSignalAnimation = new FunctionAnimation();
-	public FunctionAnimation incomingSignalAnimation = new FunctionAnimation();
+	public OutFunctionAnimation emittedSignalAnimation = new OutFunctionAnimation();
+	public InFunctionAnimation incomingSignalAnimation = new InFunctionAnimation();
 	public JLabel emittedSignalLabel = new JLabel("Emitted Signal");
 	public JLabel emittedSignalLabelPL = new JLabel("Sygna³ Wychodz¹cy");
 	public JLabel incomingSignalLabelPL = new JLabel("Sygna³ Odbierany");
