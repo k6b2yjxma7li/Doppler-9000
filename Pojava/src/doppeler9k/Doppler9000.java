@@ -92,6 +92,8 @@ public class Doppler9000 extends WindowGUI {
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
+				signalAnimationPanel.remove(incomingSignalAnimation);
+				signalAnimationPanel.remove(emittedSignalAnimation);
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
@@ -104,8 +106,10 @@ public class Doppler9000 extends WindowGUI {
 					e.printStackTrace();
 				}
 				setValuesAnim();
+				signalAnimationPanel.add(incomingSignalAnimation);
+				signalAnimationPanel.add(emittedSignalAnimation);
 				emittedSignalAnimation.repaint();
-				//incomingSignalAnimation.repaint();
+				incomingSignalAnimation.repaint();
 				animation.tm.start();
 				animation.repaint();
 				souPanel.startButton.setEnabled(false);
@@ -119,6 +123,7 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.remove(animation);
 				upperPanel.removeAll();
 				upperPanel.repaint();
+				signalAnimationPanel.remove(incomingSignalAnimation);
 				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				animation.tm.stop();
 				animation.outFile.close();
