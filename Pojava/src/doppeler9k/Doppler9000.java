@@ -53,31 +53,7 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
 		//MENU 
-//		mainBar.sineButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				functionChoice = 0;
-//				emittedSignalAnimation.functionChoiceVal = 0;
-//				signalAnimationPanel.add(emittedSignalAnimation);
-//			}
-//		});
-//		mainBar.squareButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				functionChoice = 1;
-//				emittedSignalAnimation.functionChoiceVal = 1;
-//				signalAnimationPanel.add(emittedSignalAnimation);
-//			}
-//		});
-//		mainBar.expButton.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				functionChoice = 2;
-//				emittedSignalAnimation.functionChoiceVal = 2;
-//				signalAnimationPanel.add(emittedSignalAnimation);
-//			}
-//		});
-		//
+
 		mainBar.exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,32 +78,18 @@ public class Doppler9000 extends WindowGUI {
 					e.printStackTrace();
 				}
 				
-				//signalAnimationPanel.remove(incomingSignalAnimation);
-				//signalAnimationPanel.remove(emittedSignalAnimation);
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
 				animation.setSize(upperPanel.getWidth(),upperPanel.getHeight());
 				upperPanel.add(animation);
-				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				try {
-					incomingSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
 				setValuesAnim();
-				//signalAnimationPanel.add(incomingSignalAnimation);
-				//signalAnimationPanel.add(emittedSignalAnimation);
-				emittedSignalAnimation.repaint();
-				incomingSignalAnimation.repaint();
 				animation.tm.start();
 				animation.repaint();
 				souPanel.startButton.setEnabled(false);
 				souPanel.resetButton.setEnabled(true);
 				souPanel.stopButton.setEnabled(true);
 				obsPanel.chart.setEnabled(false);
-				//final ChartWin incomingSine = new ChartWin(source,observer, soundVelocity,15);
-				//incomingSine.setVisible(true);
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
@@ -136,8 +98,6 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.remove(animation);
 				upperPanel.removeAll();
 				upperPanel.repaint();
-				//signalAnimationPanel.remove(incomingSignalAnimation);
-				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				animation.tm.stop();
 				animation.outFile.close();
 				souPanel.stopButton.setEnabled(false);
@@ -152,13 +112,6 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.add(animation, BorderLayout.WEST);
 				animation.tm.stop();
 				animation.outFile.close();
-				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				try {
-					incomingSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
-				} catch (NumberFormatException e1) {
-					e1.printStackTrace();
-				}
-				incomingSignalAnimation.repaint();
 				setValuesAnim();
 				animation.tm.start();
 				souPanel.stopButton.setEnabled(true);
@@ -189,7 +142,7 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, functionChoice);
+					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, 0);//OTHER FUNCTIONS DELETED -- K
 				} catch (NumberFormatException | LineUnavailableException | IOException e1) {
 					e1.printStackTrace();
 				}

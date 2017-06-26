@@ -122,7 +122,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		try {
 			for(int n=0; n<step; n++) {
 				outFile.println(getFactor());
-				//System.out.println(getFactor());
 			}
 			operator();
 		} catch (FileNotFoundException e1) {

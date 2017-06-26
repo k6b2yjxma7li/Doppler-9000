@@ -1,5 +1,8 @@
 package doppeler9k;
-
+/**
+ * @author Karol
+ * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
+ */
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -27,12 +30,12 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 
 public class ChartWin extends JFrame {
-	
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
 	public double soundVelocity = 340;
 	public double timestep = 15;
 	double freq = 2;
+	//
 	public void setValues (SimulationObject sou, SimulationObject obs, double soundV, double step)
 	{
 		source = sou;
@@ -40,7 +43,7 @@ public class ChartWin extends JFrame {
 		soundVelocity = soundV;
 		timestep =step;
 	}
-
+	//
 	public double getFactor() {
 		double value;
 		double rx = observer.getX()-source.getX();
@@ -58,7 +61,6 @@ public class ChartWin extends JFrame {
 	}
 	
 	public ChartWin(SimulationObject sou, SimulationObject obs, double soundV, double step) throws HeadlessException {
-		
 		source = sou;
 		observer = obs;
 		soundVelocity = soundV;
@@ -68,12 +70,7 @@ public class ChartWin extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.add(wykres,BorderLayout.CENTER);
-		
-		
-		
-		
-		      
-		               
+		//		               
 		      final XYSeries sinus = new XYSeries( "sin(x)" );     
 		      for (int j = 0; j<25; j++)
 		      {
@@ -87,22 +84,19 @@ public class ChartWin extends JFrame {
 			    	  sinus.add(time,Math.sin(2*Math.PI*actualFreq*time));
 			      }
 		      }  
-		     
-		     
+		      //
 		      final XYSeriesCollection dataset = new XYSeriesCollection( ); 
 		      dataset.addSeries( sinus ); 
-		      
-		
+		      //		
 		JFreeChart xylineChart = ChartFactory.createXYLineChart(
-		         "wykres" ,
-		         "x" ,
-		         "f(x)" ,
+		         " " ,
+		         "t[s]" ,
+		         "f(t)" ,
 		         dataset ,
 		         PlotOrientation.VERTICAL ,
 		         true , true , false);
 		         
 		      ;
-		      
 		      ChartPanel chartPanel = new ChartPanel(xylineChart);
 		      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
 		      add(chartPanel);
