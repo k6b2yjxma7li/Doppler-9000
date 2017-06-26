@@ -16,6 +16,8 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+// PLEASE ADJUST THE CLASS -- ONLY SINE WAVE NOW
+//IF YOU REALLY WANT YOU CAN MAKE CHARTS FOR OTHER FUNCTIONS -- K
 
 //FUNCTION GENERATING CLASS
 public class FunctionGenerator {
