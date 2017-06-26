@@ -32,16 +32,18 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class ChartWin extends JFrame {
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
-	public double soundVelocity = 340;
-	public double timestep = 15;
-	double freq = 2;
+	public double soundVelocity = 343.8;
+	public double timestep = 1;
+	double freq;
+	int functionChoice = 0;
 	//
-	public void setValues (SimulationObject sou, SimulationObject obs, double soundV, double step)
+	public void setValues (SimulationObject sou, SimulationObject obs, double soundV, double frequency, double step)
 	{
 		source = sou;
 		observer = obs;
 		soundVelocity = soundV;
-		timestep =step;
+		timestep = step;
+		freq = frequency;
 	}
 	//
 	public double getFactor() {
@@ -60,34 +62,69 @@ public class ChartWin extends JFrame {
 		return value;
 	}
 	
-	public ChartWin(SimulationObject sou, SimulationObject obs, double soundV, double step) throws HeadlessException {
-		source = sou;
-		observer = obs;
-		soundVelocity = soundV;
-		timestep =step;
+	public ChartWin(SimulationObject sou, SimulationObject obs, double soundV, double frequ, double step, int fC) throws HeadlessException {
+		setValues(sou, obs, soundV, frequ, step);
+		functionChoice = fC;
 		JPanel wykres = new JPanel();
 		this.setSize(640,480);
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.add(wykres,BorderLayout.CENTER);
 		//		               
-		      final XYSeries sinus = new XYSeries( "sin(x)" );     
-		      for (int j = 0; j<25; j++)
-		      {
-		    	  
-		    	  source.calculateCoords(timestep*33);
-		    	  observer.calculateCoords(timestep*33);
-		    	  double actualFreq = freq*getFactor();
-			      for (int i = 0; i<33; i++)
-			      {
-			    	  double time = j*33*timestep*0.001+i*timestep*0.001;
-			    	  sinus.add(time,Math.sin(2*Math.PI*actualFreq*time));
-			      }
-		      }  
-		      //
-		      final XYSeriesCollection dataset = new XYSeriesCollection( ); 
-		      dataset.addSeries( sinus ); 
-		      //		
+		final XYSeries series = new XYSeries("f(x)");
+		switch(functionChoice) {
+		case 0:
+		{
+			for (int j = 0; j<25; j++) {
+				source.calculateCoords(timestep*33);
+				observer.calculateCoords(timestep*33);
+				double actualFreq = freq*getFactor();
+				for (int i = 0; i<33; i++) {
+					double time = j*33*timestep*0.001+i*timestep*0.001;
+					series.add(time,Math.sin(2*Math.PI*actualFreq*time));
+				}
+			}
+			break;
+		}
+		case 1:
+		{
+			for (int j = 0; j<25; j++) {
+				source.calculateCoords(timestep*33);
+				observer.calculateCoords(timestep*33);
+				double actualFreq = freq*getFactor();
+				for (int i = 0; i<33; i++) {
+					double time = j*33*timestep*0.001+i*timestep*0.001;
+					series.add(time,Math.sin(2*Math.PI*actualFreq*time));
+					if(Math.sin(2*Math.PI*actualFreq*time) > 0) {
+						series.add(time, 1);
+					} else if(Math.sin(2*Math.PI*actualFreq*time) == 0) {
+						series.add(time, 0);
+					} else if(Math.sin(2*Math.PI*actualFreq*time) <0 ) {
+						series.add(time, -1);
+					}
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			for (int j = 0; j<25; j++) {
+				source.calculateCoords(timestep*33);
+				observer.calculateCoords(timestep*33);
+				double actualFreq = freq*getFactor();
+				for (int i = 0; i<33; i++) {
+					double time = j*33*timestep*0.001+i*timestep*0.001;
+					double angle = 2*Math.PI*actualFreq*time;
+					series.add(time,Math.sin(angle)*Math.exp(Math.cos(angle)));
+				}
+			}
+			break;
+		}
+		}
+		//
+		final XYSeriesCollection dataset = new XYSeriesCollection( ); 
+		dataset.addSeries(series); 
+		//		
 		JFreeChart xylineChart = ChartFactory.createXYLineChart(
 		         " " ,
 		         "t[s]" ,
@@ -95,14 +132,12 @@ public class ChartWin extends JFrame {
 		         dataset ,
 		         PlotOrientation.VERTICAL ,
 		         true , true , false);
-		         
-		      ;
-		      ChartPanel chartPanel = new ChartPanel(xylineChart);
-		      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
-		      add(chartPanel);
-		      final XYPlot plot = xylineChart.getXYPlot();
-		      ValueAxis yaxis = plot.getRangeAxis();
-		      yaxis.setRange(-2, 2);
+		ChartPanel chartPanel = new ChartPanel(xylineChart);
+		chartPanel.setPreferredSize(new java.awt.Dimension(560,367));
+		add(chartPanel);
+		final XYPlot plot = xylineChart.getXYPlot();
+		ValueAxis yaxis = plot.getRangeAxis();
+		yaxis.setRange(-2, 2);
 	}
 	
 }

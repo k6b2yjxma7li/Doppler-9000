@@ -19,14 +19,14 @@ import javax.swing.JFrame;
 import javax.swing.GroupLayout.Alignment;
 
 public class Doppler9000 extends WindowGUI {
-	int functionChoice;
+	int functionChoice = 0;
 	int limitVel;
 	float soundVelocity = (float)343.8;
 	public SimulationObject source = new SimulationObject();
 	public SimulationObject observer = new SimulationObject();
 	public AnimationPanel animation;
-	//SETS VALUES FOR ANIMATION
-	public void setValuesAnim() {
+	//
+	public void setValuesAnim() {//SETS VALUES FOR ANIMATION
 		source.setAngle(Float.parseFloat(souPanel.souDirection.getText()));
 		source.setV(Float.parseFloat(souPanel.souVelocityField.getText()));
 		source.setX(1+Float.parseFloat(souPanel.souXPosition.getText()));
@@ -53,19 +53,36 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
 		//MENU 
-
 		mainBar.exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
+		mainBar.sinSigButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				functionChoice = 0;
+			}
+		});
+		mainBar.sqrSigButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				functionChoice = 1;
+			}
+		});
+		mainBar.secSigButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				functionChoice = 2;
+			}
+		});
 		obsPanel.chart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setValuesAnim();
-				final ChartWin incomingSine = new ChartWin(source,observer, soundVelocity,15);
-				incomingSine.setVisible(true);
+				final ChartWin incomingSign = new ChartWin(source, observer, soundVelocity, Double.parseDouble(souPanel.freqField.getText()), 15, functionChoice);
+				incomingSign.setVisible(true);
 				
 			}
 		});
@@ -77,7 +94,6 @@ public class Doppler9000 extends WindowGUI {
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-				
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
@@ -142,7 +158,7 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, 0);//OTHER FUNCTIONS DELETED -- K
+					FunctionGenerator gen = new FunctionGenerator((float)Math.log(Float.parseFloat(souPanel.freqField.getText())), 10, functionChoice);//OTHER FUNCTIONS DELETED -- K
 				} catch (NumberFormatException | LineUnavailableException | IOException e1) {
 					e1.printStackTrace();
 				}
