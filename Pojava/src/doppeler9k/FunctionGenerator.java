@@ -29,6 +29,13 @@ public class FunctionGenerator {
 		lineCounter.close();
 		return counter;
 	}
+	public double freqNormalizer(double freq, double fact) {
+		if(freq*fact >= 22000) {
+			freq = 22000;
+			System.out.println("Frequnecy over limit! Changed to max.");
+		}
+		return freq;
+	}
 	//SINE GENERATING METHOD
 	public void sine(double frequency , double volume) throws IOException, LineUnavailableException {
 		BufferedReader fileReader = new BufferedReader(new FileReader("factorfile.txt"));
@@ -45,14 +52,14 @@ public class FunctionGenerator {
 		for(int a=0; a<(lines/10); a++) {
 			for(int b=0; b<9; b++) {
 				for(int c=0; c<44; c++) {
-					double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+					double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 					buffer[theta] = (byte)(Math.sin(angle)*volume);
 					theta++;
 				}
 				if(counter<lines) {counter++;}
 			}
 			for(int c=0; c<45; c++) {
-				double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+				double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 				buffer[theta] = (byte)(Math.sin(angle)*volume);
 				theta++;
 			}
@@ -82,7 +89,7 @@ public class FunctionGenerator {
 		for(int a=0; a<(lines/10); a++) {
 			for(int b=0; b<9; b++) {
 				for(int c=0; c<44; c++) {
-					double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+					double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 					if(Math.sin(angle) > 0) {
 						buffer[theta]=(byte)(1*volume);
 					}else if(Math.sin(angle) == 0){
@@ -95,7 +102,7 @@ public class FunctionGenerator {
 				if(counter<lines) {counter++;}
 			}
 			for(int c=0; c<45; c++) {
-				double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+				double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 				if(Math.sin(angle) > 0) {
 					buffer[theta]=(byte)(1*volume);
 				}else if(Math.sin(angle) == 0){
@@ -131,14 +138,14 @@ public class FunctionGenerator {
 		for(int a=0; a<(lines/10); a++) {
 			for(int b=0; b<9; b++) {
 				for(int c=0; c<44; c++) {
-					double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+					double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 					buffer[theta] = (byte)(Math.sin(angle)*Math.exp(Math.cos(angle))*volume);
 					theta++;
 				}
 				if(counter<lines) {counter++;}
 			}
 			for(int c=0; c<45; c++) {
-				double angle = (double)((2*Math.PI/44100)*frequency*(double)theta*factor[counter]);
+				double angle = (double)((2*Math.PI/44100)*freqNormalizer(frequency, factor[counter])*(double)theta*factor[counter]);
 				buffer[theta] = (byte)(Math.sin(angle)*Math.exp(Math.cos(angle))*volume);
 				theta++;
 			}

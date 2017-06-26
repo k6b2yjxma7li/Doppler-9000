@@ -40,12 +40,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 	public void setFrequency(double f) {
 		freq = f;
 	}
-	public void operator() throws FileNotFoundException {
-		operator = new PrintWriter(new FileOutputStream("operatorfile.txt"));
-		operator.println(getFactor());
-		operator.flush();
-		operator.close();
-	}
 	//
 	public AnimationPanel() throws FileNotFoundException {
 		for(int n =0; n < waveNumber; n++) {
@@ -123,7 +117,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
 			for(int n=0; n<step; n++) {
 				outFile.println(getFactor());
 			}
-			operator();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}

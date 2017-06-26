@@ -81,9 +81,16 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setValuesAnim();
-				final ChartWin incomingSign = new ChartWin(source, observer, soundVelocity, Double.parseDouble(souPanel.freqField.getText()), 15, functionChoice);
-				incomingSign.setVisible(true);
-				
+				ChartWin incomingSign;
+				FactorChart factorChart;
+				try {
+					incomingSign = new ChartWin(soundVelocity, Double.parseDouble(souPanel.freqField.getText()), functionChoice);
+					factorChart = new FactorChart();
+					factorChart.setVisible(true);
+					incomingSign.setVisible(true);
+				} catch (HeadlessException | NumberFormatException | IOException e1) {
+					e1.printStackTrace();
+				}				
 			}
 		});
 		souPanel.startButton.addActionListener(new ActionListener() {
@@ -158,7 +165,7 @@ public class Doppler9000 extends WindowGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FunctionGenerator gen = new FunctionGenerator((float)Math.log(Float.parseFloat(souPanel.freqField.getText())), 10, functionChoice);//OTHER FUNCTIONS DELETED -- K
+					FunctionGenerator gen = new FunctionGenerator(Float.parseFloat(souPanel.freqField.getText()), 10, functionChoice);//OTHER FUNCTIONS DELETED -- K
 				} catch (NumberFormatException | LineUnavailableException | IOException e1) {
 					e1.printStackTrace();
 				}

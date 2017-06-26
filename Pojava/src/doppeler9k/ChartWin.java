@@ -4,17 +4,12 @@ package doppeler9k;
  * CTRL + CLICK ME-> https://github.com/rassch/Doppler-9000
  */
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,46 +19,37 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 
 public class ChartWin extends JFrame {
-	public SimulationObject source = new SimulationObject();
-	public SimulationObject observer = new SimulationObject();
 	public double soundVelocity = 343.8;
-	public double timestep = 1;
+	public double timestep = 0.01;
 	double freq;
 	int functionChoice = 0;
 	//
-	public void setValues (SimulationObject sou, SimulationObject obs, double soundV, double frequency, double step)
-	{
-		source = sou;
-		observer = obs;
+	public int lineCounter() throws IOException {
+		int counter = 0;
+		BufferedReader lineCounter = new BufferedReader(new FileReader("factorfile.txt"));
+		while(lineCounter.readLine() != null) {
+			counter++;
+		}
+		lineCounter.close();
+		return counter;
+	}
+	public void setValues(double soundV, double frequency) {
 		soundVelocity = soundV;
-		timestep = step;
 		freq = frequency;
 	}
-	//
-	public double getFactor() {
-		double value;
-		double rx = observer.getX()-source.getX();
-		double ry = observer.getY()-source.getY();
-		double cosObs = 1;
-		double cosSou = 1;
-		if (source.getV() != 0) {
-			cosSou = ((rx*source.vx()) + (ry*source.vy())) / ((Math.sqrt(rx*rx+ry*ry) * source.getV()));
+	public ChartWin(double soundV, double frequ, int fC) throws HeadlessException, IOException {
+		BufferedReader factorReader = new BufferedReader(new FileReader("factorfile.txt"));
+		double lines = lineCounter();
+		double[] factor = new double[(int) lines];
+		for(int n=0; n < lines; n++) {
+			factor[n] = Double.parseDouble(factorReader.readLine());
 		}
-		if(observer.getV() != 0) {
-			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.getV()));
-		}
-		value = (soundVelocity + (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
-		return value;
-	}
-	
-	public ChartWin(SimulationObject sou, SimulationObject obs, double soundV, double frequ, double step, int fC) throws HeadlessException {
-		setValues(sou, obs, soundV, frequ, step);
+		setValues(soundV, frequ);
 		functionChoice = fC;
 		JPanel wykres = new JPanel();
 		this.setSize(640,480);
@@ -75,12 +61,10 @@ public class ChartWin extends JFrame {
 		switch(functionChoice) {
 		case 0:
 		{
-			for (int j = 0; j<25; j++) {
-				source.calculateCoords(timestep*33);
-				observer.calculateCoords(timestep*33);
-				double actualFreq = freq*getFactor();
-				for (int i = 0; i<33; i++) {
-					double time = j*33*timestep*0.001+i*timestep*0.001;
+			for (int j = 0; j<lines; j++) {
+				double actualFreq = freq*factor[j];
+				for (int i = 0; i<100; i++) {
+					double time = j*100*timestep*0.001+i*timestep*0.001;
 					series.add(time,Math.sin(2*Math.PI*actualFreq*time));
 				}
 			}
@@ -88,12 +72,10 @@ public class ChartWin extends JFrame {
 		}
 		case 1:
 		{
-			for (int j = 0; j<25; j++) {
-				source.calculateCoords(timestep*33);
-				observer.calculateCoords(timestep*33);
-				double actualFreq = freq*getFactor();
-				for (int i = 0; i<33; i++) {
-					double time = j*33*timestep*0.001+i*timestep*0.001;
+			for (int j = 0; j<lines; j++) {
+				double actualFreq = freq*factor[j];
+				for (int i = 0; i<100; i++) {
+					double time = j*100*timestep*0.001+i*timestep*0.001;
 					series.add(time,Math.sin(2*Math.PI*actualFreq*time));
 					if(Math.sin(2*Math.PI*actualFreq*time) > 0) {
 						series.add(time, 1);
@@ -108,12 +90,10 @@ public class ChartWin extends JFrame {
 		}
 		case 2:
 		{
-			for (int j = 0; j<25; j++) {
-				source.calculateCoords(timestep*33);
-				observer.calculateCoords(timestep*33);
-				double actualFreq = freq*getFactor();
-				for (int i = 0; i<33; i++) {
-					double time = j*33*timestep*0.001+i*timestep*0.001;
+			for (int j = 0; j<lines; j++) {
+				double actualFreq = freq*factor[j];
+				for (int i = 0; i<100; i++) {
+					double time = j*100*timestep*0.001+i*timestep*0.001;
 					double angle = 2*Math.PI*actualFreq*time;
 					series.add(time,Math.sin(angle)*Math.exp(Math.cos(angle)));
 				}
