@@ -53,35 +53,44 @@ public class Doppler9000 extends WindowGUI {
 	//MAIN C
 	public Doppler9000() throws HeadlessException, LineUnavailableException, FileNotFoundException, IOException {
 		//MENU 
-		mainBar.sineButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 0;
-				emittedSignalAnimation.functionChoiceVal = 0;
-				signalAnimationPanel.add(emittedSignalAnimation);
-			}
-		});
-		mainBar.squareButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 1;
-				emittedSignalAnimation.functionChoiceVal = 1;
-				signalAnimationPanel.add(emittedSignalAnimation);
-			}
-		});
-		mainBar.expButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				functionChoice = 2;
-				emittedSignalAnimation.functionChoiceVal = 2;
-				signalAnimationPanel.add(emittedSignalAnimation);
-			}
-		});
+//		mainBar.sineButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				functionChoice = 0;
+//				emittedSignalAnimation.functionChoiceVal = 0;
+//				signalAnimationPanel.add(emittedSignalAnimation);
+//			}
+//		});
+//		mainBar.squareButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				functionChoice = 1;
+//				emittedSignalAnimation.functionChoiceVal = 1;
+//				signalAnimationPanel.add(emittedSignalAnimation);
+//			}
+//		});
+//		mainBar.expButton.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				functionChoice = 2;
+//				emittedSignalAnimation.functionChoiceVal = 2;
+//				signalAnimationPanel.add(emittedSignalAnimation);
+//			}
+//		});
 		//
 		mainBar.exitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		obsPanel.chart.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setValuesAnim();
+				final ChartWin incomingSine = new ChartWin(source,observer, soundVelocity,15);
+				incomingSine.setVisible(true);
+				
 			}
 		});
 		souPanel.startButton.addActionListener(new ActionListener() {
@@ -92,8 +101,9 @@ public class Doppler9000 extends WindowGUI {
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-				signalAnimationPanel.remove(incomingSignalAnimation);
-				signalAnimationPanel.remove(emittedSignalAnimation);
+				
+				//signalAnimationPanel.remove(incomingSignalAnimation);
+				//signalAnimationPanel.remove(emittedSignalAnimation);
 				upperPanel.remove(animation);
 				upperPanel.repaint();
 				animation.tm.stop();
@@ -106,8 +116,8 @@ public class Doppler9000 extends WindowGUI {
 					e.printStackTrace();
 				}
 				setValuesAnim();
-				signalAnimationPanel.add(incomingSignalAnimation);
-				signalAnimationPanel.add(emittedSignalAnimation);
+				//signalAnimationPanel.add(incomingSignalAnimation);
+				//signalAnimationPanel.add(emittedSignalAnimation);
 				emittedSignalAnimation.repaint();
 				incomingSignalAnimation.repaint();
 				animation.tm.start();
@@ -115,6 +125,9 @@ public class Doppler9000 extends WindowGUI {
 				souPanel.startButton.setEnabled(false);
 				souPanel.resetButton.setEnabled(true);
 				souPanel.stopButton.setEnabled(true);
+				obsPanel.chart.setEnabled(false);
+				//final ChartWin incomingSine = new ChartWin(source,observer, soundVelocity,15);
+				//incomingSine.setVisible(true);
 			}
 		});
 		souPanel.stopButton.addActionListener(new ActionListener() {
@@ -123,12 +136,13 @@ public class Doppler9000 extends WindowGUI {
 				upperPanel.remove(animation);
 				upperPanel.removeAll();
 				upperPanel.repaint();
-				signalAnimationPanel.remove(incomingSignalAnimation);
+				//signalAnimationPanel.remove(incomingSignalAnimation);
 				emittedSignalAnimation.setFreq(Math.log(Float.parseFloat(souPanel.freqField.getText())));
 				animation.tm.stop();
 				animation.outFile.close();
 				souPanel.stopButton.setEnabled(false);
 				souPanel.startButton.setEnabled(true);
+				obsPanel.chart.setEnabled(true);
 			}
 		});
 		souPanel.resetButton.addActionListener(new ActionListener() {

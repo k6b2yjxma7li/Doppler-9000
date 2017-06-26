@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AnimationPanel extends JPanel implements ActionListener {
-	double soundVelocity = 600;
+	double soundVelocity = 340;
 	double freq;
 	int step = 15;
 	int counter = 0;
@@ -106,12 +106,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		double cosObs = 1;
 		double cosSou = 1;
 		if (source.getV() != 0) {
-			cosSou = ((rx*source.vx()) + (ry*source.vy())) / ((Math.sqrt(rx*rx+ry*ry) * source.getV()));
+			cosSou = ((rx*source.vx()) + (ry*source.vy())) / ((Math.sqrt(rx*rx+ry*ry) * source.getV())); 
 		}
 		if(observer.getV() != 0) {
 			cosObs = ((rx*observer.vx()) + (ry*observer.vy())) / ((Math.sqrt(rx*rx+ry*ry) * observer.getV()));
 		}
-		value = (soundVelocity + (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
+		value = (soundVelocity - (observer.getV()* cosObs)) / (soundVelocity - (source.getV() * cosSou));
 		return value;
 	}
 	//
@@ -122,6 +122,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
 		try {
 			for(int n=0; n<step; n++) {
 				outFile.println(getFactor());
+				//System.out.println(getFactor());
 			}
 			operator();
 		} catch (FileNotFoundException e1) {

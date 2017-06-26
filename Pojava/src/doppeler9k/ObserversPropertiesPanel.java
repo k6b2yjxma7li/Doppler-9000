@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 
 public class ObserversPropertiesPanel extends JPanel {
 	//OBSERVER PROPERTIES PANEL
@@ -30,6 +31,9 @@ public class ObserversPropertiesPanel extends JPanel {
 	public JTextField obsDirection = new JTextField("0");
 	public JCheckBox vLimit = new JCheckBox("Velocity limit",true);
 	public JCheckBox vLimitPL = new JCheckBox("Limit prêdkoœci", true);
+	public JButton chart = new JButton("Chart");
+	public JButton chartPL = new JButton("Wykres");
+	
 	//
 	public ObserversPropertiesPanel(int lang) {//0 - english// 1 - polski
 		GroupLayout objPropertiesPanelLayout = new GroupLayout(this);
@@ -61,6 +65,7 @@ public class ObserversPropertiesPanel extends JPanel {
 		//
 		objPropertiesPanelLayout.setHorizontalGroup(columnsO);
 		objPropertiesPanelLayout.setVerticalGroup(linesO);
+		
 		//LANGUAGE
 		switch(lang) {
 		case 0:
@@ -98,6 +103,9 @@ public class ObserversPropertiesPanel extends JPanel {
 			lineO6.addComponent(vLimit);
 			columnO3.addComponent(vLimit);
 			//
+			lineO6.addComponent(chart);
+			columnO1.addComponent(chart);
+			//
 			noLabel.setMinimumSize(new Dimension(60, 30));
 			noLabel.setMaximumSize(new Dimension(60, 30));
 			noLabel2.setMinimumSize(new Dimension(60, 30));
@@ -110,7 +118,9 @@ public class ObserversPropertiesPanel extends JPanel {
 			obsYPosition.setMaximumSize(new Dimension(60, 30));
 			obsVelocityField.setMinimumSize(new Dimension(60, 30));
 			obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			chart.setEnabled(false);
 			break;
+			
 		}
 		case 1:
 		{
@@ -144,6 +154,9 @@ public class ObserversPropertiesPanel extends JPanel {
 			lineO4.addComponent(obsYPosition);
 			columnO3.addComponent(obsYPosition);
 			//
+			lineO6.addComponent(chart);
+			columnO1.addComponent(chart);
+			//
 			lineO6.addComponent(vLimitPL);
 			columnO3.addComponent(vLimitPL);
 			//
@@ -159,8 +172,10 @@ public class ObserversPropertiesPanel extends JPanel {
 			obsYPosition.setMaximumSize(new Dimension(60, 30));
 			obsVelocityField.setMinimumSize(new Dimension(60, 30));
 			obsVelocityField.setMaximumSize(new Dimension(60, 30));
+			chart.setEnabled(false);
 			break;
 		}
 		}
+		
 	}
 }
